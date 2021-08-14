@@ -1,0 +1,31 @@
+﻿@page
+@model BwMelder.Pages.Reports.IndexModel
+
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<h1>Reports</h1>
+<hr />
+
+<h4>Auswertungen</h4>
+
+<ul>
+    <li>
+        <a asp-page="./FoodOrder">Essensbestellung</a>
+    </li>
+    <li>
+        <a asp-page="./ShirtOrder">T-Shirt-Bestellung</a>
+    </li>
+</ul>
+
+<h4>Alle Daten</h4>
+
+<ul>
+    <li>
+        <a asp-page="./Athletes">Sportlerübersicht</a>
+    </li>
+    <li>
+        <a asp-page="./TeamCoaches">Betreuerübersicht</a>
+    </li>
+</ul>

@@ -1,0 +1,110 @@
+﻿@page "{id:guid}"
+@model BwMelder.Pages.Crews.DetailsModel
+
+@{
+    ViewData["Title"] = "Mannschaftsdetails";
+}
+
+<h1>Mannschaftsdetails</h1>
+<partial name="_CrewInfo" model="Model.Crew" />
+<hr />
+
+<h4>Heimtrainer</h4>
+<p class="text-muted">
+    Ansprechpartner für die Kommunikation zu den Sportlern und die weitere Vorbereitung bis zum BW
+</p>
+@if (Model.Crew.HomeCoach == null)
+{
+    <p>
+        <a class="btn btn-primary"
+           asp-page="./HomeCoaches/Create"
+           asp-route-crewid="@Model.Crew.Id">
+            Heimtrainer anlegen
+        </a>
+    </p>
+}
+else
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(model => model.Crew.HomeCoach.FullName)</h5>
+            <dl class="row">
+                <dt class="col-sm-3 col-lg-2">
+                    @Html.DisplayNameFor(model => model.Crew.HomeCoach.Contact.EmailAddress)
+                </dt>
+                <dd class="col-sm-9 col-lg-10">
+                    @Html.DisplayFor(model => model.Crew.HomeCoach.Contact.EmailAddress)
+                </dd>
+                <dt class="col-sm-3 col-lg-2">
+                    @Html.DisplayNameFor(model => model.Crew.HomeCoach.Contact.Phone)
+                </dt>
+                <dd class="col-sm-9 col-lg-10">
+                    @Html.DisplayFor(model => model.Crew.HomeCoach.Contact.Phone)
+                </dd>
+            </dl>
+            <a class="card-link" asp-page="./HomeCoaches/Edit" asp-route-id="@Model.Crew.HomeCoach.Id">Bearbeiten</a>
+            <a class="card-link text-danger" asp-page="./HomeCoaches/Delete" asp-route-id="@Model.Crew.HomeCoach.Id">Löschen</a>
+        </div>
+    </div>
+}
+
+@if (Model.Crew.Race.Coxed)
+{
+    <h4>Steuermensch</h4>
+
+    // Check for a cox among the athletes.
+    var cox = Model.Crew.Athletes.FirstOrDefault(a => a.IsCox);
+    if (cox == null)
+    {
+        <p>
+            <a class="btn btn-primary"
+               asp-page="./Athletes/Create"
+               asp-route-crewid="@Model.Crew.Id"
+               asp-route-iscox="@true">
+                Steuermensch anlegen
+            </a>
+        </p>
+    }
+    else
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <partial name="_AthleteBrief" model="cox" />
+                <a class="card-link" asp-page="./Athletes/Details" asp-route-id="@cox.Id">Details</a>
+                <a class="card-link" asp-page="./Athletes/Edit" asp-route-id="@cox.Id">Bearbeiten</a>
+                <a class="card-link text-danger" asp-page="./Athletes/Delete" asp-route-id="@cox.Id">Löschen</a>
+            </div>
+        </div>
+    }
+}
+
+<h4>Ruderer (@Model.Crew.Athletes.Where(a => !a.IsCox).Count() von @Model.Crew.Race.RowerCount)</h4>
+@{
+    // Check for athletes that are not coxing.
+    var rowers = Model.Crew.Athletes.Where(a => !a.IsCox);
+
+    // Offer adding more if the total count is not where it should be.
+    if (Model.Crew.Race.RowerCount > rowers.Count())
+    {
+        <p>
+            <a class="btn btn-primary"
+               asp-page="./Athletes/Create"
+               asp-route-crewid="@Model.Crew.Id"
+               asp-route-iscox="@false">
+                Ruderer anlegen
+            </a>
+        </p>
+    }
+
+    foreach (var rower in rowers.OrderBy(r => r.LastName))
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <partial name="_AthleteBrief" model="rower" />
+                <a class="card-link" asp-page="./Athletes/Details" asp-route-id="@rower.Id">Details</a>
+                <a class="card-link" asp-page="./Athletes/Edit" asp-route-id="@rower.Id">Bearbeiten</a>
+                <a class="card-link text-danger" asp-page="./Athletes/Delete" asp-route-id="@rower.Id">Löschen</a>
+            </div>
+        </div>
+    }
+}

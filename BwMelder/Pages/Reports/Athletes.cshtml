@@ -1,0 +1,79 @@
+﻿@page
+@model BwMelder.Pages.Reports.AthletesModel
+
+@{
+    ViewData["Title"] = "Sportlerübersicht";
+}
+
+<h1>Sportlerübersicht</h1>
+
+<table class="table table-hover table-sm table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Race.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Race.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].ClubName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].ShirtSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].Diet.Choice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].Diet.Restrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].Comments)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var crew in Model.Crews)
+        {
+            foreach (var athlete in crew.Athletes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => crew.Race.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => crew.Race.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => crew.ClubName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.DateOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.ShirtSize)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.Diet.Choice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.Diet.Restrictions)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.Comments)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

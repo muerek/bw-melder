@@ -1,0 +1,49 @@
+﻿@page "{id:guid}"
+@model BwMelder.Pages.Crews.HomeCoaches.EditModel
+
+@{
+    ViewData["Title"] = "Heimtrainer bearbeiten";
+}
+
+<h1>Heimtrainer bearbeiten</h1>
+<partial name="_CrewInfo" model="Model.Crew" />
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HomeCoach.FirstName" class="control-label"></label>
+                <input asp-for="HomeCoach.FirstName" class="form-control" />
+                <span asp-validation-for="HomeCoach.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeCoach.LastName" class="control-label"></label>
+                <input asp-for="HomeCoach.LastName" class="form-control" />
+                <span asp-validation-for="HomeCoach.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeCoach.Contact.EmailAddress" class="control-label"></label>
+                <input asp-for="HomeCoach.Contact.EmailAddress" class="form-control" />
+                <span asp-validation-for="HomeCoach.Contact.EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeCoach.Contact.Phone" class="control-label"></label>
+                <input asp-for="HomeCoach.Contact.Phone" class="form-control" />
+                <span asp-validation-for="HomeCoach.Contact.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Speichern" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="../Details" asp-route-id="@Model.HomeCoach.CrewId">Zurück zur Mannschaft</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

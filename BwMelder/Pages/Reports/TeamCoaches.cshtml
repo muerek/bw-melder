@@ -1,0 +1,81 @@
+﻿@page
+@model BwMelder.Pages.Reports.TeamCoachesModel
+
+@{
+    ViewData["Title"] = "Betreuerübersicht";
+}
+
+<h1>Betreuerübersicht</h1>
+
+<table class="table table-hover table-sm table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].ClubName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].DriversLicense)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].Contact.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].Contact.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].ShirtSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].Diet.Choice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].Diet.Restrictions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].Comments)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TeamCoach) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClubName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriversLicense)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact.Phone)
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => item.ShirtSize)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diet.Choice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diet.Restrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

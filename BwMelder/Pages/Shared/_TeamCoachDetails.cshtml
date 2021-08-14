@@ -1,0 +1,84 @@
+﻿@model BwMelder.Model.TeamCoach
+
+<h4>Stammdaten</h4>
+<dl class="row">
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.FullName)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.FullName)
+    </dd>
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.ClubName)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.ClubName)
+    </dd>
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.DateOfBirth)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.DateOfBirth)
+        @* Highlight minors with a badge. *@
+        @if (Model.DateOfBirth.AddYears(18) > DateTime.Today)
+        {
+            <span class="badge badge-info">U19</span>
+        }
+    </dd>
+</dl>
+
+<h4>Kontaktinformationen</h4>
+<dl class="row">
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.Address.Summary)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.Address.Summary)
+    </dd>
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.Contact.EmailAddress)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.Contact.EmailAddress)
+    </dd>
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.Contact.Phone)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.Contact.Phone)
+    </dd>
+</dl>
+
+<h4>Teilnahmeinformationen</h4>
+<dl class="row">
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.ShirtSize)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.ShirtSize)
+    </dd>
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.Diet.Choice)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.Diet.Choice)
+    </dd>
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.Diet.Restrictions)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.Diet.Restrictions)
+    </dd>
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.DriversLicense)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.DriversLicense)
+    </dd>
+    <dt class="col-sm-3 col-lg-2">
+        @Html.DisplayNameFor(model => model.Comments)
+    </dt>
+    <dd class="col-sm-9 col-lg-10">
+        @Html.DisplayFor(model => model.Comments)
+    </dd>
+</dl>

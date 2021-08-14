@@ -1,0 +1,56 @@
+﻿@page
+@model BwMelder.Pages.Races.IndexModel
+
+@{
+    ViewData["Title"] = "Rennen";
+}
+
+<h1>Rennen</h1>
+<p>
+    Hier werden die Rennen definiert, für die Mannschaften nominiert werden können.
+    Mit den Angaben zur Anzahl der Ruderer und zum Steuermensch werden Eintragungen auf Plausibilität geprüft.
+</p>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Neues Rennen anlegen</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Races[0].Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Races[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Races[0].RowerCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Races[0].Coxed)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Races) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RowerCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coxed)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Bearbeiten</a> |
+                <a class="text-danger" asp-page="./Delete" asp-route-id="@item.Id">Löschen</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Start";
+}
+
+<div>
+    <h1 class="display-4">BW-Melder NRW</h1>
+    <p class="lead">
+        Wir erfassen die Meldungen zum BW 2021 digital.
+    </p>
+    <hr />
+    <p>
+        Als Trainer erhaltet ihr einen speziellen Link von der Ruderjugend, wenn eure Sportler nominiert werden.
+        Über diesen Link gelangt ihr direkt zur Registrierung der Sportler.
+    </p>
+    @if (!(User.Identity?.IsAuthenticated ?? false))
+    {
+        <p>
+            <a asp-page="/Admin/Login">Anmelden als Ruderjugend</a>
+        </p>
+    }
+</div>

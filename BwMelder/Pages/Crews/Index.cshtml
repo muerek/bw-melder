@@ -1,0 +1,66 @@
+﻿@page
+@model BwMelder.Pages.Crews.IndexModel
+
+@{
+    ViewData["Title"] = "Nominierte Mannschaften";
+}
+
+<h1>Nominierte Mannschaften</h1>
+<p>
+    Nominierungen geben an, welcher Verein in welchem Rennen eine Mannschaft stellt.
+    Nachdem eine Mannschaft nominiert wurde, können Sportler und Heimtrainer in den Mannschaftsdetails eingetragen werden.
+</p>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Neue Nominierung anlegen</a>
+    <a class="btn btn-link" asp-page="../Races/Index">Rennen verwalten</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Race)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].ClubName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].HomeCoach)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var crew in Model.Crews)
+        {
+            var athleteStatusClass = (crew.Athletes.Count, crew.Race.AthleteCount) switch
+            {
+                (0, _) => "table-danger",
+                var (x, y) when x < y => "table-warning",
+                var (x, y) when x == y => "table-success",
+                (_, _) => ""
+            };
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => crew.Race.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => crew.ClubName)
+                </td>
+                <td class="@athleteStatusClass">
+                    @crew.Athletes.Count von @crew.Race.AthleteCount
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => crew.HomeCoach.FullName)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@crew.Id">Zur Mannschaft</a> |
+                    <a asp-page="./Edit" asp-route-id="@crew.Id">Bearbeiten</a> |
+                    <a class="text-danger" asp-page="./Delete" asp-route-id="@crew.Id">Löschen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+﻿@page "{id:guid}"
+@model BwMelder.Pages.TeamCoaches.DetailsModel
+
+@{
+    ViewData["Title"] = "Betreuerdetails";
+}
+
+<h1>Betreuerdetails</h1>
+<hr />
+
+<div>
+    <partial name="_TeamCoachDetails" model="@Model.TeamCoach" />
+</div>
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.TeamCoach.Id">Bearbeiten</a>
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <text>| <a asp-page="./Index">Zurück zur Übersicht</a></text>
+    }
+</div>

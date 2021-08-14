@@ -1,0 +1,61 @@
+﻿@page
+@model BwMelder.Pages.TeamCoaches.IndexModel
+
+@{
+    ViewData["Title"] = "Betreuer";
+}
+
+<h1>Betreuer</h1>
+<p>
+    Hier werden die Betreuer verwaltet, die mit dem Team zum Bundeswettbewerb fahren.
+</p>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Neuen Betreuer hinzufügen</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoaches[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoaches[0].ClubName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoaches[0].DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoaches[0].DriversLicense)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var teamCoach in Model.TeamCoaches) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => teamCoach.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => teamCoach.ClubName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => teamCoach.DateOfBirth)
+                @* Highlight minors with a badge. *@
+                @if (teamCoach.DateOfBirth.AddYears(18) > DateTime.Today)
+                {
+                    <span class="badge badge-info">U19</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => teamCoach.DriversLicense)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@teamCoach.Id">Bearbeiten</a> |
+                <a asp-page="./Details" asp-route-id="@teamCoach.Id">Details</a> |
+                <a class="text-danger" asp-page="./Delete" asp-route-id="@teamCoach.Id">Löschen</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

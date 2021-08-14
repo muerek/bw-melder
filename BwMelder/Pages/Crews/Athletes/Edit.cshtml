@@ -1,0 +1,24 @@
+﻿@page "{id:guid}"
+@model BwMelder.Pages.Crews.Athletes.EditModel
+
+@{
+    ViewData["Title"] = "Sportler bearbeiten";
+}
+
+<h1>Sportler bearbeiten</h1>
+<partial name="_CrewInfo" model="Model.Crew" />
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <partial name="_AthleteForm" model="@Model.Athlete" />
+    </div>
+</div>
+
+<div>
+    <a asp-page="../Details" asp-route-id="@Model.Athlete.CrewId">Zurück zur Mannschaft</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

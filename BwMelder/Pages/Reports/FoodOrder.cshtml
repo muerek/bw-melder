@@ -1,0 +1,52 @@
+﻿@page
+@model BwMelder.Pages.Reports.FoodOrderModel
+
+@{
+    ViewData["Title"] = "Essensbestellung";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<h4>Zusammenfassung</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Verpflegungsart</th>
+            <th>Sportler</th>
+            <th>Betreuer</th>
+            <th>Summe</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var choice in Enum.GetValues<DietaryChoice>())
+        {
+            var athleteCount = Model.AthleteFoodOrder.FirstOrDefault(o => o.Choice == choice).Count;
+            var teamCoachCount = Model.TeamCoachFoodOrder.FirstOrDefault(o => o.Choice == choice).Count;
+            
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => choice)
+                </td>
+                <td>
+                    @athleteCount
+                </td>
+                <td>
+                    @teamCoachCount
+                </td>
+                <td>
+                    @(athleteCount + teamCoachCount)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Bemerkungen</h4>
+<ul>
+@foreach (var restriction in Model.Restrictions)
+{
+    <li>@restriction.Count x @restriction.Restriction</li>
+}
+</ul>
