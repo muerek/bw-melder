@@ -9,6 +9,8 @@
 <partial name="_CrewInfo" model="Model.Crew" />
 <hr />
 
+<div id="qrCode"></div>
+
 <h4>Heimtrainer</h4>
 <p class="text-muted">
     Ansprechpartner für die Kommunikation zu den Sportlern und die weitere Vorbereitung bis zum BW
@@ -107,4 +109,18 @@ else
             </div>
         </div>
     }
+}
+
+@section Scripts {
+    
+    <script type="text/javascript" src="~/lib/qrcodejs/qrcode.min.js"></script>
+    <script type="text/javascript">
+        new QRCode(document.getElementById("qrCode"),
+            {
+                text: window.location.href,
+                width: 150,
+                height: 150
+            });
+    </script>
+
 }
