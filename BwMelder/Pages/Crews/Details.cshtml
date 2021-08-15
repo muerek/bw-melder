@@ -9,7 +9,24 @@
 <partial name="_CrewInfo" model="Model.Crew" />
 <hr />
 
-<div id="qrCode"></div>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+
+    <p>
+        Über diesen Link können weitere Personen ohne Anmeldung auf die Mannschaftsdetails zugreifen und Eintragungen vornehmen:
+    </p>
+    <div class="input-group mb-3">
+        <input id="shareLink" class="form-control" readonly />
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" data-toggle="button" onclick="toggleQrCode()">QR-Code</button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div id="qrCode"></div>
+    </div>
+
+    <hr />
+}
 
 <h4>Heimtrainer</h4>
 <p class="text-muted">
@@ -112,15 +129,26 @@ else
 }
 
 @section Scripts {
-    
+
     <script type="text/javascript" src="~/lib/qrcodejs/qrcode.min.js"></script>
     <script type="text/javascript">
-        new QRCode(document.getElementById("qrCode"),
-            {
-                text: window.location.href,
-                width: 150,
-                height: 150
-            });
+        document.getElementById("shareLink").value = window.location.href;
+
+        function toggleQrCode() {
+            qrCodeContainer = document.getElementById("qrCode");
+
+            if (qrCodeContainer.innerHTML.trim().length > 0) {
+                qrCodeContainer.innerHTML = "";
+            }
+            else {
+                new QRCode(qrCodeContainer,
+                    {
+                        text: window.location.href,
+                        width: 150,
+                        height: 150
+                    });
+            }
+        }
     </script>
 
 }
