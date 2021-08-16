@@ -3,14 +3,16 @@ using System;
 using BwMelder.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BwMelder.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    partial class BwMelderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210816085740_AddCrewAccessKeys")]
+    partial class AddCrewAccessKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
