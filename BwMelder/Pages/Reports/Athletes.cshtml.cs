@@ -28,6 +28,8 @@ namespace BwMelder.Pages.Reports
                 .Include(c => c.Race)
                 .Include(c => c.Athletes)
                 .Include(c => c.HomeCoach)
+                .OrderBy(c => c.Race.Number.Length)
+                .ThenBy(c => c.Race.Number)
                 .ToListAsync();
         }
     }

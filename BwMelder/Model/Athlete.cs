@@ -8,6 +8,7 @@ namespace BwMelder.Model
 {
     public class Athlete : Participant
     {
+        [Display(Name = "Erziehungsberechtigter")]
         public LegalGuardian LegalGuardian { get; set; } = new();
 
         [Display(Name = "Steuermensch")]

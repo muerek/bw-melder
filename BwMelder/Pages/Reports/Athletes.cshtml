@@ -2,12 +2,16 @@
 @model BwMelder.Pages.Reports.AthletesModel
 
 @{
-    ViewData["Title"] = "Sportlerübersicht";
+    ViewData["Title"] = "Alle Sportlerdaten";
 }
 
-<h1>Sportlerübersicht</h1>
+<h1>@ViewData["Title"]</h1>
 
-<table class="table table-hover table-sm table-responsive">
+<p>
+    <button class="btn btn-secondary" onclick="tableToCsv('athletes-table')">CSV herunterladen</button>
+</p>
+
+<table class="table table-hover table-sm table-responsive" id="athletes-table">
     <thead>
         <tr>
             <th>
@@ -20,10 +24,16 @@
                 @Html.DisplayNameFor(model => model.Crews[0].ClubName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].FullName)
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].FirstName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].Address)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].ShirtSize)
@@ -36,6 +46,24 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].HomeCoach)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].HomeCoach.Contact.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].HomeCoach.Contact.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].LegalGuardian)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].LegalGuardian.Contact.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crews[0].Athletes[0].LegalGuardian.Contact.Phone)
             </th>
         </tr>
     </thead>
@@ -55,10 +83,16 @@
                         @Html.DisplayFor(modelItem => crew.ClubName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => athlete.FullName)
+                        @Html.DisplayFor(modelItem => athlete.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.FirstName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => athlete.DateOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.Address.Summary)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => athlete.ShirtSize)
@@ -71,6 +105,24 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => athlete.Comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => crew.HomeCoach.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => crew.HomeCoach.Contact.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => crew.HomeCoach.Contact.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.LegalGuardian.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.LegalGuardian.Contact.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => athlete.LegalGuardian.Contact.Phone)
                     </td>
                 </tr>
             }
