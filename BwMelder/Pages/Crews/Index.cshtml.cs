@@ -28,7 +28,8 @@ namespace BwMelder.Pages.Crews
                 .Include(c => c.HomeCoach)
                 .Include(c => c.Race)
                 .Include(c => c.Athletes)
-                .OrderBy(c => c.Race.Number)
+                .OrderBy(c => c.Race.Number.Length)
+                .ThenBy(c => c.Race.Number)
                 .ToListAsync();
         }
     }
