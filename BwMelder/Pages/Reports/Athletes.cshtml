@@ -7,7 +7,11 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<table class="table table-hover table-sm table-responsive">
+<p>
+    <button class="btn btn-secondary" onclick="tableToCsv('athletes-table')">CSV herunterladen</button>
+</p>
+
+<table class="table table-hover table-sm table-responsive" id="athletes-table">
     <thead>
         <tr>
             <th>
