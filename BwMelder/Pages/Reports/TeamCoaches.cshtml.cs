@@ -25,6 +25,8 @@ namespace BwMelder.Pages.Reports
         {
             TeamCoach = await db.TeamCoaches
                 .AsNoTracking()
+                .OrderBy(tc => tc.LastName)
+                .ThenBy(tc => tc.FirstName)
                 .ToListAsync();
         }
     }

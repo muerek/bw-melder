@@ -2,16 +2,19 @@
 @model BwMelder.Pages.Reports.TeamCoachesModel
 
 @{
-    ViewData["Title"] = "Betreuerübersicht";
+    ViewData["Title"] = "Alle Betreuerdaten";
 }
 
-<h1>Betreuerübersicht</h1>
+<h1>@ViewData["Title"]</h1>
 
 <table class="table table-hover table-sm table-responsive">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TeamCoach[0].FullName)
+                @Html.DisplayNameFor(model => model.TeamCoach[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].FirstName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TeamCoach[0].ClubName)
@@ -20,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.TeamCoach[0].DateOfBirth)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TeamCoach[0].DriversLicense)
+                @Html.DisplayNameFor(model => model.TeamCoach[0].Address)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TeamCoach[0].Contact.EmailAddress)
@@ -38,6 +41,9 @@
                 @Html.DisplayNameFor(model => model.TeamCoach[0].Diet.Restrictions)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].DriversLicense)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.TeamCoach[0].Comments)
             </th>
         </tr>
@@ -46,7 +52,10 @@
 @foreach (var item in Model.TeamCoach) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClubName)
@@ -55,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.DateOfBirth)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DriversLicense)
+                @Html.DisplayFor(modelItem => item.Address.Summary)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Contact.EmailAddress)
@@ -64,13 +73,16 @@
                 @Html.DisplayFor(modelItem => item.Contact.Phone)
             </td>
             <th>
-                @Html.DisplayNameFor(model => item.ShirtSize)
+                @Html.DisplayFor(model => item.ShirtSize)
             </th>
             <td>
                 @Html.DisplayFor(modelItem => item.Diet.Choice)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Diet.Restrictions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriversLicense)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Comments)
