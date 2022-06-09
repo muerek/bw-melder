@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BwMelder.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    [Migration("20220528200813_InitializeDatabase")]
+    [Migration("20220609195521_InitializeDatabase")]
     partial class InitializeDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -299,6 +299,24 @@ namespace BwMelder.Migrations
                             Number = "V",
                             RowerCount = 4
                         });
+                });
+
+            modelBuilder.Entity("BwMelder.Model.TeamCoachAccessKey", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("TeamCoachId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TeamCoachAccessKeys");
                 });
 
             modelBuilder.Entity("BwMelder.Model.Athlete", b =>

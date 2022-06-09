@@ -26,6 +26,19 @@ namespace BwMelder.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TeamCoachAccessKeys",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Key = table.Column<string>(type: "TEXT", nullable: false),
+                    TeamCoachId = table.Column<Guid>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeamCoachAccessKeys", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Crews",
                 columns: table => new
                 {
@@ -238,6 +251,9 @@ namespace BwMelder.Migrations
 
             migrationBuilder.DropTable(
                 name: "Participants");
+
+            migrationBuilder.DropTable(
+                name: "TeamCoachAccessKeys");
 
             migrationBuilder.DropTable(
                 name: "Crews");

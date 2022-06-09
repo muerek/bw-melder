@@ -299,6 +299,24 @@ namespace BwMelder.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BwMelder.Model.TeamCoachAccessKey", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("TeamCoachId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TeamCoachAccessKeys");
+                });
+
             modelBuilder.Entity("BwMelder.Model.Athlete", b =>
                 {
                     b.HasBaseType("BwMelder.Model.Participant");
