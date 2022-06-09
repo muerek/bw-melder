@@ -6,17 +6,18 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace BwMelder.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    [Migration("20210809085639_InitializeDatabase")]
+    [Migration("20220528200813_InitializeDatabase")]
     partial class InitializeDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
 
             modelBuilder.Entity("BwMelder.Model.Crew", b =>
                 {
@@ -92,7 +93,7 @@ namespace BwMelder.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Participants");
+                    b.ToTable("Participants", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Participant");
                 });
@@ -126,88 +127,176 @@ namespace BwMelder.Migrations
                         {
                             Id = 1,
                             Coxed = false,
-                            Name = "Jung 1x 14",
-                            Number = "1",
+                            Name = "Jung 1x 13",
+                            Number = "A",
                             RowerCount = 1
                         },
                         new
                         {
                             Id = 2,
                             Coxed = false,
-                            Name = "Jung 1x 14 LG",
-                            Number = "2",
+                            Name = "Jung 1x 13 LG",
+                            Number = "B",
                             RowerCount = 1
                         },
                         new
                         {
                             Id = 3,
                             Coxed = false,
-                            Name = "Mäd 1x 14",
-                            Number = "3",
+                            Name = "Mäd 1x 13",
+                            Number = "C",
                             RowerCount = 1
                         },
                         new
                         {
                             Id = 4,
                             Coxed = false,
-                            Name = "Mäd 1x 14 LG",
-                            Number = "4",
+                            Name = "Mäd 1x 13 LG",
+                            Number = "D",
                             RowerCount = 1
                         },
                         new
                         {
                             Id = 5,
                             Coxed = false,
-                            Name = "Jung 2x 13/14",
-                            Number = "5",
+                            Name = "Jung 2x 12/13",
+                            Number = "E",
                             RowerCount = 2
                         },
                         new
                         {
                             Id = 6,
                             Coxed = false,
-                            Name = "Jung 2x 13/14 LG",
-                            Number = "6",
+                            Name = "Jung 2x 12/13 LG",
+                            Number = "F",
                             RowerCount = 2
                         },
                         new
                         {
                             Id = 7,
                             Coxed = false,
-                            Name = "Mäd 2x 13/14",
-                            Number = "7",
+                            Name = "Mäd 2x 12/13",
+                            Number = "G",
                             RowerCount = 2
                         },
                         new
                         {
                             Id = 8,
                             Coxed = false,
-                            Name = "Mäd 2x 13/14 LG",
-                            Number = "8",
+                            Name = "Mäd 2x 12/13 LG",
+                            Number = "H",
                             RowerCount = 2
                         },
                         new
                         {
                             Id = 9,
                             Coxed = true,
-                            Name = "Jung 4x+ 13/14",
-                            Number = "9",
+                            Name = "Jung 4x+ 12/13",
+                            Number = "I",
                             RowerCount = 4
                         },
                         new
                         {
                             Id = 10,
                             Coxed = true,
-                            Name = "Mäd 4x+ 13/14",
-                            Number = "10",
+                            Name = "Mäd 4x+ 12/13",
+                            Number = "J",
                             RowerCount = 4
                         },
                         new
                         {
                             Id = 11,
                             Coxed = true,
+                            Name = "Jung/Mäd 4x+ 12/13 Mix",
+                            Number = "K",
+                            RowerCount = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Coxed = false,
+                            Name = "Jung 1x 14",
+                            Number = "L",
+                            RowerCount = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Coxed = false,
+                            Name = "Jung 1x 14 LG",
+                            Number = "M",
+                            RowerCount = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Coxed = false,
+                            Name = "Mäd 1x 14",
+                            Number = "N",
+                            RowerCount = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Coxed = false,
+                            Name = "Mäd 1x 14 LG",
+                            Number = "O",
+                            RowerCount = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Coxed = false,
+                            Name = "Jung 2x 13/14",
+                            Number = "P",
+                            RowerCount = 2
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Coxed = false,
+                            Name = "Jung 2x 13/14 LG",
+                            Number = "Q",
+                            RowerCount = 2
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Coxed = false,
+                            Name = "Mäd 2x 13/14",
+                            Number = "R",
+                            RowerCount = 2
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Coxed = false,
+                            Name = "Mäd 2x 13/14 LG",
+                            Number = "S",
+                            RowerCount = 2
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Coxed = true,
+                            Name = "Jung 4x+ 13/14",
+                            Number = "T",
+                            RowerCount = 4
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Coxed = true,
+                            Name = "Mäd 4x+ 13/14",
+                            Number = "U",
+                            RowerCount = 4
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Coxed = true,
                             Name = "Jung/Mäd 4x+ 13/14 Mix",
-                            Number = "11",
+                            Number = "V",
                             RowerCount = 4
                         });
                 });
