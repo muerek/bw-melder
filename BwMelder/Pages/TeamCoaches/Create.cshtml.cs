@@ -40,5 +40,14 @@ namespace BwMelder.Pages.TeamCoaches
 
             return RedirectToPage("./Details", new { id = TeamCoach.Id });
         }
+
+        public async Task<IActionResult> OnPostCreateKeyAsync()
+        {
+            var key = new TeamCoachAccessKey();
+            db.TeamCoachAccessKeys.Add(key);
+            await db.SaveChangesAsync();
+
+            return RedirectToPage("./Keys/Details", new { id = key.Id });
+        }
     }
 }

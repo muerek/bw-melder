@@ -1,0 +1,17 @@
+﻿@page "{id:guid}"
+@model BwMelder.Pages.TeamCoaches.Keys.DetailsModel
+
+@{
+    ViewData["Title"] = "Betreuerzugang";
+}
+
+<h1>Betreuerzugang</h1>
+<p>
+    Über diesen Link kann sich ein Betreuer registrieren, seinen Eintrag wiederfinden und ggf. bearbeiten.
+</p>
+<p>
+    @Model.AccessKey.Id
+</p>
+<p>
+    @Model.AccessKey.Key
+</p>

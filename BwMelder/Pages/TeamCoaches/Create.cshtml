@@ -8,6 +8,19 @@
 <h1>Betreuer anlegen</h1>
 <hr />
 
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <p>
+        Betreuer können Ihre Daten über einen speziellen Zugang auch selbst eintragen.
+    </p>
+    <div>
+        <form method="post" asp-page-handler="CreateKey">
+            <input type="submit" value="Zugang erstellen" class="btn btn-primary" />
+        </form>
+    </div>
+    <hr />
+}
+
 <div class="row">
     <div class="col-md-4">
         <partial name="_TeamCoachForm" model="Model.TeamCoach" />
@@ -22,5 +35,7 @@
 }
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
