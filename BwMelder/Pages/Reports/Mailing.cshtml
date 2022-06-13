@@ -1,0 +1,37 @@
+﻿@page
+@model BwMelder.Pages.Reports.MailingModel
+
+@{
+    ViewData["Title"] = "Mail-Verteiler";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<p>
+    <a href="@Model.GetMailtoLink(Model.AllEmailAddresses)" class="btn btn-primary">Mail an alle schreiben</a>
+</p>
+
+<h4>Heimtrainer</h4>
+
+<p>
+    @foreach (var emailAddress in Model.HomeCoachEmailAddresses)
+    {
+        @:@emailAddress;
+    }
+</p>
+<p>
+    <a href="@Model.GetMailtoLink(Model.HomeCoachEmailAddresses)" class="btn btn-primary">Mail schreiben</a>
+</p>
+
+<h4>Betreuer</h4>
+
+<p>
+    @foreach (var emailAddress in Model.TeamCoachEmailAddresses)
+    {
+        @:@emailAddress;
+    }
+</p>
+<p>
+    <a href="@Model.GetMailtoLink(Model.TeamCoachEmailAddresses)" class="btn btn-primary">Mail schreiben</a>
+</p>
