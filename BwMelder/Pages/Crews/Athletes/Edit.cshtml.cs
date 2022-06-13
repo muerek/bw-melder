@@ -58,7 +58,7 @@ namespace BwMelder.Pages.Crews.Athletes
                 return Page();
             }
 
-            db.Attach(Athlete).State = EntityState.Modified;
+            db.Update(Athlete);
 
             try
             {
