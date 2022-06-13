@@ -45,7 +45,7 @@ namespace BwMelder.Pages.TeamCoaches
                 return Page();
             }
 
-            db.Attach(TeamCoach).State = EntityState.Modified;
+            db.Update(TeamCoach);
 
             try
             {
