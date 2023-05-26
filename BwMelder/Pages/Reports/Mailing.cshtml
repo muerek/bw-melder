@@ -15,22 +15,15 @@
 <h4>Heimtrainer</h4>
 
 <p>
-    @foreach (var emailAddress in Model.HomeCoachEmailAddresses)
-    {
-        @:@emailAddress;
-    }
+    <textarea class="form-control" readonly>@string.Join("; ", Model.HomeCoachEmailAddresses)</textarea>
 </p>
 <p>
     <a href="@Model.GetMailtoLink(Model.HomeCoachEmailAddresses)" class="btn btn-primary">Mail schreiben</a>
 </p>
 
 <h4>Betreuer</h4>
-
 <p>
-    @foreach (var emailAddress in Model.TeamCoachEmailAddresses)
-    {
-        @:@emailAddress;
-    }
+    <textarea class="form-control" readonly>@string.Join("; ", Model.TeamCoachEmailAddresses)</textarea>
 </p>
 <p>
     <a href="@Model.GetMailtoLink(Model.TeamCoachEmailAddresses)" class="btn btn-primary">Mail schreiben</a>
