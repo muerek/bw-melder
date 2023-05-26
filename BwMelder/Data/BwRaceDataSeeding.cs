@@ -34,7 +34,11 @@ namespace BwMelder.Data
                 new() { Id = 19, Number = "S", Name = "Mäd 2x 13/14 LG", RowerCount = 2, Coxed = false },
                 new() { Id = 20, Number = "T", Name = "Jung 4x+ 13/14", RowerCount = 4, Coxed = true },
                 new() { Id = 21, Number = "U", Name = "Mäd 4x+ 13/14", RowerCount = 4, Coxed = true },
-                new() { Id = 22, Number = "V", Name = "Jung/Mäd 4x+ 13/14 Mix", RowerCount = 4, Coxed = true }
+                new() { Id = 22, Number = "V", Name = "Jung/Mäd 4x+ 13/14 Mix", RowerCount = 4, Coxed = true },
+                new() { Id = 23, Number = "W", Name = "SON 2x 12-14 Inklusion", RowerCount = 2, Coxed = false },
+                new() { Id = 24, Number = "X", Name = "SON 1x 12-14 Para", RowerCount = 1, Coxed = false },
+                new() { Id = 25, Number = "1", Name = "SON 2x 15-18 Inklusion", RowerCount = 2, Coxed = false },
+                new() { Id = 26, Number = "2", Name = "SON 1x 15-18 Para", RowerCount = 1, Coxed = false }
             };
 
             modelBuilder.Entity<Race>().HasData(races);
