@@ -214,6 +214,26 @@ namespace BwMelder.Migrations
                 columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
                 values: new object[] { 22, true, "Jung/Mäd 4x+ 13/14 Mix", "V", 4 });
 
+            migrationBuilder.InsertData(
+                table: "Races",
+                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
+                values: new object[] { 23, false, "SON 2x 12-14 Inklusion", "W", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Races",
+                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
+                values: new object[] { 24, false, "SON 1x 12-14 Para", "X", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Races",
+                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
+                values: new object[] { 25, false, "SON 2x 15-18 Inklusion", "1", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Races",
+                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
+                values: new object[] { 26, false, "SON 1x 15-18 Para", "2", 1 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Crews_RaceId",
                 table: "Crews",

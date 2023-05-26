@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BwMelder.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    [Migration("20220528200813_InitializeDatabase")]
+    [Migration("20230526163003_InitializeDatabase")]
     partial class InitializeDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -298,6 +298,38 @@ namespace BwMelder.Migrations
                             Name = "Jung/Mäd 4x+ 13/14 Mix",
                             Number = "V",
                             RowerCount = 4
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Coxed = false,
+                            Name = "SON 2x 12-14 Inklusion",
+                            Number = "W",
+                            RowerCount = 2
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Coxed = false,
+                            Name = "SON 1x 12-14 Para",
+                            Number = "X",
+                            RowerCount = 1
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Coxed = false,
+                            Name = "SON 2x 15-18 Inklusion",
+                            Number = "1",
+                            RowerCount = 2
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Coxed = false,
+                            Name = "SON 1x 15-18 Para",
+                            Number = "2",
+                            RowerCount = 1
                         });
                 });
 
