@@ -55,27 +55,7 @@
 </table>
 
 @section Scripts {
-
-    <script type="text/javascript" src="~/lib/qrcodejs/qrcode.min.js"></script>
-    <script type="text/javascript">
-        function toggleQrCode(url, qr) {
-            qrCodeContainer = document.getElementById(qr);
-
-            if (qrCodeContainer.innerHTML.trim().length > 0) {
-                qrCodeContainer.innerHTML = "";
-                qrCodeContainer.classList.remove("mt-2");
-            }
-            else {
-                new QRCode(qrCodeContainer,
-                    {
-                        text: url,
-                        width: 150,
-                        height: 150
-                    });
-
-                qrCodeContainer.classList.add("mt-2");
-            }
-        }
-    </script>
-
+    @{
+        await Html.RenderPartialAsync("_QrCodeScriptsPartial");
+    }
 }
