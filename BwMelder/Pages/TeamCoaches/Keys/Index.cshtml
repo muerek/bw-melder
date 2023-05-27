@@ -26,18 +26,56 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.TeamCoachKeys) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Secret)
-            </td>
-            <td>
-                <a class="text-danger" asp-page="./Delete" asp-route-id="@item.Id">Löschen</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.TeamCoachKeys)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    <div class="input-group">
+                        <input class="form-control" value="@Model.GetSecretUrl(item)" readonly />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" data-toggle="button"
+                                    onclick="toggleQrCode('@Model.GetSecretUrl(item)', 'qrCode-@item.Id')">
+                                QR-Code
+                            </button>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div id="qrCode-@item.Id"></div>
+                    </div>
+                </td>
+                <td>
+                    <a class="text-danger" asp-page="./Delete" asp-route-id="@item.Id">Löschen</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/lib/qrcodejs/qrcode.min.js"></script>
+    <script type="text/javascript">
+        function toggleQrCode(url, qr) {
+            qrCodeContainer = document.getElementById(qr);
+
+            if (qrCodeContainer.innerHTML.trim().length > 0) {
+                qrCodeContainer.innerHTML = "";
+                qrCodeContainer.classList.remove("mt-2");
+            }
+            else {
+                new QRCode(qrCodeContainer,
+                    {
+                        text: url,
+                        width: 150,
+                        height: 150
+                    });
+
+                qrCodeContainer.classList.add("mt-2");
+            }
+        }
+    </script>
+
+}
