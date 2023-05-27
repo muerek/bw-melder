@@ -27,7 +27,7 @@ namespace BwMelder.Pages.TeamCoaches
             {
                 var key = await db.TeamCoachKeys
                     .AsNoTracking()
-                    .FirstOrDefaultAsync(key => key.Secret == secret);
+                    .SingleOrDefaultAsync(key => key.Secret == secret);
 
                 if (key != null)
                 {
