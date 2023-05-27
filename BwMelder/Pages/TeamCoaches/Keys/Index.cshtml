@@ -1,0 +1,43 @@
+﻿@page
+@model BwMelder.Pages.TeamCoaches.Keys.IndexModel
+@{
+    ViewData["Title"] = "Betreuerzugänge";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>
+    Betreuer können ihre Daten über einen Betreuerzugang selbst eintragen und ändern.
+    Dafür ist keine Anmeldung notwendig, sondern ein spezieller, persönlicher Link.
+    Die hier gezeigten Zugänge wurden freigeschaltet, aber noch nicht verwendet.
+</p>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Betreuerzugang anlegen</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoachKeys[0].Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoachKeys[0].Secret)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TeamCoachKeys) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Secret)
+            </td>
+            <td>
+                <a class="text-danger" asp-page="./Delete" asp-route-id="@item.Id">Löschen</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
