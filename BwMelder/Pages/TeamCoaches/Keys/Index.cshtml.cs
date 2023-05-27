@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,41 +10,33 @@ using BwMelder.Model;
 using Microsoft.AspNetCore.Http;
 using BwMelder.Extensions;
 
-namespace BwMelder.Pages.Crews
+namespace BwMelder.Pages.TeamCoaches.Keys
 {
-    public class DetailsModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly BwMelderDbContext db;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public DetailsModel(BwMelderDbContext db, IHttpContextAccessor httpContextAccessor)
+        public IndexModel(BwMelderDbContext db, IHttpContextAccessor httpContextAccessor)
         {
             this.db = db;
             this.httpContextAccessor = httpContextAccessor;
         }
 
-        public Crew? Crew { get; set; }
+        public IList<TeamCoachKey> TeamCoachKeys { get; set; } = new List<TeamCoachKey>();
+
         public string BaseUrl { get; set; } = string.Empty;
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task OnGetAsync()
         {
-            Crew = await db.Crews
+            TeamCoachKeys = await db.TeamCoachKeys
                 .AsNoTracking()
-                .Include(c => c.HomeCoach)
-                .Include(c => c.Race)
-                .Include(c => c.Athletes)
-                .SingleOrDefaultAsync(m => m.Id == id);
-
-            if (Crew == null)
-            {
-                return NotFound();
-            }
+                .Where(key => key.TeamCoach == null)
+                .ToListAsync();
 
             BaseUrl = httpContextAccessor.HttpContext?.Request.BaseUrl() ?? string.Empty;
-
-            return Page();
         }
 
-        public string GetSecretUrl() => $"{BaseUrl}Crews/Details/{Crew?.Id}";
+        public string GetSecretUrl(TeamCoachKey key) => $"{BaseUrl}TeamCoaches/Key/{key.Secret}";
     }
 }

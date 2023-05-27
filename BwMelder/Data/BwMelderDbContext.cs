@@ -17,6 +17,7 @@ namespace BwMelder.Data
 
         public DbSet<HomeCoach> HomeCoaches => Set<HomeCoach>();
         public DbSet<TeamCoach> TeamCoaches => Set<TeamCoach>();
+        public DbSet<TeamCoachKey> TeamCoachKeys => Set<TeamCoachKey>();
 
         public BwMelderDbContext(DbContextOptions<BwMelderDbContext> options) : base(options) { }
         

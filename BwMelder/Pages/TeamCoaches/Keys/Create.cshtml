@@ -1,0 +1,35 @@
+﻿@page
+@model BwMelder.Pages.TeamCoaches.Keys.CreateModel
+
+@{
+    ViewData["Title"] = "Betreuerzugang anlegen";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Key.Comment" class="control-label"></label>
+                <input asp-for="Key.Comment" class="form-control" />
+                <span asp-validation-for="Key.Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Speichern" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Zurück zur Übersicht</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

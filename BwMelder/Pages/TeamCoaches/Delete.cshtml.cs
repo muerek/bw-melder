@@ -20,7 +20,7 @@ namespace BwMelder.Pages.TeamCoaches
         }
 
         [BindProperty]
-        public TeamCoach TeamCoach { get; set; }
+        public TeamCoach? TeamCoach { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
@@ -48,15 +48,21 @@ namespace BwMelder.Pages.TeamCoaches
             if (TeamCoach != null)
             {
                 db.TeamCoaches.Remove(TeamCoach);
+
+                // Check for an attached key and delete it too.
+                if (TeamCoach.TeamCoachKeyId != null)
+                {
+                    var key = await db.TeamCoachKeys.FindAsync(TeamCoach.TeamCoachKeyId);
+                    if (key != null)
+                    {
+                        db.TeamCoachKeys.Remove(key);
+                    }
+                }
+
                 await db.SaveChangesAsync();
             }
 
-            // Return authenticated users to the overview, anonymous users to the creation form.
-            if (User.Identity?.IsAuthenticated ?? false)
-            {
-                return RedirectToPage("./Index");
-            }
-            return RedirectToPage("./Create");
+            return RedirectToPage("./Index");
         }
     }
 }

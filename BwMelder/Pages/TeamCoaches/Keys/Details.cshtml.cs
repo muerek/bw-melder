@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +10,7 @@ using BwMelder.Model;
 using Microsoft.AspNetCore.Http;
 using BwMelder.Extensions;
 
-namespace BwMelder.Pages.Crews
+namespace BwMelder.Pages.TeamCoaches.Keys
 {
     public class DetailsModel : PageModel
     {
@@ -23,28 +23,26 @@ namespace BwMelder.Pages.Crews
             this.httpContextAccessor = httpContextAccessor;
         }
 
-        public Crew? Crew { get; set; }
+        public TeamCoachKey? Key { get; set; }
         public string BaseUrl { get; set; } = string.Empty;
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Crew = await db.Crews
+            Key = await db.TeamCoachKeys
                 .AsNoTracking()
-                .Include(c => c.HomeCoach)
-                .Include(c => c.Race)
-                .Include(c => c.Athletes)
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(key => key.Id == id);
 
-            if (Crew == null)
+            if (Key == null)
             {
                 return NotFound();
             }
 
+            // Base URL is needed for generating the secret URLs team coaches are supposed to use.
             BaseUrl = httpContextAccessor.HttpContext?.Request.BaseUrl() ?? string.Empty;
 
             return Page();
         }
 
-        public string GetSecretUrl() => $"{BaseUrl}Crews/Details/{Crew?.Id}";
+        public string GetSecretUrl(TeamCoachKey key) => $"{BaseUrl}TeamCoaches/Key/{key.Secret}";
     }
 }
