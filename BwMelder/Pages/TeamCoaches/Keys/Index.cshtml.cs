@@ -37,6 +37,6 @@ namespace BwMelder.Pages.TeamCoaches.Keys
             BaseUrl = httpContextAccessor.HttpContext?.Request.BaseUrl() ?? string.Empty;
         }
 
-        public string GetSecretUrl(TeamCoachKey key) => $"{BaseUrl}TeamCoaches/Keys/{key.Secret}";
+        public string GetSecretUrl(TeamCoachKey key) => $"{BaseUrl}TeamCoaches/Key/{key.Secret}";
     }
 }

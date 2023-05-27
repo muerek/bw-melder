@@ -1,5 +1,5 @@
 ﻿@page "{id:int}"
-@model BwMelder.Pages.TeamCoaches.Keys.DeleteModel
+@model BwMelder.Pages.TeamCoaches.Keys.DetailsModel
 
 @{
     ViewData["Title"] = "Betreuerzugang";
@@ -20,7 +20,18 @@
             @Html.DisplayNameFor(model => model.Key!.Secret)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Key!.Secret)
+            <div class="input-group">
+                <input class="form-control" value="@Model.GetSecretUrl(Model.Key!)" readonly />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-toggle="button"
+                            onclick="toggleQrCode('@Model.GetSecretUrl(Model.Key!)', 'qrCode-@Model.Key!.Id')">
+                        QR-Code
+                    </button>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div id="qrCode-@Model.Key!.Id"></div>
+            </div>
         </dd>
     </dl>
 </div>
@@ -30,3 +41,29 @@
     <a asp-page="../Index">Betreuerzugänge verwalten</a> |
     <a class="text-danger" asp-page="./Delete" asp-route-id="@Model.Key!.Id">Löschen</a>
 </div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/lib/qrcodejs/qrcode.min.js"></script>
+    <script type="text/javascript">
+        function toggleQrCode(url, qr) {
+            qrCodeContainer = document.getElementById(qr);
+
+            if (qrCodeContainer.innerHTML.trim().length > 0) {
+                qrCodeContainer.innerHTML = "";
+                qrCodeContainer.classList.remove("mt-2");
+            }
+            else {
+                new QRCode(qrCodeContainer,
+                    {
+                        text: url,
+                        width: 150,
+                        height: 150
+                    });
+
+                qrCodeContainer.classList.add("mt-2");
+            }
+        }
+    </script>
+
+}
