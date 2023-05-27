@@ -18,5 +18,8 @@ namespace BwMelder.Model
 
         [Display(Name = "Führerschein")]
         public DriversLicense DriversLicense { get; set; } = DriversLicense.None;
+
+        public int? TeamCoachKeyId { get; set; } = null;
+        public TeamCoachKey? TeamCoachKey { get; set; } = null;
     }
 }

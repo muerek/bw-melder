@@ -331,6 +331,23 @@ namespace BwMelder.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BwMelder.Model.TeamCoachKey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("Secret")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TeamCoachKeys");
+                });
+
             modelBuilder.Entity("BwMelder.Model.Athlete", b =>
                 {
                     b.HasBaseType("BwMelder.Model.Participant");
@@ -356,6 +373,12 @@ namespace BwMelder.Migrations
 
                     b.Property<int>("DriversLicense")
                         .HasColumnType("INTEGER");
+
+                    b.Property<int?>("TeamCoachKeyId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasIndex("TeamCoachKeyId")
+                        .IsUnique();
 
                     b.HasDiscriminator().HasValue("TeamCoach");
                 });
@@ -516,6 +539,10 @@ namespace BwMelder.Migrations
 
             modelBuilder.Entity("BwMelder.Model.TeamCoach", b =>
                 {
+                    b.HasOne("BwMelder.Model.TeamCoachKey", "TeamCoachKey")
+                        .WithOne("TeamCoach")
+                        .HasForeignKey("BwMelder.Model.TeamCoach", "TeamCoachKeyId");
+
                     b.OwnsOne("BwMelder.Model.Contact", "Contact", b1 =>
                         {
                             b1.Property<Guid>("TeamCoachId")
@@ -539,6 +566,8 @@ namespace BwMelder.Migrations
 
                     b.Navigation("Contact")
                         .IsRequired();
+
+                    b.Navigation("TeamCoachKey");
                 });
 
             modelBuilder.Entity("BwMelder.Model.Crew", b =>
@@ -551,6 +580,11 @@ namespace BwMelder.Migrations
             modelBuilder.Entity("BwMelder.Model.Race", b =>
                 {
                     b.Navigation("Crews");
+                });
+
+            modelBuilder.Entity("BwMelder.Model.TeamCoachKey", b =>
+                {
+                    b.Navigation("TeamCoach");
                 });
 #pragma warning restore 612, 618
         }

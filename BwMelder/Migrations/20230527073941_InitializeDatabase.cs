@@ -26,6 +26,20 @@ namespace BwMelder.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TeamCoachKeys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Secret = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Comment = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeamCoachKeys", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Crews",
                 columns: table => new
                 {
@@ -91,7 +105,8 @@ namespace BwMelder.Migrations
                     Contact_Phone = table.Column<string>(type: "TEXT", nullable: true),
                     Contact_EmailAddress = table.Column<string>(type: "TEXT", nullable: true),
                     ClubName = table.Column<string>(type: "TEXT", nullable: true),
-                    DriversLicense = table.Column<int>(type: "INTEGER", nullable: true)
+                    DriversLicense = table.Column<int>(type: "INTEGER", nullable: true),
+                    TeamCoachKeyId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -102,6 +117,11 @@ namespace BwMelder.Migrations
                         principalTable: "Crews",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Participants_TeamCoachKeys_TeamCoachKeyId",
+                        column: x => x.TeamCoachKeyId,
+                        principalTable: "TeamCoachKeys",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -249,6 +269,12 @@ namespace BwMelder.Migrations
                 name: "IX_Participants_CrewId",
                 table: "Participants",
                 column: "CrewId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Participants_TeamCoachKeyId",
+                table: "Participants",
+                column: "TeamCoachKeyId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -261,6 +287,9 @@ namespace BwMelder.Migrations
 
             migrationBuilder.DropTable(
                 name: "Crews");
+
+            migrationBuilder.DropTable(
+                name: "TeamCoachKeys");
 
             migrationBuilder.DropTable(
                 name: "Races");
