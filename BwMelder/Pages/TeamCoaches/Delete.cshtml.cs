@@ -62,12 +62,7 @@ namespace BwMelder.Pages.TeamCoaches
                 await db.SaveChangesAsync();
             }
 
-            // Return authenticated users to the overview, anonymous users to the homepage.
-            if (User.Identity?.IsAuthenticated ?? false)
-            {
-                return RedirectToPage("./Index");
-            }
-            return RedirectToPage("/");
+            return RedirectToPage("./Index");
         }
     }
 }

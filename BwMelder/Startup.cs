@@ -44,11 +44,11 @@ namespace BwMelder
                 options.Conventions.AllowAnonymousToFolder("/Crews/HomeCoaches");
 
                 // Allow anonymous access for team coaches so they can add themselves.
-                // Note that Index is not included.
+                // Note that Index and Delete are not included.
                 options.Conventions.AllowAnonymousToPage("/TeamCoaches/Create");
                 options.Conventions.AllowAnonymousToPage("/TeamCoaches/Details");
                 options.Conventions.AllowAnonymousToPage("/TeamCoaches/Edit");
-                options.Conventions.AllowAnonymousToPage("/TeamCoaches/Delete");
+                options.Conventions.AllowAnonymousToPage("/TeamCoaches/Key");
 
                 // Note that the homepage and login/logout are allowed for anonymous access by attributes.
             });
