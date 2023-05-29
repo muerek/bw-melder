@@ -1,9 +1,23 @@
 ﻿@page "{secret:guid}"
 @model BwMelder.Pages.TeamCoaches.KeyModel
 @{
-    ViewData["Title"] = "Weiterleitung...";
+    ViewData["Title"] = "Betreuerregistrierung";
 }
 
 <div>
-    <p>Einen Moment, wir leiten dich weiter...</p>
+    <h1 class="display-4">Betreuer&shy;registrierung</h1>
+    <p class="lead">
+        für das NRW-Team beim Bundeswettbewerb
+    </p>
+    <hr />
+    <p>
+        Wir möchten dich gerne als Betreuer beim Bundeswettbewerb dabeihaben!
+    </p>
+    <p>
+        Für die weitere Organisation benötigen wir ein paar Informationen von dir.
+        Bitte fülle das Formular auf der nächsten Seite aus, um dich als Betreuer zu registrieren.
+    </p>
+    <a class="btn btn-primary" asp-page="./Create" asp-route-secret="@Model.Key!.Secret">
+        Weiter
+    </a>
 </div>
