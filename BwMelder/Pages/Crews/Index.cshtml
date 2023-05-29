@@ -35,10 +35,15 @@
     <tbody>
         @foreach (var crew in Model.Crews)
         {
+            // Color-code the athlete count to show if the crew is complete or not.
+            // Compare the actual athlete count of the crew with the expected athlete count according to the race definition.
             var athleteStatusClass = (crew.Athletes.Count, crew.Race.AthleteCount) switch
             {
+                // No athletes were added yet, red highlight.
                 (0, _) => "table-danger",
+                // Some were added, but not all of them, yellow highlight.
                 var (x, y) when x < y => "table-warning",
+                // All were added, green highlight.
                 var (x, y) when x == y => "table-success",
                 (_, _) => ""
             };
@@ -64,3 +69,7 @@
         }
     </tbody>
 </table>
+
+<p>
+    Ein Überblick über die gemeldeten Sportler je Boot gibt es in der <a asp-page="../Reports/Entries">Meldeübersicht</a>.
+</p>

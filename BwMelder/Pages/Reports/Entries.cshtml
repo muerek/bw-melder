@@ -1,0 +1,68 @@
+﻿@page
+@model BwMelder.Pages.Reports.EntriesModel
+
+@{
+    ViewData["Title"] = "Meldeübersicht";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@* Print a separate block for each race. *@
+@foreach (var race in Model.Races)
+{
+    <hr />
+    <h4>@race.FullName</h4>
+
+    @if (race.Crews.Count == 0)
+    {
+        <p class="text-muted">Keine Meldungen.</p>
+    }
+    else
+    {
+        @foreach (var crew in race.Crews)
+        {
+            <p>
+                <a asp-page="../Crews/Details" asp-route-id="@crew.Id">
+                    <h5>@crew.ClubName</h5>
+                </a>
+
+                <ol>
+                    @* Show all positions required for an entry in this race, regardless if there is athlete data or not. *@
+                    @{
+                        IList<Athlete> rowers = crew.Athletes.Where(a => !a.IsCox).ToList();
+                    }
+                    @for (int position = 0; position < race.RowerCount; position++)
+                    {
+                        var rower = rowers.ElementAtOrDefault(position);
+                        <li>
+                            @if (rower != null)
+                            {
+                                <text>@rower.FullName (@rower.DateOfBirth.Year)</text>
+                            }
+                            else
+                            {
+                                <span class="text-muted">(offen)</span>
+                            }
+                        </li>
+                    }
+
+                    @if (race.Coxed)
+                    {
+                        var cox = crew.Athletes.SingleOrDefault(a => a.IsCox);
+                        <li style="list-style-type: 'St. ';">
+                            @if (cox != null)
+                            {
+                                <text>@cox.FullName (@cox.DateOfBirth.Year)</text>
+                            }
+                            else
+                            {
+                                <span class="text-muted">(offen)</span>
+                            }
+                        </li>
+                    }
+                </ol>
+            </p>
+        }
+    }
+}
+
