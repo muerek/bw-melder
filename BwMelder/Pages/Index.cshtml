@@ -7,15 +7,34 @@
 <div>
     <h1 class="display-4">BW-Melder NRW</h1>
     <p class="lead">
-        Wir erfassen die Meldungen zum BW digital.
+        Wir erfassen eure Meldungen zum BW digital.
     </p>
     <hr />
-    <p>
-        Als Trainer erhaltet ihr einen speziellen Link von der Ruderjugend, wenn eure Sportler nominiert werden.
-        Über diesen Link gelangt ihr direkt zur Registrierung der Sportler.
-    </p>
-    @if (!(User.Identity?.IsAuthenticated ?? false))
+    @if (User.Identity?.IsAuthenticated ?? false)
     {
+        <p>
+            Willkommen im Ruderjugend-Bereich. Hier findet ihr diese Funktionen:
+        </p>
+        <p>
+            <a class="font-weight-bold" asp-page="/TeamCoaches/Index">Betreuer</a> - Verwaltet die Team-Betreuer, die mit zum BW fahren.
+            Ihr könnt die Betreuer selbst eintragen oder Zugänge erstellen, über die sich die Betreuer selbst registrieren können.
+        </p>
+        <p>
+            <a class="font-weight-bold" asp-page="/Crews/Index">Mannschaften</a> - Verwaltet die Mannschaften für die Boote beim BW.
+            Für jede nominierte Mannschaft erhaltet ihr einen Zugang, über den die jeweiligen Trainer die Daten der Athleten selbst eintragen können.
+        </p>
+        <p>
+            <a class="font-weight-bold" asp-page="/Reports/Index">Reports</a> - Schaut euch verschiedene Auswertungen und Zusammenfassungen der Daten im System an,
+            zum Beispiel eine Bestellübersicht fürs Essen oder die E-Mail-Verteiler. Außerdem könnt ihr alle Daten herunterladen.
+        </p>
+    }
+    else
+    {
+        <p>
+            Ihr wollt eure Sportler anmelden? Oder ihr kommt als Betreuer mit?
+            Dann bekommt ihr von uns einen speziellen Link, der euch direkt zur Anmeldung führt.
+            Bis dahin wünschen wir euch viel Erfolg!
+        </p>
         <p>
             <a asp-page="/Admin/Login">Anmelden als Ruderjugend</a>
         </p>
