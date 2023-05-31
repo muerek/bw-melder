@@ -5,14 +5,16 @@
     ViewData["Title"] = "Reports";
 }
 
-<h1>Reports</h1>
-<hr />
+<h1>@ViewData["Title"]</h1>
+<p>
+    Hier findet ihr verschiedene Auswertungen und Zusammenfassungen aller Daten im System. 
+</p>
 
 <h4>Kontakte</h4>
 
 <ul>
     <li>
-        <a asp-page="./Mailing">Mail-Verteiler</a>
+        <a asp-page="./Mailing">Mail-Verteiler</a> - E-Mail-Adressen der Betreuer und Heimtrainer
     </li>
 </ul>
 
@@ -20,7 +22,7 @@
 
 <ul>
     <li>
-        <a asp-page="./Entries">Meldeübersicht</a>
+        <a asp-page="./Entries">Meldeübersicht</a> - Aufstellung der Boote je Rennen mit Namen der Mannschaft
     </li>
     <li>
         <a asp-page="./FoodOrder">Essensbestellung</a>
@@ -31,7 +33,11 @@
 </ul>
 
 <h4>Alle Daten</h4>
-
+<p>
+    Hier könnt ihr die gesammelten Teilnehmerdaten herunterladen.
+    Das Abrufen der gesamten Daten kann das System stark belasten.
+    Bitte ruft diese Reports daher möglichst erst ab, nachdem die Anmeldung abgeschlossen ist.
+</p>
 <ul>
     <li>
         <a asp-page="./Athletes">Sportler</a>
