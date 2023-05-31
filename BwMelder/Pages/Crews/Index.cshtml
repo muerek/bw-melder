@@ -2,16 +2,21 @@
 @model BwMelder.Pages.Crews.IndexModel
 
 @{
-    ViewData["Title"] = "Nominierte Mannschaften";
+    ViewData["Title"] = "Mannschaften";
 }
 
-<h1>Nominierte Mannschaften</h1>
+<h1>@ViewData["Title"]</h1>
 <p>
-    Nominierungen geben an, welcher Verein in welchem Rennen eine Mannschaft stellt.
-    Nachdem eine Mannschaft nominiert wurde, können Sportler und Heimtrainer in den Mannschaftsdetails eingetragen werden.
+    Hier werden die Mannschaften für die Boote beim BW verwaltet.
+    Nominiert eine Mannschaft, um sie hinzuzufügen. Dafür müsst ihr nur Rennen und Verein angeben.
+    Anschließend erhaltet ihr einen Zugang, über den die jeweiligen Trainer die Daten ihrer Sportler selbst eintragen können.
+    In der Tabelle unten könnt ihr nachvollziehen, wie viele Athleten schon eingetragen sind.
 </p>
 <p>
-    <a class="btn btn-primary" asp-page="Create">Neue Nominierung anlegen</a>
+    Ein Überblick über die gemeldeten Sportler je Boot gibt es in der <a asp-page="../Reports/Entries">Meldeübersicht</a>.
+</p>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Mannschaft nominieren</a>
     <a class="btn btn-link" asp-page="../Races/Index">Rennen verwalten</a>
 </p>
 <table class="table">
@@ -69,7 +74,3 @@
         }
     </tbody>
 </table>
-
-<p>
-    Ein Überblick über die gemeldeten Sportler je Boot gibt es in der <a asp-page="../Reports/Entries">Meldeübersicht</a>.
-</p>
