@@ -17,7 +17,7 @@
         Darüber können sie ohne Anmeldung auf diese Mannschaft zugreifen und die Daten ihrer Sportler eintragen:
     </p>
     <div class="input-group">
-        <input class="form-control" readonly value="@Model.GetSecretUrl()"/>
+        <input class="form-control" readonly value="@Model.GetSecretUrl()" />
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" data-toggle="button" onclick="toggleQrCode('@Model.GetSecretUrl()', 'qrCode')">QR-Code</button>
         </div>
@@ -31,14 +31,14 @@
 else
 {
     <p>
-        Für die weitere Organisation benötigen wir ein paar Informationen von dir.
-        Bitte fülle das Formular auf der nächsten Seite aus, um dich als Betreuer zu registrieren.
+        Bitte registriere hier deine Mannschaft.
+        Du kannst deine Eintragungen jederzeit ergänzen und ändern, indem du diese Seite erneut aufrufst.
     </p>
 }
 
 <h4>Heimtrainer</h4>
-<p class="text-muted">
-    Ansprechpartner für die Kommunikation zu den Sportlern und die weitere Vorbereitung bis zum BW
+<p class="small text-muted">
+    Unser Ansprechpartner für die weitere Organsation bis zum BW und die Kommunikation zu den Sportlern
 </p>
 @if (Model.Crew.HomeCoach == null)
 {
@@ -105,14 +105,24 @@ else
     }
 }
 
-<h4>Ruderer (@Model.Crew.Athletes.Where(a => !a.IsCox).Count() von @Model.Crew.Race.RowerCount)</h4>
+<h4>Ruderer</h4>
 @{
-    // Check for athletes that are not coxing.
+    // Filter for athletes that are not coxing.
     var rowers = Model.Crew.Athletes.Where(a => !a.IsCox);
 
-    // Offer adding more if the total count is not where it should be.
+    // Show a success message if all rowers have been added.
+    if (rowers.Count() == @Model.Crew.Race.RowerCount)
+    {
+        <p class="text-success">
+            Alle eingetragen!
+        </p>
+    }
+    // Show a progress message and a button to add more if some are missing.
     if (Model.Crew.Race.RowerCount > rowers.Count())
     {
+        <p class="text-muted">
+            @rowers.Count() von @Model.Crew.Race.RowerCount eingetragen
+        </p>
         <p>
             <a class="btn btn-primary"
                asp-page="./Athletes/Create"
@@ -123,6 +133,7 @@ else
         </p>
     }
 
+    // Show brief information for each rower.
     foreach (var rower in rowers.OrderBy(r => r.LastName))
     {
         <div class="card mb-3">
