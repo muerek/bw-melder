@@ -5,7 +5,7 @@
     ViewData["Title"] = "Mannschaftsdetails";
 }
 
-<h1>Mannschaftsdetails</h1>
+<h1>@ViewData["Title"]</h1>
 <partial name="_CrewInfo" model="Model.Crew" />
 <hr />
 
@@ -13,7 +13,8 @@
 {
 
     <p>
-        Über diesen Link können weitere Personen ohne Anmeldung auf die Mannschaftsdetails zugreifen und Eintragungen vornehmen:
+        Schickt diesen Link an die Trainer.
+        Darüber können sie ohne Anmeldung auf diese Mannschaft zugreifen und die Daten ihrer Sportler eintragen:
     </p>
     <div class="input-group">
         <input class="form-control" readonly value="@Model.GetSecretUrl()"/>
@@ -26,6 +27,13 @@
     </div>
 
     <hr />
+}
+else
+{
+    <p>
+        Für die weitere Organisation benötigen wir ein paar Informationen von dir.
+        Bitte fülle das Formular auf der nächsten Seite aus, um dich als Betreuer zu registrieren.
+    </p>
 }
 
 <h4>Heimtrainer</h4>

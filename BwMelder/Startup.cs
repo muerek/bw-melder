@@ -38,7 +38,8 @@ namespace BwMelder
             {
                 // Allow anonymous access to crew details for coaches.
                 options.Conventions.AllowAnonymousToPage("/Crews/Details");
-                
+                options.Conventions.AllowAnonymousToPage("/Crews/Key");
+
                 // Allow anonymous access to everything required to manage a single crew.
                 options.Conventions.AllowAnonymousToFolder("/Crews/Athletes");
                 options.Conventions.AllowAnonymousToFolder("/Crews/HomeCoaches");
