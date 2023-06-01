@@ -1,0 +1,27 @@
+﻿@page "{secret:guid}"
+@model BwMelder.Pages.Crews.KeyModel
+@{
+    ViewData["Title"] = "Mannschaftsregistrierung";
+}
+
+<div>
+    <h1 class="display-4">Mannschafts&shy;registrierung</h1>
+    <p class="lead">
+        für das NRW-Team beim Bundeswettbewerb
+    </p>
+    <hr />
+    <p>
+        Herzlichen Glückwunsch zur Nominierung!
+    </p>
+    @* TODO: Leverage CrewInfo partial, that would require unwrapping the div it comes with. *@
+    <p class="alert alert-success">
+        @Model.Crew!.ClubName in Rennen @Model.Crew!.Race.FullName
+    </p>
+    <p>
+        Bitte füge auf der nächsten Seite alle deine Sportler hinzu, um deine Mannschaft zu registrieren.
+        Trage dich selbst auch als Heimtrainer ein, damit wir alles weitere mit dir organisieren können.
+    </p>
+    <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Crew!.Id">
+        Weiter
+    </a>
+</div>

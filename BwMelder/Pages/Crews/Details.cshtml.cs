@@ -45,6 +45,6 @@ namespace BwMelder.Pages.Crews
             return Page();
         }
 
-        public string GetSecretUrl() => $"{BaseUrl}Crews/Details/{Crew?.Id}";
+        public string GetSecretUrl() => $"{BaseUrl}Crews/Key/{Crew?.Id}";
     }
 }

@@ -18,27 +18,29 @@ namespace BwMelder.Pages.TeamCoaches
             this.db = db;
         }
 
+        public TeamCoachKey? Key { get; set; }
+
         public async Task<IActionResult> OnGetAsync(Guid secret)
         {
-            var key = await db.TeamCoachKeys
+            Key = await db.TeamCoachKeys
                 .AsNoTracking()
                 .Include(key => key.TeamCoach)
                 .SingleOrDefaultAsync(key => key.Secret == secret);
 
             // Cancel if an invalid key was presented.
-            if (key == null)
+            if (Key == null)
             {
                 return BadRequest();
             }
 
-            // Go to adding a new team coach if none is attached to that key yet.
-            if (key.TeamCoach == null)
+            // Go to existing team coach if one is already attached to that key.
+            if (Key.TeamCoach != null)
             {
-                return RedirectToPage("./Create", new { secret });
+                return RedirectToPage("./Details", new { id = Key.TeamCoach.Id });
             }
 
-            // Go to the team coach attached to this key.
-            return RedirectToPage("./Details", new { id = key.TeamCoach.Id });
+            // Display page if key is valid and unused.
+            return Page();
         }
     }
 }

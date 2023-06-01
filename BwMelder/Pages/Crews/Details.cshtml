@@ -5,7 +5,7 @@
     ViewData["Title"] = "Mannschaftsdetails";
 }
 
-<h1>Mannschaftsdetails</h1>
+<h1>@ViewData["Title"]</h1>
 <partial name="_CrewInfo" model="Model.Crew" />
 <hr />
 
@@ -13,10 +13,11 @@
 {
 
     <p>
-        Über diesen Link können weitere Personen ohne Anmeldung auf die Mannschaftsdetails zugreifen und Eintragungen vornehmen:
+        Schickt diesen Link an die Trainer.
+        Darüber können sie ohne Anmeldung auf diese Mannschaft zugreifen und die Daten ihrer Sportler eintragen:
     </p>
     <div class="input-group">
-        <input class="form-control" readonly value="@Model.GetSecretUrl()"/>
+        <input class="form-control" readonly value="@Model.GetSecretUrl()" />
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" data-toggle="button" onclick="toggleQrCode('@Model.GetSecretUrl()', 'qrCode')">QR-Code</button>
         </div>
@@ -27,10 +28,17 @@
 
     <hr />
 }
+else
+{
+    <p>
+        Bitte registriere hier deine Mannschaft.
+        Du kannst deine Eintragungen jederzeit ergänzen und ändern, indem du diese Seite erneut aufrufst.
+    </p>
+}
 
 <h4>Heimtrainer</h4>
 <p class="text-muted">
-    Ansprechpartner für die Kommunikation zu den Sportlern und die weitere Vorbereitung bis zum BW
+    Unser Ansprechpartner für die weitere Organsation bis zum BW und die Kommunikation zu den Sportlern
 </p>
 @if (Model.Crew.HomeCoach == null)
 {
@@ -38,7 +46,7 @@
         <a class="btn btn-primary"
            asp-page="./HomeCoaches/Create"
            asp-route-crewid="@Model.Crew.Id">
-            Heimtrainer anlegen
+            Heimtrainer hinzufügen
         </a>
     </p>
 }
@@ -80,7 +88,7 @@ else
                asp-page="./Athletes/Create"
                asp-route-crewid="@Model.Crew.Id"
                asp-route-iscox="@true">
-                Steuermensch anlegen
+                Steuermensch hinzufügen
             </a>
         </p>
     }
@@ -97,24 +105,35 @@ else
     }
 }
 
-<h4>Ruderer (@Model.Crew.Athletes.Where(a => !a.IsCox).Count() von @Model.Crew.Race.RowerCount)</h4>
+<h4>Ruderer</h4>
 @{
-    // Check for athletes that are not coxing.
+    // Filter for athletes that are not coxing.
     var rowers = Model.Crew.Athletes.Where(a => !a.IsCox);
 
-    // Offer adding more if the total count is not where it should be.
+    // Show a success message if all rowers have been added.
+    if (rowers.Count() == @Model.Crew.Race.RowerCount)
+    {
+        <p class="text-success">
+            Alle eingetragen!
+        </p>
+    }
+    // Show a progress message and a button to add more if some are missing.
     if (Model.Crew.Race.RowerCount > rowers.Count())
     {
+        <p class="text-muted">
+            @rowers.Count() von @Model.Crew.Race.RowerCount eingetragen
+        </p>
         <p>
             <a class="btn btn-primary"
                asp-page="./Athletes/Create"
                asp-route-crewid="@Model.Crew.Id"
                asp-route-iscox="@false">
-                Ruderer anlegen
+                Ruderer hinzufügen
             </a>
         </p>
     }
 
+    // Show brief information for each rower.
     foreach (var rower in rowers.OrderBy(r => r.LastName))
     {
         <div class="card mb-3">
