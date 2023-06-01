@@ -20,6 +20,10 @@
             @Html.DisplayNameFor(model => model.Key!.Secret)
         </dt>
         <dd class="col-sm-10">
+            <p class="mb-2">
+                Schickt diesen Link an den Betreuer.
+                Darüber kann er/sie sich selbst eintragen:
+            </p>
             <div class="input-group">
                 <input class="form-control" value="@Model.GetSecretUrl(Model.Key!)" readonly />
                 <div class="input-group-append">
@@ -38,7 +42,7 @@
 
 <div>
     <a asp-page="../Index">Zurück zur Betreuerübersicht</a> |
-    <a asp-page="../Index">Betreuerzugänge verwalten</a> |
+    <a asp-page="./Index">Betreuerzugänge anzeigen</a> |
     <a class="text-danger" asp-page="./Delete" asp-route-id="@Model.Key!.Id">Löschen</a>
 </div>
 
