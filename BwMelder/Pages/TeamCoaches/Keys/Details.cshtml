@@ -28,8 +28,9 @@
                 <input class="form-control" value="@Model.GetSecretUrl(Model.Key!)" readonly />
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" data-toggle="button"
-                            onclick="toggleQrCode('@Model.GetSecretUrl(Model.Key!)', 'qrCode-@Model.Key!.Id')">
-                        QR-Code
+                            onclick="toggleQrCode('@Model.GetSecretUrl(Model.Key!)', 'qrCode-@Model.Key!.Id')"
+                            title="QR-Code generieren">
+                        <i class="bi bi-qr-code-scan"></i>
                     </button>
                 </div>
             </div>

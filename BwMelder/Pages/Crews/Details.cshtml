@@ -19,7 +19,11 @@
     <div class="input-group">
         <input class="form-control" readonly value="@Model.GetSecretUrl()" />
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" data-toggle="button" onclick="toggleQrCode('@Model.GetSecretUrl()', 'qrCode')">QR-Code</button>
+            <button class="btn btn-outline-secondary" data-toggle="button"
+                    onclick="toggleQrCode('@Model.GetSecretUrl()', 'qrCode')"
+                    title="QR-Code generieren">
+                <i class="bi bi-qr-code-scan"></i>
+            </button>
         </div>
     </div>
     <div class="d-flex justify-content-center">
@@ -46,7 +50,7 @@ else
         <a class="btn btn-primary"
            asp-page="./HomeCoaches/Create"
            asp-route-crewid="@Model.Crew.Id">
-            Heimtrainer hinzufügen
+            <i class="bi bi-person-plus-fill"></i> Heimtrainer hinzufügen
         </a>
     </p>
 }
@@ -88,7 +92,7 @@ else
                asp-page="./Athletes/Create"
                asp-route-crewid="@Model.Crew.Id"
                asp-route-iscox="@true">
-                Steuermensch hinzufügen
+                <i class="bi bi-person-plus-fill"></i> Steuermensch hinzufügen
             </a>
         </p>
     }
@@ -132,7 +136,7 @@ else
                asp-page="./Athletes/Create"
                asp-route-crewid="@Model.Crew.Id"
                asp-route-iscox="@false">
-                Ruderer hinzufügen
+                <i class="bi bi-person-plus-fill"></i> Ruderer hinzufügen
             </a>
         </p>
     }
