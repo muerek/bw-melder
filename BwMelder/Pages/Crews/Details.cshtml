@@ -105,7 +105,6 @@ else
     }
 }
 
-<h4>Ruderer</h4>
 @{
     // Filter for athletes that are not coxing.
     var rowers = Model.Crew.Athletes.Where(a => !a.IsCox);
@@ -113,16 +112,21 @@ else
     // Show a success message if all rowers have been added.
     if (rowers.Count() == @Model.Crew.Race.RowerCount)
     {
-        <p class="text-success">
-            Alle eingetragen!
-        </p>
+        <h4>
+            Ruderer
+            <small class="text-success">Alle eingetragen!</small>
+        </h4>
     }
     // Show a progress message and a button to add more if some are missing.
     if (Model.Crew.Race.RowerCount > rowers.Count())
     {
-        <p class="text-muted">
-            @rowers.Count() von @Model.Crew.Race.RowerCount eingetragen
-        </p>
+        <h4>
+            Ruderer
+            <small class="text-muted">
+                @rowers.Count() von @Model.Crew.Race.RowerCount eingetragen
+            </small>
+        </h4>
+
         <p>
             <a class="btn btn-primary"
                asp-page="./Athletes/Create"
