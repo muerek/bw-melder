@@ -15,7 +15,7 @@
     Einen Überblick über die gemeldeten Sportler gibt es in der <a asp-page="../Reports/Entries">Meldeübersicht</a>.
 </p>
 <p>
-    <a class="btn btn-primary" asp-page="Create">Mannschaft nominieren</a>
+    <a class="btn btn-primary" asp-page="Create"><i class="bi bi-trophy"></i> Mannschaft nominieren</a>
     @*<a class="btn btn-link" asp-page="../Races/Index">Rennen verwalten</a>*@
 </p>
 <table class="table">
@@ -66,8 +66,8 @@
                 </td>
                 <td>
                     <a asp-page="./Details" asp-route-id="@crew.Id">Zur Mannschaft</a> |
-                    <a asp-page="./Edit" asp-route-id="@crew.Id">Bearbeiten</a> |
-                    <a class="text-danger" asp-page="./Delete" asp-route-id="@crew.Id">Löschen</a>
+                    <a asp-page="./Edit" asp-route-id="@crew.Id" title="Bearbeiten"><i class="bi bi-pencil"></i></a> |
+                    <a class="text-danger" asp-page="./Delete" asp-route-id="@crew.Id" title="Löschen"><i class="bi bi-trash3"></i></a>
                 </td>
             </tr>
         }

@@ -9,7 +9,9 @@
 <hr />
 
 <p>
-    <a href="@Model.GetMailtoLink(Model.AllEmailAddresses)" class="btn btn-primary">Mail an alle schreiben</a>
+    <a href="@Model.GetMailtoLink(Model.AllEmailAddresses)" class="btn btn-primary">
+        <i class="bi bi-envelope-at"></i> Mail an alle schreiben
+    </a>
 </p>
 
 <h4>Heimtrainer</h4>
@@ -18,7 +20,9 @@
     <textarea class="form-control" readonly>@string.Join("; ", Model.HomeCoachEmailAddresses)</textarea>
 </p>
 <p>
-    <a href="@Model.GetMailtoLink(Model.HomeCoachEmailAddresses)" class="btn btn-primary">Mail schreiben</a>
+    <a href="@Model.GetMailtoLink(Model.HomeCoachEmailAddresses)" class="btn btn-secondary">
+        <i class="bi bi-envelope-at"></i> Mail schreiben
+    </a>
 </p>
 
 <h4>Betreuer</h4>
@@ -26,5 +30,7 @@
     <textarea class="form-control" readonly>@string.Join("; ", Model.TeamCoachEmailAddresses)</textarea>
 </p>
 <p>
-    <a href="@Model.GetMailtoLink(Model.TeamCoachEmailAddresses)" class="btn btn-primary">Mail schreiben</a>
+    <a href="@Model.GetMailtoLink(Model.TeamCoachEmailAddresses)" class="btn btn-secondary">
+        <i class="bi bi-envelope-at"></i> Mail schreiben
+    </a>
 </p>

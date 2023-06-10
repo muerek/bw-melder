@@ -19,7 +19,11 @@
     <div class="input-group">
         <input class="form-control" readonly value="@Model.GetSecretUrl()" />
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" data-toggle="button" onclick="toggleQrCode('@Model.GetSecretUrl()', 'qrCode')">QR-Code</button>
+            <button class="btn btn-outline-secondary" data-toggle="button"
+                    onclick="toggleQrCode('@Model.GetSecretUrl()', 'qrCode')"
+                    title="QR-Code generieren">
+                <i class="bi bi-qr-code-scan"></i>
+            </button>
         </div>
     </div>
     <div class="d-flex justify-content-center">
@@ -30,7 +34,7 @@
 }
 else
 {
-    <p>
+    <p class="alert alert-info">
         Bitte registriere hier deine Mannschaft.
         Du kannst deine Eintragungen jederzeit ergänzen und ändern, indem du diese Seite erneut aufrufst.
     </p>
@@ -46,7 +50,7 @@ else
         <a class="btn btn-primary"
            asp-page="./HomeCoaches/Create"
            asp-route-crewid="@Model.Crew.Id">
-            Heimtrainer hinzufügen
+            <i class="bi bi-person-plus-fill"></i> Heimtrainer hinzufügen
         </a>
     </p>
 }
@@ -88,7 +92,7 @@ else
                asp-page="./Athletes/Create"
                asp-route-crewid="@Model.Crew.Id"
                asp-route-iscox="@true">
-                Steuermensch hinzufügen
+                <i class="bi bi-person-plus-fill"></i> Steuermensch hinzufügen
             </a>
         </p>
     }
@@ -105,7 +109,6 @@ else
     }
 }
 
-<h4>Ruderer</h4>
 @{
     // Filter for athletes that are not coxing.
     var rowers = Model.Crew.Athletes.Where(a => !a.IsCox);
@@ -113,22 +116,27 @@ else
     // Show a success message if all rowers have been added.
     if (rowers.Count() == @Model.Crew.Race.RowerCount)
     {
-        <p class="text-success">
-            Alle eingetragen!
-        </p>
+        <h4>
+            Ruderer
+            <small class="text-success">Alle eingetragen!</small>
+        </h4>
     }
     // Show a progress message and a button to add more if some are missing.
     if (Model.Crew.Race.RowerCount > rowers.Count())
     {
-        <p class="text-muted">
-            @rowers.Count() von @Model.Crew.Race.RowerCount eingetragen
-        </p>
+        <h4>
+            Ruderer
+            <small class="text-muted">
+                @rowers.Count() von @Model.Crew.Race.RowerCount eingetragen
+            </small>
+        </h4>
+
         <p>
             <a class="btn btn-primary"
                asp-page="./Athletes/Create"
                asp-route-crewid="@Model.Crew.Id"
                asp-route-iscox="@false">
-                Ruderer hinzufügen
+                <i class="bi bi-person-plus-fill"></i> Ruderer hinzufügen
             </a>
         </p>
     }
