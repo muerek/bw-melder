@@ -3,10 +3,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace BwMelder.Migrations
 {
+    /// <inheritdoc />
     public partial class InitializeDatabase : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -95,7 +99,8 @@ namespace BwMelder.Migrations
                     Diet_Restrictions = table.Column<string>(type: "TEXT", nullable: true),
                     ShirtSize = table.Column<int>(type: "INTEGER", nullable: false),
                     Comments = table.Column<string>(type: "TEXT", nullable: true),
-                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
+                    HasPublicTransportTicket = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", maxLength: 13, nullable: false),
                     LegalGuardian_FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     LegalGuardian_LastName = table.Column<string>(type: "TEXT", nullable: true),
                     LegalGuardian_Contact_Phone = table.Column<string>(type: "TEXT", nullable: true),
@@ -127,132 +132,35 @@ namespace BwMelder.Migrations
             migrationBuilder.InsertData(
                 table: "Races",
                 columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 1, false, "Jung 1x 13", "A", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 2, false, "Jung 1x 13 LG", "B", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 3, false, "Mäd 1x 13", "C", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 4, false, "Mäd 1x 13 LG", "D", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 5, false, "Jung 2x 12/13", "E", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 6, false, "Jung 2x 12/13 LG", "F", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 7, false, "Mäd 2x 12/13", "G", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 8, false, "Mäd 2x 12/13 LG", "H", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 9, true, "Jung 4x+ 12/13", "I", 4 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 10, true, "Mäd 4x+ 12/13", "J", 4 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 11, true, "Jung/Mäd 4x+ 12/13 Mix", "K", 4 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 12, false, "Jung 1x 14", "L", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 13, false, "Jung 1x 14 LG", "M", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 14, false, "Mäd 1x 14", "N", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 15, false, "Mäd 1x 14 LG", "O", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 16, false, "Jung 2x 13/14", "P", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 17, false, "Jung 2x 13/14 LG", "Q", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 18, false, "Mäd 2x 13/14", "R", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 19, false, "Mäd 2x 13/14 LG", "S", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 20, true, "Jung 4x+ 13/14", "T", 4 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 21, true, "Mäd 4x+ 13/14", "U", 4 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 22, true, "Jung/Mäd 4x+ 13/14 Mix", "V", 4 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 23, false, "SON 2x 12-14 Inklusion", "W", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 24, false, "SON 1x 12-14 Para", "X", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 25, false, "SON 2x 15-18 Inklusion", "1", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Races",
-                columns: new[] { "Id", "Coxed", "Name", "Number", "RowerCount" },
-                values: new object[] { 26, false, "SON 1x 15-18 Para", "2", 1 });
+                values: new object[,]
+                {
+                    { 1, false, "Jung 1x 13", "A", 1 },
+                    { 2, false, "Jung 1x 13 LG", "B", 1 },
+                    { 3, false, "Mäd 1x 13", "C", 1 },
+                    { 4, false, "Mäd 1x 13 LG", "D", 1 },
+                    { 5, false, "Jung 2x 12/13", "E", 2 },
+                    { 6, false, "Jung 2x 12/13 LG", "F", 2 },
+                    { 7, false, "Mäd 2x 12/13", "G", 2 },
+                    { 8, false, "Mäd 2x 12/13 LG", "H", 2 },
+                    { 9, true, "Jung 4x+ 12/13", "I", 4 },
+                    { 10, true, "Mäd 4x+ 12/13", "J", 4 },
+                    { 11, true, "Jung/Mäd 4x+ 12/13 Mix", "K", 4 },
+                    { 12, false, "Jung 1x 14", "L", 1 },
+                    { 13, false, "Jung 1x 14 LG", "M", 1 },
+                    { 14, false, "Mäd 1x 14", "N", 1 },
+                    { 15, false, "Mäd 1x 14 LG", "O", 1 },
+                    { 16, false, "Jung 2x 13/14", "P", 2 },
+                    { 17, false, "Jung 2x 13/14 LG", "Q", 2 },
+                    { 18, false, "Mäd 2x 13/14", "R", 2 },
+                    { 19, false, "Mäd 2x 13/14 LG", "S", 2 },
+                    { 20, true, "Jung 4x+ 13/14", "T", 4 },
+                    { 21, true, "Mäd 4x+ 13/14", "U", 4 },
+                    { 22, true, "Jung/Mäd 4x+ 13/14 Mix", "V", 4 },
+                    { 23, false, "SON 2x 12-14 Inklusion", "W", 2 },
+                    { 24, false, "SON 1x 12-14 Para", "X", 1 },
+                    { 25, false, "SON 2x 15-18 Inklusion", "1", 2 },
+                    { 26, false, "SON 1x 15-18 Para", "2", 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Crews_RaceId",
@@ -277,6 +185,7 @@ namespace BwMelder.Migrations
                 unique: true);
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

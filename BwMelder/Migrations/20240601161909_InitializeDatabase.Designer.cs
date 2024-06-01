@@ -11,13 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BwMelder.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    [Migration("20230527073941_InitializeDatabase")]
+    [Migration("20240601161909_InitializeDatabase")]
     partial class InitializeDatabase
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
 
             modelBuilder.Entity("BwMelder.Model.Crew", b =>
                 {
@@ -78,11 +79,15 @@ namespace BwMelder.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
+                        .HasMaxLength(13)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("HasPublicTransportTicket")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -96,6 +101,8 @@ namespace BwMelder.Migrations
                     b.ToTable("Participants", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Participant");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("BwMelder.Model.Race", b =>

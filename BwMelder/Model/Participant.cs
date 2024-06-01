@@ -39,5 +39,8 @@ namespace BwMelder.Model
         [Display(Name = "Medizinische Hinweise und weitere Bemerkungen")]
         [DataType(DataType.MultilineText)]
         public string? Comments { get; set; } = string.Empty;
+
+        [Display(Name = "Deutschlandticket")]
+        public bool HasPublicTransportTicket { get; set; } = false;
     }
 }
