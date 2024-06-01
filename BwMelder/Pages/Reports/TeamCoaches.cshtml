@@ -39,6 +39,9 @@
                 @Html.DisplayNameFor(model => model.TeamCoach[0].ShirtSize)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].HasPublicTransportTicket)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.TeamCoach[0].Diet.Choice)
             </th>
             <th>
@@ -76,9 +79,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Contact.Phone)
             </td>
-            <th>
+            <td>
                 @Html.DisplayFor(model => item.ShirtSize)
-            </th>
+            </td>
+            <td>
+                @(item.HasPublicTransportTicket ? "Ja" : "Nein")
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Diet.Choice)
             </td>
