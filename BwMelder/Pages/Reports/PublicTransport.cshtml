@@ -1,0 +1,45 @@
+﻿@page
+@model BwMelder.Pages.Reports.PublicTransportModel
+
+@{
+    ViewData["Title"] = "Deutschlandticket";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Sportler</th>
+            <th>Betreuer</th>
+            <th>Summe</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td>Vorhanden</td>
+            @{
+                var athletesWithTicket = Model.AthleteTickets.FirstOrDefault(t => t.HasTicket).Count;
+                var teamCoachesWithTicket = Model.TeamCoachTickets.FirstOrDefault(t => t.HasTicket).Count;
+            }
+            <td>@athletesWithTicket</td>
+            <td>@teamCoachesWithTicket</td>
+            <td>@(athletesWithTicket + teamCoachesWithTicket)</td>
+        </tr>
+
+        <tr>
+            <td>Nicht vorhanden</td>
+            @{
+                var athletesWithoutTicket = Model.AthleteTickets.FirstOrDefault(t => !t.HasTicket).Count;
+                var teamCoachesWithoutTicket = Model.TeamCoachTickets.FirstOrDefault(t => !t.HasTicket).Count;
+            }
+            <td>@athletesWithoutTicket</td>
+            <td>@teamCoachesWithoutTicket</td>
+            <td>@(athletesWithoutTicket + teamCoachesWithoutTicket)</td>
+        </tr>
+
+    </tbody>
+</table>

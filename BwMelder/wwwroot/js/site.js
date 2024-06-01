@@ -24,7 +24,9 @@ function tableToCsv(table_id, separator = ',') {
     }
     var csv_string = csv.join('\n');
     // Download it
-    var filename = 'export_' + table_id + '_' + new Date().toLocaleDateString() + '.csv';
+    // Filename: export_<table identifier>_<UTC time without milliseconds>
+    // Remove colons from filename, they do not play nice with filenames.
+    var filename = 'Export_' + table_id + '_' + new Date().toISOString().slice(0, -5).replaceAll(':', '') + 'Z.csv';
     var link = document.createElement('a');
     link.style.display = 'none';
     link.setAttribute('target', '_blank');

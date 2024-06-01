@@ -8,10 +8,10 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <button class="btn btn-secondary" onclick="tableToCsv('teamcoaches-table')">CSV herunterladen</button>
+    <button class="btn btn-secondary" onclick="tableToCsv('TeamCoaches_Table')">CSV herunterladen</button>
 </p>
 
-<table class="table table-hover table-sm table-responsive" id="teamcoaches-table">
+<table class="table table-hover table-sm table-responsive" id="TeamCoaches_Table">
     <thead>
         <tr>
             <th>
@@ -37,6 +37,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TeamCoach[0].ShirtSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamCoach[0].HasPublicTransportTicket)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TeamCoach[0].Diet.Choice)
@@ -76,9 +79,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Contact.Phone)
             </td>
-            <th>
+            <td>
                 @Html.DisplayFor(model => item.ShirtSize)
-            </th>
+            </td>
+            <td>
+                @(item.HasPublicTransportTicket ? "Ja" : "Nein")
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Diet.Choice)
             </td>
