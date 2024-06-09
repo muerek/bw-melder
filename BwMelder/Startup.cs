@@ -34,26 +34,33 @@ namespace BwMelder
                 options.UseSqlite(connectionString)
             );
 
-            services.AddRazorPages(options =>
+            if (Configuration.GetValue<bool>("AllowAnonymousRegistration"))
             {
-                // Allow anonymous access to crew details for coaches.
-                options.Conventions.AllowAnonymousToPage("/Crews/Details");
-                options.Conventions.AllowAnonymousToPage("/Crews/Key");
+                services.AddRazorPages(options =>
+                {
+                    // Allow anonymous access to crew details for coaches.
+                    options.Conventions.AllowAnonymousToPage("/Crews/Details");
+                    options.Conventions.AllowAnonymousToPage("/Crews/Key");
 
-                // Allow anonymous access to everything required to manage a single crew.
-                options.Conventions.AllowAnonymousToFolder("/Crews/Athletes");
-                options.Conventions.AllowAnonymousToFolder("/Crews/HomeCoaches");
+                    // Allow anonymous access to everything required to manage a single crew.
+                    options.Conventions.AllowAnonymousToFolder("/Crews/Athletes");
+                    options.Conventions.AllowAnonymousToFolder("/Crews/HomeCoaches");
 
-                // Allow anonymous access for team coaches so they can add themselves.
-                // Note that Index and Delete are not included.
-                options.Conventions.AllowAnonymousToPage("/TeamCoaches/Create");
-                options.Conventions.AllowAnonymousToPage("/TeamCoaches/Details");
-                options.Conventions.AllowAnonymousToPage("/TeamCoaches/Edit");
-                options.Conventions.AllowAnonymousToPage("/TeamCoaches/Key");
+                    // Allow anonymous access for team coaches so they can add themselves.
+                    // Note that Index and Delete are not included.
+                    options.Conventions.AllowAnonymousToPage("/TeamCoaches/Create");
+                    options.Conventions.AllowAnonymousToPage("/TeamCoaches/Details");
+                    options.Conventions.AllowAnonymousToPage("/TeamCoaches/Edit");
+                    options.Conventions.AllowAnonymousToPage("/TeamCoaches/Key");
 
-                // Note that the homepage and login/logout are allowed for anonymous access by attributes.
-            });
-
+                    // Note that the homepage and login/logout are allowed for anonymous access by attributes.
+                });
+            }
+            else
+            {
+                services.AddRazorPages();
+            }
+           
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
