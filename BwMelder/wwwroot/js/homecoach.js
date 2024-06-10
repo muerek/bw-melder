@@ -25,8 +25,6 @@ function saveHomeCoach() {
     // Save the data into local storage.
     // Users will probably open a second crew in another tab, so session storage may not work.
     localStorage.setItem("homeCoach", JSON.stringify(homeCoach));
-
-    console.log("Stored!");
 }
 
 // Pre-populate the HomeCoach form with data from local storage.
