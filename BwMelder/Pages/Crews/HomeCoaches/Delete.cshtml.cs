@@ -57,7 +57,7 @@ namespace BwMelder.Pages.Crews.HomeCoaches
                 db.HomeCoaches.Remove(HomeCoach);
                 await db.SaveChangesAsync();
 
-                return RedirectToPage("/Crews/Athletes", new { id = HomeCoach.CrewId });
+                return RedirectToPage("/Crews/Details", new { id = HomeCoach.CrewId });
             }
 
             return RedirectToPage("/Crews");
