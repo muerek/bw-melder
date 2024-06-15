@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.2.32519.379
+VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BwMelder", "BwMelder\BwMelder.csproj", "{7AFDBE0A-F1A0-4F72-9CC6-0483AC779EEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder", "BwMelder\BwMelder.csproj", "{20EE3619-A37C-4369-A806-8A8475B203CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7AFDBE0A-F1A0-4F72-9CC6-0483AC779EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7AFDBE0A-F1A0-4F72-9CC6-0483AC779EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7AFDBE0A-F1A0-4F72-9CC6-0483AC779EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7AFDBE0A-F1A0-4F72-9CC6-0483AC779EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20EE3619-A37C-4369-A806-8A8475B203CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20EE3619-A37C-4369-A806-8A8475B203CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20EE3619-A37C-4369-A806-8A8475B203CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20EE3619-A37C-4369-A806-8A8475B203CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4E6BBEB0-065D-431A-AD27-B513D1988566}
+		SolutionGuid = {70B5B1D9-6E05-42EF-9604-9763C0A1A76B}
 	EndGlobalSection
 EndGlobal
