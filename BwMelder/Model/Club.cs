@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.VisualBasic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BwMelder.Model;
 
@@ -14,4 +15,10 @@ public class Club
     /// </summary>
     [Display(Name = "Vereinsname")]
     public string Name { get; set; } = string.Empty;
+
+    public ClubCoach ClubCoach { get; set; } = null!;
+
+    public IList<TeamCoach> TeamCoaches { get; set; } = new List<TeamCoach>();
+
+    public IList<Crew> Crews { get; set; } = new List<Crew>();
 }

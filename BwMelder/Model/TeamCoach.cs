@@ -9,9 +9,8 @@ public class TeamCoach : Participant
 {
     public Contact Contact { get; set; } = new();
 
-    [Display(Name = "Verein")]
-    public string ClubName { get; set; } = string.Empty;
-
     [Display(Name = "Führerschein")]
     public DriversLicense DriversLicense { get; set; } = DriversLicense.None;
+
+    public Guid ClubId { get; set; } = Guid.Empty;
 }

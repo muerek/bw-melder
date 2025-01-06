@@ -8,7 +8,9 @@ public class AccessKey
 
     public DateTime NotBefore { get; } = DateTime.Now;
 
-    public DateTime NotAfter { get; init; } = DateTime.Now.AddDays(30);
+    public DateTime NotAfter { get; init; } = DateTime.Now.AddDays(2);
 
     public bool IsValid => NotBefore <= DateTime.Now && DateTime.Now <= NotAfter;
+
+    public Guid ClubId { get; set; } = Guid.Empty;
 }

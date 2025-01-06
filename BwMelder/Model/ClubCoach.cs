@@ -20,4 +20,6 @@ public class ClubCoach
     public string FullName => $"{FirstName} {LastName}";
 
     public Contact Contact { get; set; } = new();
+
+    public Guid ClubId { get; set; } = Guid.Empty;
 }

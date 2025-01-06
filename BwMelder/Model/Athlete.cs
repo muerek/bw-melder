@@ -10,8 +10,8 @@ public class Athlete : Participant
     [Display(Name = "Erziehungsberechtigter")]
     public LegalGuardian LegalGuardian { get; set; } = new();
 
-    [Display(Name = "Steuermensch")]
-    public bool IsCox { get; set; } = false;
+    [Display(Name = "Position")]
+    public Position Position { get; set; } = Position.Rower1;
 
     public Guid CrewId { get; set; } = Guid.Empty;
 }
