@@ -1,10 +1,20 @@
 using BwMelder.Components;
+using BwMelder.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Add database connection via EF Core.
+// Use a supplied connection string or fall back to a default in the settings.
+var connectionString = builder.Configuration["Database"] ?? builder.Configuration.GetConnectionString("DefaultDatabase");
+builder.Services.AddDbContext<BwMelderDbContext>(options =>
+    options.UseSqlite(connectionString)
+);
 
 var app = builder.Build();
 
