@@ -1,5 +1,6 @@
 using BwMelder.Components;
 using BwMelder.Data;
+using BwMelder.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -16,7 +17,11 @@ builder.Services.AddDbContext<BwMelderDbContext>(options =>
     options.UseSqlite(connectionString)
 );
 
-builder.Services.AddCascadingAuthenticationState();
+// Add application services.
+builder.Services.AddBwMelderServices();
+
+// Set up authentication.
+builder.Services.AddBwMelderAuthentication();
 
 var app = builder.Build();
 
@@ -32,6 +37,10 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+// Enable authentication.
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
