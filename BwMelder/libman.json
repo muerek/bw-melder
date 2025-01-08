@@ -1,15 +1,18 @@
 {
-  "version": "3.0",
+  "version": "1.0",
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "provider": "cdnjs",
       "library": "bootstrap@5.3.3",
-      "destination": "wwwroot/bootstrap/",
+      "destination": "wwwroot/lib/bootstrap/",
       "files": [
         "css/bootstrap.min.css",
         "css/bootstrap.min.css.map"
       ]
+    },
+    {
+      "library": "bootstrap-icons@1.11.3",
+      "destination": "wwwroot/lib/bootstrap-icons/"
     }
   ]
 }
