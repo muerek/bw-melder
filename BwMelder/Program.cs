@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add Razor component rendering.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
@@ -15,6 +15,8 @@ var connectionString = builder.Configuration["Database"] ?? builder.Configuratio
 builder.Services.AddDbContext<BwMelderDbContext>(options =>
     options.UseSqlite(connectionString)
 );
+
+builder.Services.AddCascadingAuthenticationState();
 
 var app = builder.Build();
 
