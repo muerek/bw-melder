@@ -1,6 +1,7 @@
 ﻿@page "/admin/login"
 @using System.ComponentModel.DataAnnotations
 @using BwMelder.Authentication;
+@using BwMelder.Model;
 
 @inject UserAuthenticationService UserAuthenticationService;
 @inject NavigationManager Navigation;
@@ -29,7 +30,7 @@
 
 @code {
     [SupplyParameterFromForm]
-    private UserCredentials? Credentials { get; set; }
+    private User? Credentials { get; set; }
 
     // Initialize empty credentials if not set from form.
     protected override void OnInitialized() => Credentials ??= new();

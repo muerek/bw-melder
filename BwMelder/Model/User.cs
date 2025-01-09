@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Authentication;
+namespace BwMelder.Model;
 
 /// <summary>
-/// DTO holding credentials submitted for a login attempt.
+/// Represents a user who can login to the application.
 /// </summary>
-class UserCredentials
+class User
 {
     [Required]
     internal string Username { get; set; } = string.Empty;
+    
     [Required]
     internal string Password { get; set; } = string.Empty;
 }
