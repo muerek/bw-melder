@@ -1,6 +1,7 @@
-﻿<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
-    <div class="container">
-        @* Brand name at the beginning *@
+﻿<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom">
+    @* Fill full width if narrower than medium breakpoint. *@
+    <div class="container-md">
+       
         <a class="navbar-brand" href="#">
             <i class="bi bi-clipboard-check"></i> BW-Melder
          </a>
@@ -9,7 +10,7 @@
         <AuthorizeView>
             <Authorized>
 
-                @* Hamburger menu icon for narrow screens *@
+                @* Hamburger menu icon for collapsed menu. *@
                 <button class="navbar-toggler" type="button"
                         data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false"
@@ -17,19 +18,22 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                @* Main navigation links *@
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="#">Mannschaften</NavLink>
-                        </li>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="#">Betreuer</NavLink>
-                        </li>
-                        <li class="nav-item">
-                            <NavLink class="nav-link" href="#">Übersicht</NavLink>
-                        </li>
-                    </ul>
+                @* Collapse main navigation if narrower than medium breakpoint. *@
+                <div class="collapse navbar-collapse d-md-flex justify-content-between" id="navbarNav">
+                    <div class="navbar-nav">
+                        <NavLink class="nav-link" href="#">Mannschaften</NavLink>
+                        <NavLink class="nav-link" href="#">Betreuer</NavLink>
+                        <NavLink class="nav-link" href="#">Übersicht</NavLink>
+                    </div>
+                    <div class="navbar-nav">
+                        @* Show logout as button in expanded menu, as regular link in collapsed menu. *@
+                        <NavLink class="btn btn-outline-secondary d-none d-md-inline" href="/admin/logout">
+                            <i class="bi bi-box-arrow-right"></i> Abmelden
+                        </NavLink>
+                        <NavLink class="nav-link d-md-none" href="/admin/logout">
+                            <i class="bi bi-box-arrow-right"></i> Abmelden
+                        </NavLink>
+                    </div>
                 </div>
 
             </Authorized>
