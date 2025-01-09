@@ -38,6 +38,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
+app.MapBwMelderEndpoints();
+
 // Enable authentication.
 app.UseAuthentication();
 app.UseAuthorization();
