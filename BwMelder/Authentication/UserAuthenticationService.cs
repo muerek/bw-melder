@@ -7,7 +7,7 @@ namespace BwMelder.Authentication;
 /// <summary>
 /// Handles user authentication.
 /// </summary>
-public class UserAuthenticationService
+class UserAuthenticationService
 {
     private readonly IConfiguration config;
     private readonly IHttpContextAccessor httpContextAccessor;
@@ -46,7 +46,7 @@ public class UserAuthenticationService
     /// Logout the current user.
     /// </summary>
     /// <exception cref="InvalidOperationException"></exception>
-    public async Task LogoutUserAsync()
+    internal async Task LogoutUserAsync()
     {
         var context = httpContextAccessor.HttpContext;
         if (context == null) { throw new InvalidOperationException("This operation requires an active HttpContext"); }

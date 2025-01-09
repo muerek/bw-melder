@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BwMelder.Extensions;
 
-public static class ServicesExtensions
+static class ServicesExtensions
 {
     /// <summary>
     /// Registers the application's services.
