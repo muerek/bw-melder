@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace BwMelder.Authentication;
 
@@ -13,8 +15,13 @@ abstract class AuthenticationService(IHttpContextAccessor httpContextAccessor)
         ?? throw new InvalidOperationException("Operation requires an active HttpContext");
 
     /// <summary>
-    /// Logout the current user.
+    /// Logs out the current user, ending their session.
     /// </summary>
-    /// <exception cref="InvalidOperationException"></exception>
-    internal async Task LogoutUserAsync() => await Context.SignOutAsync();
+    internal async Task LogoutAsync() => await Context.SignOutAsync();
+
+    /// <summary>
+    /// Logs in the current user with the given identity.
+    /// </summary>
+    internal async Task LoginAsync(ClaimsIdentity identity) =>
+        await Context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 }

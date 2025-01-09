@@ -8,7 +8,7 @@ namespace BwMelder.Authentication;
 /// <summary>
 /// Handles authentication for users logging in with username and password.
 /// </summary>
-class UserAuthenticationService(IConfiguration config, IHttpContextAccessor httpContextAccessor)
+class UserAuthenticationService(IHttpContextAccessor httpContextAccessor, IConfiguration config)
     : AuthenticationService(httpContextAccessor)
 {
     /// <summary>
@@ -21,14 +21,11 @@ class UserAuthenticationService(IConfiguration config, IHttpContextAccessor http
     {
         if (ValidateCredentials(credentials))
         {
-            var identity = GetUserIdentity();
-            await Context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+            await LoginAsync(GetUserIdentity());
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 
     /// <summary>
