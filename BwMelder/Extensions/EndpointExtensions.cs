@@ -1,4 +1,5 @@
-﻿using BwMelder.Services;
+﻿using BwMelder.Dto;
+using BwMelder.Services;
 
 namespace BwMelder.Extensions;
 
@@ -11,6 +12,9 @@ static class EndpointExtensions
     {
         app.MapGet("/admin/logout", Logout);
         app.MapGet("/go/{secret}", LoginWithSecret);
+
+        // TODO: Remove these endpoints, only for testing.
+        app.MapGet("/clubs/new/{name}", CreateClub);
         
         return app;
     }
@@ -31,6 +35,13 @@ static class EndpointExtensions
             return Results.Redirect("/");
         }
         return Results.NotFound();
+    }
+
+    static async Task<IResult> CreateClub(string name, ClubService clubService)
+    {
+        var request = new CreateClubRequest() { Name = name };
+        await clubService.CreateClubAsync(request);
+        return Results.Ok();
     }
 
 }
