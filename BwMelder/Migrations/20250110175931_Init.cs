@@ -45,8 +45,9 @@ namespace BwMelder.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(type: "TEXT", nullable: false),
+                    Secret = table.Column<string>(type: "TEXT", nullable: false),
                     NotAfter = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Activated = table.Column<bool>(type: "INTEGER", nullable: false),
                     ClubId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -150,8 +151,7 @@ namespace BwMelder.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AccessKeys_ClubId",
                 table: "AccessKeys",
-                column: "ClubId",
-                unique: true);
+                column: "ClubId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ClubCoaches_ClubId",

@@ -23,20 +23,22 @@ namespace BwMelder.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("ClubId")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("Activated")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("Key")
-                        .IsRequired()
+                    b.Property<Guid>("ClubId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("NotAfter")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Secret")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ClubId")
-                        .IsUnique();
+                    b.HasIndex("ClubId");
 
                     b.ToTable("AccessKeys");
                 });
@@ -198,8 +200,8 @@ namespace BwMelder.Migrations
             modelBuilder.Entity("BwMelder.Model.AccessKey", b =>
                 {
                     b.HasOne("BwMelder.Model.Club", null)
-                        .WithOne("AccessKey")
-                        .HasForeignKey("BwMelder.Model.AccessKey", "ClubId")
+                        .WithMany("AccessKeys")
+                        .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -391,7 +393,7 @@ namespace BwMelder.Migrations
 
             modelBuilder.Entity("BwMelder.Model.Club", b =>
                 {
-                    b.Navigation("AccessKey");
+                    b.Navigation("AccessKeys");
 
                     b.Navigation("ClubCoach");
 

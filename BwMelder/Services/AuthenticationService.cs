@@ -23,15 +23,15 @@ class AuthenticationService(IHttpContextAccessor httpContextAccessor, BwMelderDb
     public async Task LogoutAsync() => await Context.SignOutAsync();
 
     /// <summary>
-    /// Tries to login a user identified by the given access key.
+    /// Tries to login a user identified by the given secret.
     /// </summary>
-    /// <param name="key">Access key provided by the user.</param>
+    /// <param name="secret">Secret provided by the user.</param>
     /// <returns>True if login completed successfully, false if it failed.</returns>
-    public async Task<bool> LoginAsync(string key)
+    public async Task<bool> LoginAsync(string secret)
     {
         var accessKey = await db.AccessKeys
             .AsNoTracking()
-            .SingleOrDefaultAsync(k => k.Key == key);
+            .SingleOrDefaultAsync(k => k.Secret == secret);
 
         if (accessKey != null)
         {

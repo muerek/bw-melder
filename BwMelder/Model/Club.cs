@@ -22,5 +22,5 @@ public class Club
 
     public IList<Crew> Crews { get; set; } = [];
 
-    public AccessKey? AccessKey { get; set; } = null;
+    public IList<AccessKey> AccessKeys { get; set; } = [];
 }
