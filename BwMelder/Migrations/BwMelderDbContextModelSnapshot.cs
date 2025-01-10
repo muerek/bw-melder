@@ -23,13 +23,16 @@ namespace BwMelder.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Activated")
+                    b.Property<bool>("Active")
                         .HasColumnType("INTEGER");
 
                     b.Property<Guid>("ClubId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("NotAfter")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("NotBefore")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Secret")

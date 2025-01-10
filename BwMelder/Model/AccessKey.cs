@@ -9,7 +9,7 @@ public class AccessKey
     /// <summary>
     /// Access key is invalid before this time.
     /// </summary>
-    public DateTime NotBefore { get; } = DateTime.Now;
+    public DateTime NotBefore { get; init; } = DateTime.Now;
 
     /// <summary>
     /// Access key is invalid after this time.
@@ -19,12 +19,7 @@ public class AccessKey
     /// <summary>
     /// Flag to invalidate the key even within its period of validity.
     /// </summary>
-    public bool Activated { get; set; } = true;
-
-    /// <summary>
-    /// Determines if the access key is still valid for use.
-    /// </summary>
-    public bool IsValid => Activated && NotBefore <= DateTime.Now && DateTime.Now <= NotAfter;
+    public bool Active { get; set; } = true;
 
     public Guid ClubId { get; set; } = Guid.Empty;
 }

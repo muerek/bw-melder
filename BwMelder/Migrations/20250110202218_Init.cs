@@ -46,8 +46,9 @@ namespace BwMelder.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Secret = table.Column<string>(type: "TEXT", nullable: false),
+                    NotBefore = table.Column<DateTime>(type: "TEXT", nullable: false),
                     NotAfter = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Activated = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
                     ClubId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>

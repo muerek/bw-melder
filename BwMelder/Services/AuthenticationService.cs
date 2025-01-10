@@ -33,7 +33,7 @@ class AuthenticationService(IHttpContextAccessor httpContextAccessor, BwMelderDb
             .AsNoTracking()
             .SingleOrDefaultAsync(k => k.Secret == secret);
 
-        if (accessKey != null)
+        if (accessKey != null && AccessKeyService.ValidateAccessKey(accessKey))
         {
             var claims = new List<Claim>()
             {

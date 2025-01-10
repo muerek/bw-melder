@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BwMelder.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    [Migration("20250110175931_Init")]
+    [Migration("20250110202218_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -26,13 +26,16 @@ namespace BwMelder.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Activated")
+                    b.Property<bool>("Active")
                         .HasColumnType("INTEGER");
 
                     b.Property<Guid>("ClubId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("NotAfter")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("NotBefore")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Secret")
