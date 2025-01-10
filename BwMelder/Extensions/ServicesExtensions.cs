@@ -32,9 +32,8 @@ static class ServicesExtensions
                 options.SlidingExpiration = true;
             });
 
-        // Add services handling login and logout process.
-        services.AddScoped<UserAuthenticationService>();
-        services.AddScoped<KeyAuthenticationService>();
+        // Add service handling login and logout process.
+        services.AddScoped<AuthenticationService>();
 
         // Provide authentication state to components, required for AuthorizeView.
         services.AddCascadingAuthenticationState();
