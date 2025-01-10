@@ -1,6 +1,9 @@
 ﻿@page "/admin/login"
+
+@* Override required authorization from _Imports.razor. *@
+@attribute [AllowAnonymous]
+
 @using System.ComponentModel.DataAnnotations
-@using BwMelder.Authentication;
 @using BwMelder.Model;
 
 @inject AuthenticationService AuthService;

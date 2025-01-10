@@ -1,4 +1,4 @@
-﻿using BwMelder.Authentication;
+﻿using BwMelder.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BwMelder.Extensions;
