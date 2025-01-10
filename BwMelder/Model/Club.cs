@@ -16,9 +16,11 @@ public class Club
     [Display(Name = "Vereinsname")]
     public string Name { get; set; } = string.Empty;
 
-    public ClubCoach ClubCoach { get; set; } = null!;
+    public ClubCoach? ClubCoach { get; set; } = null;
 
-    public IList<TeamCoach> TeamCoaches { get; set; } = new List<TeamCoach>();
+    public IList<TeamCoach> TeamCoaches { get; set; } = [];
 
-    public IList<Crew> Crews { get; set; } = new List<Crew>();
+    public IList<Crew> Crews { get; set; } = [];
+
+    public AccessKey? AccessKey { get; set; } = null;
 }

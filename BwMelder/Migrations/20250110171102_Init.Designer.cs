@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BwMelder.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    [Migration("20250106211647_Init")]
+    [Migration("20250110171102_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -37,6 +37,9 @@ namespace BwMelder.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClubId")
+                        .IsUnique();
 
                     b.ToTable("AccessKeys");
                 });
@@ -193,6 +196,15 @@ namespace BwMelder.Migrations
                     b.HasIndex("ClubId");
 
                     b.HasDiscriminator().HasValue("TeamCoach");
+                });
+
+            modelBuilder.Entity("BwMelder.Model.AccessKey", b =>
+                {
+                    b.HasOne("BwMelder.Model.Club", null)
+                        .WithOne("AccessKey")
+                        .HasForeignKey("BwMelder.Model.AccessKey", "ClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BwMelder.Model.ClubCoach", b =>
@@ -382,8 +394,9 @@ namespace BwMelder.Migrations
 
             modelBuilder.Entity("BwMelder.Model.Club", b =>
                 {
-                    b.Navigation("ClubCoach")
-                        .IsRequired();
+                    b.Navigation("AccessKey");
+
+                    b.Navigation("ClubCoach");
 
                     b.Navigation("Crews");
 
