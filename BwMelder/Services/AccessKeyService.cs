@@ -43,12 +43,12 @@ class AccessKeyService(BwMelderDbContext db)
     }
 
     /// <summary>
-    /// Creates and stores a new access key for a club.
-    /// All previous access keys will be invalidated.
+    /// Renew access to the application for a club.
+    /// Generates a new and active access key.
+    /// All older access keys will be invalidated.
     /// </summary>
-    /// <param name="clubId">Link the access key to the club identified by this ID.</param>
-    /// <returns>New access key.</returns>
-    public async Task<AccessKey> CreateAccessKeyAsync(Guid clubId)
+    /// <param name="clubId">Renew access for the club with this ID.</param>
+    public async Task RenewAccessAsync(Guid clubId)
     {
         // Generate a new key.
         var accessKey = new AccessKey()
@@ -57,20 +57,25 @@ class AccessKeyService(BwMelderDbContext db)
             ClubId = clubId
         };
 
-        // Invalidate any existing keys for this club.
-        await db.AccessKeys
-            .Where(a => a.ClubId == clubId)
-            .ExecuteUpdateAsync(setters => setters.SetProperty(a => a.Active, false));
-
+        await LockAccessAsync(clubId);
         // Save the new key.
         db.AccessKeys.Add(accessKey);
         await db.SaveChangesAsync();
-
-        return accessKey;
     }
 
     /// <summary>
-    /// Generates a new secret guaranteed not to be in use.
+    /// Lock access for a club by invalidating all access keys.
+    /// </summary>
+    /// <param name="clubId">Lock access for the club with this ID.</param>
+    public async Task LockAccessAsync(Guid clubId)
+    {
+        await db.AccessKeys
+            .Where(a => a.ClubId == clubId)
+            .ExecuteUpdateAsync(setters => setters.SetProperty(a => a.Active, false));
+    }
+
+    /// <summary>
+    /// Generates a new secret guaranteed not to be in use in any other access key.
     /// </summary>
     /// <returns>New secret.</returns>
     private async Task<string> GenerateUniqueSecretAsync()

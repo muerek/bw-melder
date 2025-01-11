@@ -16,7 +16,8 @@
 @foreach (var clubKey in clubKeys!)
 {
     <p>@clubKey.ClubName - @(clubKey.SecretUrl ?? "Keine")</p>
-    <button class="btn btn-secondary" @onclick="() => CreateNewAccess(clubKey.ClubId)">Neu</button>
+    <button class="btn btn-secondary" @onclick="() => RenewAccess(clubKey.ClubId)">Neu</button>
+    <button class="btn btn-danger" @onclick="() => LockAccess(clubKey.ClubId)">Sperren</button>
 }
 
 
@@ -29,10 +30,17 @@
         await LoadDataAsync();
     }
 
-    private async Task CreateNewAccess(Guid clubId)
+    private async Task RenewAccess(Guid clubId)
     {
-        await AccessKeyService.CreateAccessKeyAsync(clubId);
+        await AccessKeyService.RenewAccessAsync(clubId);
         // Load updated data.
+        await LoadDataAsync();
+        StateHasChanged();
+    }
+
+    private async Task LockAccess(Guid clubId)
+    {
+        await AccessKeyService.LockAccessAsync(clubId);
         await LoadDataAsync();
         StateHasChanged();
     }
