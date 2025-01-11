@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BwMelder.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    [Migration("20250106211647_Init")]
+    [Migration("20250110202218_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -26,17 +26,25 @@ namespace BwMelder.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("ClubId")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("Active")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("Key")
-                        .IsRequired()
+                    b.Property<Guid>("ClubId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("NotAfter")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime>("NotBefore")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Secret")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ClubId");
 
                     b.ToTable("AccessKeys");
                 });
@@ -193,6 +201,15 @@ namespace BwMelder.Migrations
                     b.HasIndex("ClubId");
 
                     b.HasDiscriminator().HasValue("TeamCoach");
+                });
+
+            modelBuilder.Entity("BwMelder.Model.AccessKey", b =>
+                {
+                    b.HasOne("BwMelder.Model.Club", null)
+                        .WithMany("AccessKeys")
+                        .HasForeignKey("ClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BwMelder.Model.ClubCoach", b =>
@@ -382,8 +399,9 @@ namespace BwMelder.Migrations
 
             modelBuilder.Entity("BwMelder.Model.Club", b =>
                 {
-                    b.Navigation("ClubCoach")
-                        .IsRequired();
+                    b.Navigation("AccessKeys");
+
+                    b.Navigation("ClubCoach");
 
                     b.Navigation("Crews");
 

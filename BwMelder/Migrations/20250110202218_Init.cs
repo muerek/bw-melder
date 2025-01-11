@@ -12,21 +12,6 @@ namespace BwMelder.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AccessKeys",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(type: "TEXT", nullable: false),
-                    NotAfter = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ClubId = table.Column<Guid>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AccessKeys", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Clubs",
                 columns: table => new
                 {
@@ -52,6 +37,29 @@ namespace BwMelder.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Races", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AccessKeys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Secret = table.Column<string>(type: "TEXT", nullable: false),
+                    NotBefore = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    NotAfter = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ClubId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccessKeys", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AccessKeys_Clubs_ClubId",
+                        column: x => x.ClubId,
+                        principalTable: "Clubs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,6 +148,11 @@ namespace BwMelder.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccessKeys_ClubId",
+                table: "AccessKeys",
+                column: "ClubId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ClubCoaches_ClubId",
