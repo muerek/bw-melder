@@ -6,8 +6,8 @@
             <i class="bi bi-clipboard-check"></i> BW-Melder
          </a>
 
-        @* Show navbar items to authorized users only. *@
-        <AuthorizeView>
+        @* Show navbar items to admin users only. *@
+        <AuthorizeView Roles="Administrator">
             <Authorized>
 
                 @* Hamburger menu icon for collapsed menu. *@
