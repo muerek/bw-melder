@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Model;
+namespace BwMelder.Data.Model;
 
 /// <summary>
 /// Represents a club that registers crews and team coaches.

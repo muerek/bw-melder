@@ -1,4 +1,4 @@
-﻿namespace BwMelder.Model;
+﻿namespace BwMelder.Data.Model;
 
 /// <summary>
 /// Positions an athlete can have in a crew.

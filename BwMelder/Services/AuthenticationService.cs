@@ -1,5 +1,5 @@
 ﻿using BwMelder.Data;
-using BwMelder.Model;
+using BwMelder.Data.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;

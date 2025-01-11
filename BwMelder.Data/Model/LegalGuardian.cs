@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Model;
+namespace BwMelder.Data.Model;
 
 /// <summary>
 /// Information on the legal guardian for underage athletes.

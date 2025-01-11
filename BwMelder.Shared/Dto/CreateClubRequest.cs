@@ -1,4 +1,4 @@
-﻿namespace BwMelder.Dto;
+﻿namespace BwMelder.Shared.Dto;
 
 /// <summary>
 /// DTO representing a request to create a new club.

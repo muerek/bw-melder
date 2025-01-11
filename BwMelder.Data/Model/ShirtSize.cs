@@ -1,4 +1,4 @@
-﻿namespace BwMelder.Model;
+﻿namespace BwMelder.Data.Model;
 
 /// <summary>
 /// Choice of available t-shirt sizes.

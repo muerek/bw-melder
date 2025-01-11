@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Model;
+namespace BwMelder.Data.Model;
 
 /// <summary>
 /// Coach accompanying the team to the event.

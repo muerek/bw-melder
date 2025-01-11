@@ -1,6 +1,6 @@
 ﻿using BwMelder.Data;
-using BwMelder.Dto;
-using BwMelder.Model;
+using BwMelder.Shared.Dto;
+using BwMelder.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Security.Cryptography;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Model;
+namespace BwMelder.Data.Model;
 
 /// <summary>
 /// Represents different types of drivers license.

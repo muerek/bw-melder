@@ -1,4 +1,4 @@
-﻿using BwMelder.Dto;
+﻿using BwMelder.Shared.Dto;
 using BwMelder.Services;
 
 namespace BwMelder.Extensions;

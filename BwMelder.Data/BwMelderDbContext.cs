@@ -1,4 +1,4 @@
-﻿using BwMelder.Model;
+﻿using BwMelder.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace BwMelder.Data;

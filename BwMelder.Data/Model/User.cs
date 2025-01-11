@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Model;
+namespace BwMelder.Data.Model;
 
 /// <summary>
 /// Represents a user who can login to the application.
 /// </summary>
-class User
+public class User
 {
     [Required]
-    internal string Username { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
     
     [Required]
-    internal string Password { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
 }

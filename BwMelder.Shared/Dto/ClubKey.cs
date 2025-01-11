@@ -1,4 +1,4 @@
-﻿namespace BwMelder.Dto;
+﻿namespace BwMelder.Shared.Dto;
 
 /// <summary>
 /// DTO holding information with which key a club can access the application.
