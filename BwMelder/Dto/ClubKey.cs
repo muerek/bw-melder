@@ -1,9 +1,9 @@
 ﻿namespace BwMelder.Dto;
 
 /// <summary>
-/// DTO representing the access a club has for the application.
+/// DTO holding information with which key a club can access the application.
 /// </summary>
-public class ClubAccess
+public class ClubKey
 {
     /// <summary>
     /// Unique ID of the club in the database.
@@ -17,7 +17,7 @@ public class ClubAccess
 
     /// <summary>
     /// Secret URL for accessing the application.
-    /// Set to null if the club has no active access.
+    /// Set to null if the club has no active access keys.
     /// </summary>
     public string? SecretUrl { get; set; }
 }

@@ -13,16 +13,16 @@
     Bei Bedarf können die Zugänge erneuert oder gesperrt werden.
 </p>
 
-@foreach (var clubAccess in clubAccesses!)
+@foreach (var clubKey in clubKeys!)
 {
-    <p>@clubAccess.ClubName - @(clubAccess.SecretUrl ?? "Keine")</p>
-    <button class="btn btn-secondary" @onclick="() => CreateNewAccess(clubAccess.ClubId)">Neu</button>
+    <p>@clubKey.ClubName - @(clubKey.SecretUrl ?? "Keine")</p>
+    <button class="btn btn-secondary" @onclick="() => CreateNewAccess(clubKey.ClubId)">Neu</button>
 }
 
 
 
 @code {
-    private IList<ClubAccess>? clubAccesses;
+    private IList<ClubKey>? clubKeys;
 
     protected override async Task OnInitializedAsync()
     {
@@ -37,5 +37,5 @@
         StateHasChanged();
     }
 
-    private async Task LoadDataAsync() => clubAccesses = await AccessKeyService.GetClubAccessesAsync();
+    private async Task LoadDataAsync() => clubKeys = await AccessKeyService.GetClubKeysAsync();
 }

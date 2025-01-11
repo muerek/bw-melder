@@ -22,17 +22,18 @@ class AccessKeyService(BwMelderDbContext db)
         key.Active && key.NotBefore <= DateTime.Now && DateTime.Now <= key.NotAfter;
 
     /// <summary>
-    /// Gets a list of accesses the clubs hold.
+    /// Gets a list of <see cref="ClubKey"/> DTOs listing all clubs with their active key.
+    /// Clubs without an active key will have <see cref="ClubKey.SecretUrl"/> set to null.
     /// </summary>
     /// <returns></returns>
-    public async Task<IList<ClubAccess>> GetClubAccessesAsync()
+    public async Task<IList<ClubKey>> GetClubKeysAsync()
     {
         var clubs = await db.Clubs
             .AsNoTracking()
             .Include(c => c.AccessKeys)
             .ToListAsync();
 
-        return clubs.Select(c => new ClubAccess
+        return clubs.Select(c => new ClubKey
         {
             ClubId = c.Id,
             ClubName = c.Name,
@@ -43,7 +44,7 @@ class AccessKeyService(BwMelderDbContext db)
 
     /// <summary>
     /// Creates and stores a new access key for a club.
-    /// All existing access keys will be invalidated.
+    /// All previous access keys will be invalidated.
     /// </summary>
     /// <param name="clubId">Link the access key to the club identified by this ID.</param>
     /// <returns>New access key.</returns>
