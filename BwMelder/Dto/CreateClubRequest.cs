@@ -1,7 +1,7 @@
 ﻿namespace BwMelder.Dto;
 
 /// <summary>
-/// DTO holding data required for club creation.
+/// DTO representing a request to create a new club.
 /// </summary>
 public class CreateClubRequest
 {

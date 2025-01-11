@@ -36,15 +36,17 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-app.UseAntiforgery();
-
-app.MapBwMelderEndpoints();
 
 // Enable authentication.
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Must be placed after authentication & authorization.
+app.UseAntiforgery();
+
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+app.MapBwMelderEndpoints();
 
 app.Run();

@@ -12,6 +12,7 @@ static class ServicesExtensions
     /// <returns></returns>
     public static IServiceCollection AddBwMelderServices(this IServiceCollection services)
     {
+        services.AddScoped<AccessKeyService>();
         services.AddScoped<ClubService>();
 
         return services;

@@ -1,0 +1,41 @@
+﻿@page "/admin/access-keys"
+@rendermode InteractiveServer
+
+@inject AccessKeyService AccessKeyService;
+
+<PageTitle>Zugänge</PageTitle>
+
+<h1>Zugänge</h1>
+
+<p>
+    Jeder Verein erhält einen Zugang zur Anmeldung seiner Sportler und Betreuer.
+    Der Zugang wird bei der ersten Nominierung automatisch angelegt.
+    Bei Bedarf können die Zugänge erneuert oder gesperrt werden.
+</p>
+
+@foreach (var clubAccess in clubAccesses!)
+{
+    <p>@clubAccess.ClubName - @(clubAccess.SecretUrl ?? "Keine")</p>
+    <button class="btn btn-secondary" @onclick="() => CreateNewAccess(clubAccess.ClubId)">Neu</button>
+}
+
+
+
+@code {
+    private IList<ClubAccess>? clubAccesses;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task CreateNewAccess(Guid clubId)
+    {
+        await AccessKeyService.CreateAccessKeyAsync(clubId);
+        // Load updated data.
+        await LoadDataAsync();
+        StateHasChanged();
+    }
+
+    private async Task LoadDataAsync() => clubAccesses = await AccessKeyService.GetClubAccessesAsync();
+}
