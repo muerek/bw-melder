@@ -4,13 +4,15 @@ using BwMelder.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Security.Cryptography;
+using BwMelder.Shared.Services;
 
 namespace BwMelder.Services;
 
 /// <summary>
 /// Handles access keys.
 /// </summary>
-class AccessKeyService(BwMelderDbContext db)
+public class AccessKeyService(BwMelderDbContext db)
+    : IAccessKeyService
 {
     /// <summary>
     /// Determines if an access key is valid.

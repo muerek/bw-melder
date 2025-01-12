@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder.Shared", "BwMelder
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder.Data", "BwMelder.Data\BwMelder.Data.csproj", "{31B81C82-25D5-4A22-9D32-57AB9AB83AB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder.Services", "BwMelder.Services\BwMelder.Services.csproj", "{FA3646A8-1778-4B66-BFBB-E520101D933D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{31B81C82-25D5-4A22-9D32-57AB9AB83AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31B81C82-25D5-4A22-9D32-57AB9AB83AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31B81C82-25D5-4A22-9D32-57AB9AB83AB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA3646A8-1778-4B66-BFBB-E520101D933D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA3646A8-1778-4B66-BFBB-E520101D933D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA3646A8-1778-4B66-BFBB-E520101D933D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA3646A8-1778-4B66-BFBB-E520101D933D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

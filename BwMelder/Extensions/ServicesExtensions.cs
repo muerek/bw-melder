@@ -1,4 +1,6 @@
-﻿using BwMelder.Services;
+﻿using BwMelder.Authentication;
+using BwMelder.Services;
+using BwMelder.Shared.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BwMelder.Extensions;
@@ -12,8 +14,8 @@ static class ServicesExtensions
     /// <returns></returns>
     public static IServiceCollection AddBwMelderServices(this IServiceCollection services)
     {
-        services.AddScoped<AccessKeyService>();
-        services.AddScoped<ClubService>();
+        services.AddScoped<IAccessKeyService, AccessKeyService>();
+        services.AddScoped<IClubService, ClubService>();
 
         return services;
     }
@@ -25,7 +27,7 @@ static class ServicesExtensions
     /// <returns></returns>
     public static IServiceCollection AddBwMelderAuthentication(this IServiceCollection services)
     {
-        // Add cookie-based authentication.
+        // Configure cookie-based authentication.
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
@@ -34,8 +36,8 @@ static class ServicesExtensions
                 options.SlidingExpiration = true;
             });
 
-        // Add service handling login and logout process.
-        services.AddScoped<AuthenticationService>();
+        // Add handler for login and logout process.
+        services.AddScoped<AuthenticationHandler>();
 
         // Provide authentication state to components, required for AuthorizeView.
         services.AddCascadingAuthenticationState();

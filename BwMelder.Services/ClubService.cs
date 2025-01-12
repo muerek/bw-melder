@@ -1,10 +1,12 @@
 ﻿using BwMelder.Data;
 using BwMelder.Shared.Dto;
 using BwMelder.Data.Model;
+using BwMelder.Shared.Services;
 
 namespace BwMelder.Services;
 
-class ClubService(BwMelderDbContext db)
+public class ClubService(BwMelderDbContext db)
+    : IClubService
 {
     public async Task<Guid> CreateClubAsync(CreateClubRequest request)
     {

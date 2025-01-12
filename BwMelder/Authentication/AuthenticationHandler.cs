@@ -1,16 +1,17 @@
 ﻿using BwMelder.Data;
 using BwMelder.Data.Model;
+using BwMelder.Shared.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace BwMelder.Services;
+namespace BwMelder.Authentication;
 
 /// <summary>
 /// Handles authentication tasks for the application.
 /// </summary>
-class AuthenticationService(IHttpContextAccessor httpContextAccessor, BwMelderDbContext db,
+public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, BwMelderDbContext db,
     IConfiguration config)
 {
     private HttpContext Context =>
@@ -33,7 +34,7 @@ class AuthenticationService(IHttpContextAccessor httpContextAccessor, BwMelderDb
             .AsNoTracking()
             .SingleOrDefaultAsync(k => k.Secret == secret);
 
-        if (accessKey != null && AccessKeyService.ValidateAccessKey(accessKey))
+        if (accessKey != null && IAccessKeyService.ValidateAccessKey(accessKey))
         {
             var claims = new List<Claim>()
             {

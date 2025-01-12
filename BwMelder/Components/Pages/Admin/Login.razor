@@ -5,8 +5,9 @@
 
 @using System.ComponentModel.DataAnnotations
 @using BwMelder.Data.Model;
+@using BwMelder.Authentication;
 
-@inject AuthenticationService AuthService;
+@inject AuthenticationHandler AuthHandler;
 @inject NavigationManager Navigation;
 
 <PageTitle>Anmelden</PageTitle>
@@ -40,7 +41,7 @@
 
     private async Task AuthenticateAsync()
     {
-        if (await AuthService.LoginAsync(Credentials!))
+        if (await AuthHandler.LoginAsync(Credentials!))
         {
             Navigation.NavigateTo("/");
         }
