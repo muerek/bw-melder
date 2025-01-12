@@ -1,0 +1,11 @@
+﻿@* Contact is nested in different types. *@
+@inherits Editor<ContactRequest>
+
+<div class="mb-3">
+    <label for="contact.phone" class="form-label">Telefonnr.</label>
+    <InputText id="contact.phone" class="form-control" @bind-Value="Value.Phone" />
+</div>
+<div class="mb-3">
+    <label for="contact.email" class="form-label">E-Mail-Adresse</label>
+    <InputText id="contact.email" class="form-control" @bind-Value="Value.EmailAddress" />
+</div>

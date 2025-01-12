@@ -1,0 +1,31 @@
+﻿@page "/onboarding/club-coach"
+
+@inject IClubCoachService ClubCoachService;
+@inject NavigationManager Navigation;
+
+<PageTitle>Ansprechpartner eintragen</PageTitle>
+
+<h1>Ansprechpartner eintragen</h1>
+
+<p>
+    Wen können für die weitere Organisation bis zum BW und die Kommunikation zu den Sportlern kontaktieren?
+</p>
+
+<ClubCoachForm ClubCoach="ClubCoach" OnValidSubmit="AddClubCoachAsync" />
+
+@code {
+    [SupplyParameterFromForm]
+    public ClubCoachRequest? ClubCoach { get; set; }
+
+    protected override void OnInitialized()
+    {
+        // Parameter is already set if form data was posted.
+        ClubCoach ??= new();
+    }
+
+    private async Task AddClubCoachAsync()
+    {
+        await ClubCoachService.AddClubCoachAsync(ClubCoach!);
+        Navigation.NavigateTo("/onboarding/done");
+    }
+}

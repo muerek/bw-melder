@@ -1,0 +1,26 @@
+﻿@using System.Diagnostics.CodeAnalysis
+@inherits InputBase<Guid>
+
+<input type="hidden"
+       @bind-value="CurrentValueAsString"
+       name="@NameAttributeValue"
+       class="@CssClass"
+       @attributes="AdditionalAttributes" />
+
+@code {
+    protected override string FormatValueAsString(Guid value) => value.ToString();
+
+    protected override bool TryParseValueFromString(string? value, out Guid result, out string validationErrorMessage)
+    {
+        if (Guid.TryParse(value, out Guid guid))
+        {
+            result = guid;
+            validationErrorMessage = string.Empty;
+            return true;
+        }
+
+        result = Guid.Empty;
+        validationErrorMessage = "Could not parse value as Guid.";
+        return false;
+    }
+}
