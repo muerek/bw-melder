@@ -1,8 +1,8 @@
+using BwMelder.Authentication;
 using BwMelder.Components;
 using BwMelder.Data;
 using BwMelder.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +47,6 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.MapBwMelderEndpoints();
+app.MapBwMelderAuthenticationEndpoints();
 
 app.Run();

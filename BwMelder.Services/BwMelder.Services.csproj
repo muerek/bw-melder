@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BwMelder.Data\BwMelder.Data.csproj" />
+    <ProjectReference Include="..\BwMelder.Shared\BwMelder.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
