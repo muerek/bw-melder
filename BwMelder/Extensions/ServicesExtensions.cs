@@ -16,6 +16,7 @@ static class ServicesExtensions
     {
         services.AddScoped<IAccessKeyService, AccessKeyService>();
         services.AddScoped<IClubService, ClubService>();
+        services.AddScoped<IClubCoachService, ClubCoachService>();
 
         return services;
     }
