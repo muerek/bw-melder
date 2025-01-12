@@ -15,14 +15,14 @@ public interface IAccessKeyService
     /// </summary>
     /// <param name="secret"></param>
     /// <returns>Tuple with a flag to indicate success and a club ID.</returns>
-    public Task<(bool Success, Guid? ClubId)> TryFindClubAsync(string secret);
+    Task<(bool Success, Guid? ClubId)> TryFindClubAsync(string secret);
 
     /// <summary>
     /// Gets a list of <see cref="ClubKey"/> DTOs listing all clubs with their active key.
     /// Clubs without an active key will have <see cref="ClubKey.SecretUrl"/> set to null.
     /// </summary>
     /// <returns></returns>
-    public Task<IList<ClubKey>> GetClubKeysAsync();
+    Task<IList<ClubKey>> GetClubKeysAsync();
 
     /// <summary>
     /// Renew access to the application for a club.
@@ -30,11 +30,11 @@ public interface IAccessKeyService
     /// All older access keys will be invalidated.
     /// </summary>
     /// <param name="clubId">Renew access for the club with this ID.</param>
-    public Task RenewAccessAsync(Guid clubId);
+    Task RenewAccessAsync(Guid clubId);
 
     /// <summary>
     /// Lock access for a club by invalidating all access keys.
     /// </summary>
     /// <param name="clubId">Lock access for the club with this ID.</param>
-    public Task LockAccessAsync(Guid clubId);
+    Task LockAccessAsync(Guid clubId);
 }
