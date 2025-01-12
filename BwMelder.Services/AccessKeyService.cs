@@ -14,20 +14,16 @@ namespace BwMelder.Services;
 public class AccessKeyService(BwMelderDbContext db)
     : IAccessKeyService
 {
-    /// <summary>
-    /// Determines if an access key is valid.
-    /// </summary>
-    /// <param name="key">Access key to validate.</param>
-    /// <returns>Boolean result of the check.</returns>
-    /// <remarks>This does not really fit in here, but there is no better place right now either.</remarks>
-    public static bool ValidateAccessKey(AccessKey key) =>
-        key.Active && key.NotBefore <= DateTime.Now && DateTime.Now <= key.NotAfter;
+    public async Task<(bool Success, Guid? ClubId)> TryFindClubAsync(string secret)
+    {
+        var accessKey = await db.AccessKeys
+            .AsNoTracking()
+            .SingleOrDefaultAsync(k => k.Secret == secret);
 
-    /// <summary>
-    /// Gets a list of <see cref="ClubKey"/> DTOs listing all clubs with their active key.
-    /// Clubs without an active key will have <see cref="ClubKey.SecretUrl"/> set to null.
-    /// </summary>
-    /// <returns></returns>
+        if (accessKey != null) { return (true, accessKey.ClubId); }
+        return (false, null);
+    }
+
     public async Task<IList<ClubKey>> GetClubKeysAsync()
     {
         var clubs = await db.Clubs
@@ -44,12 +40,6 @@ public class AccessKeyService(BwMelderDbContext db)
         }).ToList();
     }
 
-    /// <summary>
-    /// Renew access to the application for a club.
-    /// Generates a new and active access key.
-    /// All older access keys will be invalidated.
-    /// </summary>
-    /// <param name="clubId">Renew access for the club with this ID.</param>
     public async Task RenewAccessAsync(Guid clubId)
     {
         // Generate a new key.
@@ -65,10 +55,6 @@ public class AccessKeyService(BwMelderDbContext db)
         await db.SaveChangesAsync();
     }
 
-    /// <summary>
-    /// Lock access for a club by invalidating all access keys.
-    /// </summary>
-    /// <param name="clubId">Lock access for the club with this ID.</param>
     public async Task LockAccessAsync(Guid clubId)
     {
         await db.AccessKeys
@@ -100,4 +86,12 @@ public class AccessKeyService(BwMelderDbContext db)
 
         throw new Exception("Could not generate unique secret. While not impossible, this is highly unlikely to occur.");
     }
+
+    /// <summary>
+    /// Determines if an access key is valid.
+    /// </summary>
+    /// <param name="key">Access key to validate.</param>
+    /// <returns>Boolean result of the check.</returns>
+    private static bool ValidateAccessKey(AccessKey key) =>
+        key.Active && key.NotBefore <= DateTime.Now && DateTime.Now <= key.NotAfter;
 }

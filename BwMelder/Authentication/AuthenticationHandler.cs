@@ -1,5 +1,4 @@
-﻿using BwMelder.Data;
-using BwMelder.Data.Model;
+﻿using BwMelder.Shared.Dto;
 using BwMelder.Shared.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -11,8 +10,8 @@ namespace BwMelder.Authentication;
 /// <summary>
 /// Handles authentication tasks for the application.
 /// </summary>
-public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, BwMelderDbContext db,
-    IConfiguration config)
+public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, IConfiguration config,
+    IAccessKeyService accessKeyService)
 {
     private HttpContext Context =>
         httpContextAccessor.HttpContext
@@ -30,15 +29,13 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, BwM
     /// <returns>True if login completed successfully, false if it failed.</returns>
     public async Task<bool> LoginAsync(string secret)
     {
-        var accessKey = await db.AccessKeys
-            .AsNoTracking()
-            .SingleOrDefaultAsync(k => k.Secret == secret);
+        var (Success, ClubId) = await accessKeyService.TryFindClubAsync(secret);
 
-        if (accessKey != null && IAccessKeyService.ValidateAccessKey(accessKey))
+        if (Success && ClubId != null)
         {
             var claims = new List<Claim>()
             {
-                new("ClubId", accessKey.ClubId.ToString()),
+                new("ClubId", ClubId.Value.ToString()),
                 new(ClaimTypes.Role, "ClubCoach")
             };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -54,7 +51,7 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, BwM
     /// </summary>
     /// <param name="credentials">Credentials provided by the user.</param>
     /// <returns>True if login completed successfully, false if it failed.</returns>
-    public async Task<bool> LoginAsync(User credentials)
+    public async Task<bool> LoginAsync(UserLoginRequest credentials)
     {
         if (ValidateCredentials(credentials))
         {
@@ -80,14 +77,16 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, BwM
     /// <summary>
     /// Checks if the supplied credentials are valid for the application.
     /// </summary>
-    private bool ValidateCredentials(User credentials)
+    private bool ValidateCredentials(UserLoginRequest credentials)
     {
         // Credentials are currently stored in the configuration in plaintext.
-        var validUser = config.GetSection("AppAdmin").Get<User>();
-        if (validUser == null)
+        // TODO: Do something else here.
+        var validUser = config.GetValue<string>("AppAdmin:Username");
+        var validPassword = config.GetValue<string>("AppAdmin:Password");
+        if (validUser == null || validPassword == null)
         {
             throw new ApplicationException("No admin user configured.");
         }
-        return validUser.Username == credentials.Username && validUser.Password == credentials.Password;
+        return validUser == credentials.Username && validPassword == credentials.Password;
     }
 }

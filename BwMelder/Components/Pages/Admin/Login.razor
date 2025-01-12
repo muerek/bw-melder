@@ -3,8 +3,6 @@
 @* Override required authorization from _Imports.razor. *@
 @attribute [AllowAnonymous]
 
-@using System.ComponentModel.DataAnnotations
-@using BwMelder.Data.Model;
 @using BwMelder.Authentication;
 
 @inject AuthenticationHandler AuthHandler;
@@ -34,10 +32,11 @@
 
 @code {
     [SupplyParameterFromForm]
-    private User? Credentials { get; set; }
+    private UserLoginRequest? Credentials { get; set; }
 
     // Initialize empty credentials if not set from form.
-    protected override void OnInitialized() => Credentials ??= new();
+    protected override void OnInitialized() =>
+        Credentials ??= new() { Username = string.Empty, Password = string.Empty };
 
     private async Task AuthenticateAsync()
     {
