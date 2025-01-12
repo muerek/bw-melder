@@ -12,11 +12,11 @@ namespace BwMelder.Shared.Dto;
 /// </summary>
 public class ContactRequest
 {
-    [DataType(DataType.PhoneNumber)]
+    [Phone]
     [Required]
     public string Phone { get; set; } = string.Empty;
 
-    [DataType(DataType.EmailAddress)]
+    [EmailAddress]
     [Required]
     public string EmailAddress { get; set; } = string.Empty;
 }
