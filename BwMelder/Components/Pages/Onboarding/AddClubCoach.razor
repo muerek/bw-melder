@@ -1,5 +1,7 @@
 ﻿@page "/onboarding/club-coach"
 
+@using BwMelder.Authentication
+
 @inject IClubCoachService ClubCoachService;
 @inject NavigationManager Navigation;
 
@@ -17,6 +19,11 @@
     [SupplyParameterFromForm]
     public ClubCoachRequest? ClubCoach { get; set; }
 
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
+    private UserContext? userContext;
+
     protected override void OnInitialized()
     {
         // Parameter is already set if form data was posted.
@@ -25,6 +32,12 @@
 
     private async Task AddClubCoachAsync()
     {
+        if (ClubCoach is null) { return; }
+
+        // Always set the club ID to the current user's club.
+        userContext = await authenticationState.GetUserContextAsync();
+        ClubCoach.ClubId = userContext?.ClubId ?? throw new ApplicationException();
+
         await ClubCoachService.AddClubCoachAsync(ClubCoach!);
         Navigation.NavigateTo("/onboarding/done");
     }
