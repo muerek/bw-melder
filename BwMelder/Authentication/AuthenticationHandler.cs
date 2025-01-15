@@ -38,6 +38,7 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, ICo
                 // TODO: Should probably do null checks here, but too cumbersome.
                 new("ClubId", authResponse.ClubId!.Value.ToString()),
                 new("ClubName", authResponse.ClubName!),
+                new("OnboardingRequired", authResponse.OnboardingRequired.ToString().ToLower(), ClaimValueTypes.Boolean),
                 new(ClaimTypes.Role, authResponse.Role!)
             };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

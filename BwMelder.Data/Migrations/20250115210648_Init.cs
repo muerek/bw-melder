@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BwMelder.Migrations
+namespace BwMelder.Data.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration

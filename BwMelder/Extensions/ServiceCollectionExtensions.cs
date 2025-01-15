@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BwMelder.Extensions;
 
-static class ServicesExtensions
+static class ServiceCollectionExtensions
 {
     /// <summary>
     /// Registers the application's services.
@@ -45,6 +45,22 @@ static class ServicesExtensions
         // Provide access to HTTP context, required for setting cookies on login.
         services.AddHttpContextAccessor();
 
+        return services;
+    }
+
+    /// <summary>
+    /// Configures authorization.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddBwMelderAuthorization(this IServiceCollection services)
+    {
+        services.AddAuthorizationBuilder()
+            .AddPolicy("OnboardedClub", policy =>
+                policy.RequireRole("ClubCoach").RequireClaim("OnboardingRequired", "true"))
+            .AddPolicy("OnboardingRequired", policy =>
+                policy.RequireRole("ClubCoach").RequireClaim("OnboardingRequired", "false"));
+        
         return services;
     }
 }
