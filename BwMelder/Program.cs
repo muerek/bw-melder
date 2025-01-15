@@ -20,8 +20,9 @@ builder.Services.AddDbContext<BwMelderDbContext>(options =>
 // Add application services.
 builder.Services.AddBwMelderServices();
 
-// Set up authentication.
+// Set up authentication and authorization.
 builder.Services.AddBwMelderAuthentication();
+builder.Services.AddBwMelderAuthorization();
 
 var app = builder.Build();
 

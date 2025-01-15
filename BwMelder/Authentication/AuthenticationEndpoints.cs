@@ -1,5 +1,6 @@
 ﻿using BwMelder.Shared.Dto;
 using BwMelder.Shared.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BwMelder.Authentication;
 
@@ -31,11 +32,16 @@ static class AuthenticationEndpoints
     /// <summary>
     /// Logs in the user with the given secret.
     /// </summary>
-    static async Task<IResult> LoginWithSecret(string secret, AuthenticationHandler authHandler)
+    static async Task<IResult> LoginWithSecret(string secret, AuthenticationHandler authHandler, HttpContext context,
+        IAuthorizationService authorization)
     {
         if (await authHandler.LoginAsync(secret))
         {
-            return Results.Redirect("/");
+            if ((await authorization.AuthorizeAsync(context.User, "OnboardedClub")).Succeeded)
+            {
+                return Results.Redirect("/");
+            }
+            return Results.Redirect("/onboarding/welcome");
         }
         return Results.NotFound();
     }

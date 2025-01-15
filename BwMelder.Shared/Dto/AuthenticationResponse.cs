@@ -15,6 +15,8 @@ public class AuthenticationResponse
 {
     public required bool IsSuccess { get; set; }
 
+    public bool OnboardingRequired { get; set; } = false;
+
     public string? Role { get; set; }
 
     public Guid? ClubId { get; set; }

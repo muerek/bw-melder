@@ -22,15 +22,18 @@ public class AccessKeyService(BwMelderDbContext db)
 
         if (accessKey != null && ValidateAccessKey(accessKey))
         {
-            // Club is needed to get the name.
+            // Club is needed to get the club name and club coach.
             var club = await db.Clubs
                 .AsNoTracking()
+                .Include(c => c.ClubCoach)
                 .SingleAsync(c => c.Id == accessKey.ClubId);
 
             return new AuthenticationResponse
             {
                 IsSuccess = true,
                 Role = "ClubCoach",
+                // Require onboarding if club coach is not set.
+                OnboardingRequired = club.ClubCoach is null,
                 ClubId = club.Id,
                 ClubName = club.Name
             };
