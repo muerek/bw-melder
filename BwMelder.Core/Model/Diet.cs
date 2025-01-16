@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Dietary choices and restrictions.
 /// </summary>
-public class Diet
+class Diet
 {
     /// <summary>
     /// Choice of diet from basic options offered by the event.

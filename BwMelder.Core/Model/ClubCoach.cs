@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Coach responsible for a club's crews before and after the event.
 /// Primary contact for all event-related communication.
 /// </summary>
-public class ClubCoach
+class ClubCoach
 {
     public int Id { get; set; } = 0;
 

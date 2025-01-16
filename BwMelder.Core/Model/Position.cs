@@ -1,9 +1,9 @@
-﻿namespace BwMelder.Data.Model;
+﻿namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Positions an athlete can have in a crew.
 /// </summary>
-public enum Position
+enum Position
 {
     Cox = 0,
     Rower1 = 1,

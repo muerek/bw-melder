@@ -19,8 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BwMelder.Data\BwMelder.Data.csproj" />
-    <ProjectReference Include="..\BwMelder.Services\BwMelder.Services.csproj" />
+    <ProjectReference Include="..\BwMelder.Core\BwMelder.Core.csproj" />
     <ProjectReference Include="..\BwMelder.Shared\BwMelder.Shared.csproj" />
   </ItemGroup>
 

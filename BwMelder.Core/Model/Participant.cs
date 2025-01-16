@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
-public class Participant
+class Participant
 {
     public Guid Id { get; set; } = Guid.Empty;
 

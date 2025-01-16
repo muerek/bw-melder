@@ -1,9 +1,8 @@
-﻿using BwMelder.Data;
-using BwMelder.Shared.Dto;
-using BwMelder.Data.Model;
+﻿using BwMelder.Shared.Dto;
+using BwMelder.Core.Model;
 using BwMelder.Shared.Services;
 
-namespace BwMelder.Services;
+namespace BwMelder.Core;
 
 public class ClubService(BwMelderDbContext db)
     : IClubService

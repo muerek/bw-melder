@@ -1,9 +1,9 @@
-﻿namespace BwMelder.Data.Model;
+﻿namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Choice of available t-shirt sizes.
 /// </summary>
-public enum ShirtSize
+enum ShirtSize
 {
     XS = 0,
     S = 1,

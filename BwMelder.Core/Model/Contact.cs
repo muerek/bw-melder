@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Contact information for phone and email correspondence.
 /// </summary>
-public class Contact
+class Contact
 {
     [Display(Name = "Telefonnummer")]
     [DataType(DataType.PhoneNumber)]

@@ -1,6 +1,6 @@
 using BwMelder.Authentication;
 using BwMelder.Components;
-using BwMelder.Data;
+using BwMelder.Core;
 using BwMelder.Extensions;
 using Microsoft.EntityFrameworkCore;
 

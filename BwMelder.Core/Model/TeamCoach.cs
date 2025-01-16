@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Coach accompanying the team to the event.
 /// </summary>
-public class TeamCoach : Participant
+class TeamCoach : Participant
 {
     public Contact Contact { get; set; } = new();
 
