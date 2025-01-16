@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Represents a race for which crews can be registered.
 /// </summary>
-public class Race
+class Race
 {
     public int Id { get; set; } = 0;
 

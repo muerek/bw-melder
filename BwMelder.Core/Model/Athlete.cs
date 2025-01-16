@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Represents an athlete who is part of a crew.
 /// </summary>
-public class Athlete : Participant
+class Athlete : Participant
 {
     [Display(Name = "Erziehungsberechtigter")]
     public LegalGuardian LegalGuardian { get; set; } = new();

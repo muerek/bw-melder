@@ -1,12 +1,11 @@
-﻿using BwMelder.Data;
-using BwMelder.Shared.Dto;
-using BwMelder.Data.Model;
+﻿using BwMelder.Shared.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Security.Cryptography;
 using BwMelder.Shared.Services;
+using BwMelder.Core.Model;
 
-namespace BwMelder.Services;
+namespace BwMelder.Core;
 
 /// <summary>
 /// Handles access keys.

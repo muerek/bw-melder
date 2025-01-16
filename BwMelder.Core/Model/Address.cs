@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Address data made up of street, zip and city.
 /// </summary>
-public class Address
+class Address
 {
     [Display(Name = "Anschrift")]
     public string Street { get; set; } = string.Empty;

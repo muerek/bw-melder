@@ -1,6 +1,6 @@
-﻿namespace BwMelder.Data.Model;
+﻿namespace BwMelder.Core.Model;
 
-public class AccessKey
+class AccessKey
 {
     public int Id { get; set; } = 0;
 

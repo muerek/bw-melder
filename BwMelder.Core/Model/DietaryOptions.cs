@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Different dietary options.
 /// </summary>
-public enum DietaryOptions
+enum DietaryOptions
 {
     [Display(Name = "Allesesser")]
     Omnivore = 0,

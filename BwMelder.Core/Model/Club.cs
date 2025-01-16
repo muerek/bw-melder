@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualBasic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Represents a club that registers crews and team coaches.
 /// </summary>
-public class Club
+class Club
 {
     public Guid Id { get; set; } = Guid.Empty;
 

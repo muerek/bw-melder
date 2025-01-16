@@ -1,9 +1,9 @@
-﻿namespace BwMelder.Data.Model;
+﻿namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Represents a crew for a race.
 /// </summary>
-public class Crew
+class Crew
 {
     public Guid Id { get; set; } = Guid.Empty;
 

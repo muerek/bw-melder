@@ -1,19 +1,17 @@
-﻿using BwMelder.Data.Model;
+﻿using BwMelder.Core.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace BwMelder.Data;
+namespace BwMelder.Core;
 
-public class BwMelderDbContext : DbContext
+public class BwMelderDbContext(DbContextOptions<BwMelderDbContext> options) : DbContext(options)
 {
-    public DbSet<AccessKey> AccessKeys => Set<AccessKey>();
-    public DbSet<Athlete> Athletes => Set<Athlete>();
-    public DbSet<Club> Clubs => Set<Club>();
-    public DbSet<ClubCoach> ClubCoaches => Set<ClubCoach>();
-    public DbSet<Crew> Crews => Set<Crew>();
-    public DbSet<Race> Races => Set<Race>();
-    public DbSet<TeamCoach> TeamCoaches => Set<TeamCoach>();
-
-    public BwMelderDbContext(DbContextOptions<BwMelderDbContext> options) : base(options) { }
+    internal DbSet<AccessKey> AccessKeys => Set<AccessKey>();
+    internal DbSet<Athlete> Athletes => Set<Athlete>();
+    internal DbSet<Club> Clubs => Set<Club>();
+    internal DbSet<ClubCoach> ClubCoaches => Set<ClubCoach>();
+    internal DbSet<Crew> Crews => Set<Crew>();
+    internal DbSet<Race> Races => Set<Race>();
+    internal DbSet<TeamCoach> TeamCoaches => Set<TeamCoach>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

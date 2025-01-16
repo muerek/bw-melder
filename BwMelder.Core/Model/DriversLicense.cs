@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BwMelder.Data.Model;
+namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Represents different types of drivers license.
 /// Uses broad generic types only as the specifics vary by issue date. 
 /// </summary>
-public enum DriversLicense
+enum DriversLicense
 {
     [Display(Name = "Kein Führerschein")]
     None = 0,

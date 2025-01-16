@@ -1,5 +1,4 @@
-﻿using BwMelder.Data;
-using BwMelder.Data.Model;
+﻿using BwMelder.Core.Model;
 using BwMelder.Shared.Dto;
 using BwMelder.Shared.Services;
 using System;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BwMelder.Services;
+namespace BwMelder.Core;
 
 public class ClubCoachService(BwMelderDbContext db)
     : IClubCoachService
