@@ -74,8 +74,12 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, ICo
     /// <summary>
     /// Logs in the current user with the given identity.
     /// </summary>
-    private async Task LoginAsync(ClaimsIdentity identity) =>
+    private async Task LoginAsync(ClaimsIdentity identity)
+    {
+        // Make sure any existing session is terminated.
+        await LogoutAsync();
         await Context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+    }
 
     /// <summary>
     /// Checks if the supplied credentials are valid for the application.
