@@ -56,9 +56,9 @@ static class ServiceCollectionExtensions
     public static IServiceCollection AddBwMelderAuthorization(this IServiceCollection services)
     {
         services.AddAuthorizationBuilder()
-            .AddPolicy("OnboardedClub", policy =>
+            .AddPolicy("ClubIsNotOnboarded", policy =>
                 policy.RequireRole("ClubCoach").RequireClaim("OnboardingRequired", "true"))
-            .AddPolicy("OnboardingRequired", policy =>
+            .AddPolicy("ClubIsOnboarded", policy =>
                 policy.RequireRole("ClubCoach").RequireClaim("OnboardingRequired", "false"));
         
         return services;

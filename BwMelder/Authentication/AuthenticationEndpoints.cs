@@ -37,7 +37,7 @@ static class AuthenticationEndpoints
     {
         if (await authHandler.LoginAsync(secret))
         {
-            if ((await authorization.AuthorizeAsync(context.User, "OnboardedClub")).Succeeded)
+            if ((await authorization.AuthorizeAsync(context.User, "ClubIsOnboarded")).Succeeded)
             {
                 return Results.Redirect("/");
             }

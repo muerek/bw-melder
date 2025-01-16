@@ -58,7 +58,7 @@ public class AccessKeyService(BwMelderDbContext db)
         }).ToList();
     }
 
-    public async Task RenewAccessAsync(Guid clubId)
+    public async Task<string> RenewAccessAsync(Guid clubId)
     {
         // Generate a new key.
         var accessKey = new AccessKey
@@ -71,6 +71,8 @@ public class AccessKeyService(BwMelderDbContext db)
         // Save the new key.
         db.AccessKeys.Add(accessKey);
         await db.SaveChangesAsync();
+
+        return accessKey.Secret;
     }
 
     public async Task LockAccessAsync(Guid clubId)

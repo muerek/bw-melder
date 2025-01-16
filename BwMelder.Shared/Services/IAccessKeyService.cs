@@ -29,7 +29,8 @@ public interface IAccessKeyService
     /// All older access keys will be invalidated.
     /// </summary>
     /// <param name="clubId">Renew access for the club with this ID.</param>
-    Task RenewAccessAsync(Guid clubId);
+    /// <returns>The secret of the new access key.</returns>
+    Task<string> RenewAccessAsync(Guid clubId);
 
     /// <summary>
     /// Lock access for a club by invalidating all access keys.
