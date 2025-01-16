@@ -9,5 +9,5 @@ namespace BwMelder.Shared.Services;
 
 public interface IClubCoachService
 {
-    Task AddClubCoachAsync(ClubCoachRequest request);
+    Task CreateClubCoachAsync(ClubCoachRequest request);
 }

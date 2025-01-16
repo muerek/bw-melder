@@ -1,0 +1,64 @@
+﻿@page "/admin/crews/add"
+
+@inject IClubService ClubService
+
+<h1>Mannschaft nominieren</h1>
+
+<h2>Für bestehenden Verein</h2>
+
+<EditForm Model="this" OnValidSubmit="NominateExistingClubAsync" FormName="NominationForExistingClub">
+    <div class="mb-3">
+        <label for="clubid" class="form-label">Verein</label>
+        <InputSelect class="form-select" id="clubid" required @bind-Value=ExistingClub>
+            <option value=""></option>
+            @foreach (var club in (Clubs ?? []))
+            {
+                <option value="@club.Id">@club.Name</option>
+            }
+        </InputSelect>
+    </div>
+    <button type="submit" class="btn btn-primary">Speichern</button>
+</EditForm>
+
+<h2>Für neuen Verein</h2>
+
+<EditForm Model="NewClub" OnValidSubmit="NominateNewClubAsync" FormName="NominationForNewClub">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label for="clubname" class="form-label">Vereinsname</label>
+        <InputText id="clubname" class="form-control" @bind-Value="NewClub!.Name" />
+    </div>
+    <button type="submit" class="btn btn-primary">Speichern</button>
+</EditForm>
+
+@code {
+    private IList<ClubResponse>? Clubs { get; set; }
+
+    [SupplyParameterFromForm(FormName = "NominationForNewClub")]
+    private CreateClubRequest? NewClub { get; set; }
+
+    [SupplyParameterFromForm(FormName = "NominationForExistingClub")]
+    private Guid? ExistingClub { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Clubs = await ClubService.GetClubsAsync();
+        
+        // Initialize if not already set from form.
+        NewClub ??= new();
+        // No need to initialize ExistingClub as null value binds to select.
+    }
+
+    private async Task NominateNewClubAsync()
+    {
+        if (NewClub is null) { return; }
+
+        var clubId = await ClubService.CreateClubAsync(NewClub);
+    }
+
+    private void NominateExistingClubAsync()
+    {
+
+    }
+}

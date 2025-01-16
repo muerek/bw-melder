@@ -40,7 +40,7 @@
         userContext = await authenticationState.GetUserContextAsync();
         ClubCoach.ClubId = userContext?.ClubId ?? throw new ApplicationException();
 
-        await ClubCoachService.AddClubCoachAsync(ClubCoach);
+        await ClubCoachService.CreateClubCoachAsync(ClubCoach);
 
         // Renew access key for the club to invalidate the used key.
         await AccessKeyService.RenewAccessAsync(ClubCoach.ClubId);
