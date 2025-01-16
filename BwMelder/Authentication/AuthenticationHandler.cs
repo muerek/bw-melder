@@ -29,14 +29,17 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, ICo
     /// <returns>True if login completed successfully, false if it failed.</returns>
     public async Task<bool> LoginAsync(string secret)
     {
-        var (Success, ClubId) = await accessKeyService.TryFindClubAsync(secret);
+        var authResponse = await accessKeyService.AuthenticateAsync(secret);
 
-        if (Success && ClubId != null)
+        if (authResponse.IsSuccess)
         {
-            var claims = new List<Claim>()
+            var claims = new List<Claim>
             {
-                new("ClubId", ClubId.Value.ToString()),
-                new(ClaimTypes.Role, "ClubCoach")
+                // TODO: Should probably do null checks here, but too cumbersome.
+                new("ClubId", authResponse.ClubId!.Value.ToString()),
+                new("ClubName", authResponse.ClubName!),
+                new("OnboardingRequired", authResponse.OnboardingRequired.ToString().ToLower(), ClaimValueTypes.Boolean),
+                new(ClaimTypes.Role, authResponse.Role!)
             };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await LoginAsync(identity);
@@ -55,7 +58,7 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, ICo
     {
         if (ValidateCredentials(credentials))
         {
-            var claims = new List<Claim>()
+            var claims = new List<Claim>
             {
                 new(ClaimTypes.Name, "Administrator"),
                 new(ClaimTypes.Role, "Administrator")
@@ -71,8 +74,12 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, ICo
     /// <summary>
     /// Logs in the current user with the given identity.
     /// </summary>
-    private async Task LoginAsync(ClaimsIdentity identity) =>
+    private async Task LoginAsync(ClaimsIdentity identity)
+    {
+        // Make sure any existing session is terminated.
+        await LogoutAsync();
         await Context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+    }
 
     /// <summary>
     /// Checks if the supplied credentials are valid for the application.

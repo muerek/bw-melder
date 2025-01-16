@@ -16,9 +16,6 @@ public class ClubCoach
     [Display(Name = "Nachname")]
     public string LastName { get; set; } = string.Empty;
 
-    [Display(Name = "Name")]
-    public string FullName => $"{FirstName} {LastName}";
-
     public Contact Contact { get; set; } = new();
 
     public Guid ClubId { get; set; } = Guid.Empty;

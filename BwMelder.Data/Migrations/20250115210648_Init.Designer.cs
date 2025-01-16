@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BwMelder.Migrations
+namespace BwMelder.Data.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    [Migration("20250110202218_Init")]
+    [Migration("20250115210648_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace BwMelder.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("BwMelder.Model.AccessKey", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.AccessKey", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace BwMelder.Migrations
                     b.ToTable("AccessKeys");
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Club", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Club", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace BwMelder.Migrations
                     b.ToTable("Clubs");
                 });
 
-            modelBuilder.Entity("BwMelder.Model.ClubCoach", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.ClubCoach", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,7 +89,7 @@ namespace BwMelder.Migrations
                     b.ToTable("ClubCoaches");
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Crew", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Crew", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,7 +108,7 @@ namespace BwMelder.Migrations
                     b.ToTable("Crews");
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Participant", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Participant", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,7 +148,7 @@ namespace BwMelder.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Race", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Race", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -173,9 +173,9 @@ namespace BwMelder.Migrations
                     b.ToTable("Races");
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Athlete", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Athlete", b =>
                 {
-                    b.HasBaseType("BwMelder.Model.Participant");
+                    b.HasBaseType("BwMelder.Data.Model.Participant");
 
                     b.Property<Guid>("CrewId")
                         .HasColumnType("TEXT");
@@ -188,9 +188,9 @@ namespace BwMelder.Migrations
                     b.HasDiscriminator().HasValue("Athlete");
                 });
 
-            modelBuilder.Entity("BwMelder.Model.TeamCoach", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.TeamCoach", b =>
                 {
-                    b.HasBaseType("BwMelder.Model.Participant");
+                    b.HasBaseType("BwMelder.Data.Model.Participant");
 
                     b.Property<Guid>("ClubId")
                         .HasColumnType("TEXT");
@@ -203,24 +203,24 @@ namespace BwMelder.Migrations
                     b.HasDiscriminator().HasValue("TeamCoach");
                 });
 
-            modelBuilder.Entity("BwMelder.Model.AccessKey", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.AccessKey", b =>
                 {
-                    b.HasOne("BwMelder.Model.Club", null)
+                    b.HasOne("BwMelder.Data.Model.Club", null)
                         .WithMany("AccessKeys")
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BwMelder.Model.ClubCoach", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.ClubCoach", b =>
                 {
-                    b.HasOne("BwMelder.Model.Club", null)
+                    b.HasOne("BwMelder.Data.Model.Club", null)
                         .WithOne("ClubCoach")
-                        .HasForeignKey("BwMelder.Model.ClubCoach", "ClubId")
+                        .HasForeignKey("BwMelder.Data.Model.ClubCoach", "ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BwMelder.Model.Contact", "Contact", b1 =>
+                    b.OwnsOne("BwMelder.Data.Model.Contact", "Contact", b1 =>
                         {
                             b1.Property<int>("ClubCoachId")
                                 .HasColumnType("INTEGER");
@@ -245,18 +245,18 @@ namespace BwMelder.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Crew", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Crew", b =>
                 {
-                    b.HasOne("BwMelder.Model.Club", null)
+                    b.HasOne("BwMelder.Data.Model.Club", null)
                         .WithMany("Crews")
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Participant", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Participant", b =>
                 {
-                    b.OwnsOne("BwMelder.Model.Address", "Address", b1 =>
+                    b.OwnsOne("BwMelder.Data.Model.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("ParticipantId")
                                 .HasColumnType("TEXT");
@@ -281,7 +281,7 @@ namespace BwMelder.Migrations
                                 .HasForeignKey("ParticipantId");
                         });
 
-                    b.OwnsOne("BwMelder.Model.Diet", "Diet", b1 =>
+                    b.OwnsOne("BwMelder.Data.Model.Diet", "Diet", b1 =>
                         {
                             b1.Property<Guid>("ParticipantId")
                                 .HasColumnType("TEXT");
@@ -307,15 +307,15 @@ namespace BwMelder.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Athlete", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Athlete", b =>
                 {
-                    b.HasOne("BwMelder.Model.Crew", null)
+                    b.HasOne("BwMelder.Data.Model.Crew", null)
                         .WithMany("Athletes")
                         .HasForeignKey("CrewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BwMelder.Model.LegalGuardian", "LegalGuardian", b1 =>
+                    b.OwnsOne("BwMelder.Data.Model.LegalGuardian", "LegalGuardian", b1 =>
                         {
                             b1.Property<Guid>("AthleteId")
                                 .HasColumnType("TEXT");
@@ -335,7 +335,7 @@ namespace BwMelder.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("AthleteId");
 
-                            b1.OwnsOne("BwMelder.Model.Contact", "Contact", b2 =>
+                            b1.OwnsOne("BwMelder.Data.Model.Contact", "Contact", b2 =>
                                 {
                                     b2.Property<Guid>("LegalGuardianAthleteId")
                                         .HasColumnType("TEXT");
@@ -364,15 +364,15 @@ namespace BwMelder.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BwMelder.Model.TeamCoach", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.TeamCoach", b =>
                 {
-                    b.HasOne("BwMelder.Model.Club", null)
+                    b.HasOne("BwMelder.Data.Model.Club", null)
                         .WithMany("TeamCoaches")
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("BwMelder.Model.Contact", "Contact", b1 =>
+                    b.OwnsOne("BwMelder.Data.Model.Contact", "Contact", b1 =>
                         {
                             b1.Property<Guid>("TeamCoachId")
                                 .HasColumnType("TEXT");
@@ -397,7 +397,7 @@ namespace BwMelder.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Club", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Club", b =>
                 {
                     b.Navigation("AccessKeys");
 
@@ -408,7 +408,7 @@ namespace BwMelder.Migrations
                     b.Navigation("TeamCoaches");
                 });
 
-            modelBuilder.Entity("BwMelder.Model.Crew", b =>
+            modelBuilder.Entity("BwMelder.Data.Model.Crew", b =>
                 {
                     b.Navigation("Athletes");
                 });

@@ -14,14 +14,32 @@ namespace BwMelder.Services;
 public class AccessKeyService(BwMelderDbContext db)
     : IAccessKeyService
 {
-    public async Task<(bool Success, Guid? ClubId)> TryFindClubAsync(string secret)
+    public async Task<AuthenticationResponse> AuthenticateAsync(string secret)
     {
         var accessKey = await db.AccessKeys
             .AsNoTracking()
             .SingleOrDefaultAsync(k => k.Secret == secret);
 
-        if (accessKey != null) { return (true, accessKey.ClubId); }
-        return (false, null);
+        if (accessKey != null && ValidateAccessKey(accessKey))
+        {
+            // Club is needed to get the club name and club coach.
+            var club = await db.Clubs
+                .AsNoTracking()
+                .Include(c => c.ClubCoach)
+                .SingleAsync(c => c.Id == accessKey.ClubId);
+
+            return new AuthenticationResponse
+            {
+                IsSuccess = true,
+                Role = "ClubCoach",
+                // Require onboarding if club coach is not set.
+                OnboardingRequired = club.ClubCoach is null,
+                ClubId = club.Id,
+                ClubName = club.Name
+            };
+        }
+
+        return new AuthenticationResponse { IsSuccess = false };
     }
 
     public async Task<IList<ClubKey>> GetClubKeysAsync()
@@ -40,10 +58,10 @@ public class AccessKeyService(BwMelderDbContext db)
         }).ToList();
     }
 
-    public async Task RenewAccessAsync(Guid clubId)
+    public async Task<string> RenewAccessAsync(Guid clubId)
     {
         // Generate a new key.
-        var accessKey = new AccessKey()
+        var accessKey = new AccessKey
         {
             Secret = await GenerateUniqueSecretAsync(),
             ClubId = clubId
@@ -53,6 +71,8 @@ public class AccessKeyService(BwMelderDbContext db)
         // Save the new key.
         db.AccessKeys.Add(accessKey);
         await db.SaveChangesAsync();
+
+        return accessKey.Secret;
     }
 
     public async Task LockAccessAsync(Guid clubId)
