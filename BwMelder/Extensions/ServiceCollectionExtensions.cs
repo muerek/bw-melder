@@ -15,8 +15,9 @@ static class ServiceCollectionExtensions
     public static IServiceCollection AddBwMelderServices(this IServiceCollection services)
     {
         services.AddScoped<IAccessKeyService, AccessKeyService>();
-        services.AddScoped<IClubService, ClubService>();
+        services.AddScoped<ICrewService, CrewService>();
         services.AddScoped<IClubCoachService, ClubCoachService>();
+        services.AddScoped<IClubService, ClubService>();
 
         return services;
     }

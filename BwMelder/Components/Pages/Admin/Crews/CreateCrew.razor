@@ -1,10 +1,11 @@
 ﻿@page "/admin/crews/add"
 
 @inject IClubService ClubService
+@inject ICrewService CrewService
 
 <h1>Mannschaft nominieren</h1>
 
-<h2>Für bestehenden Verein</h2>
+<h3>Für bestehenden Verein</h3>
 
 <EditForm Model="this" OnValidSubmit="NominateExistingClubAsync" FormName="NominationForExistingClub">
     <div class="mb-3">
@@ -20,7 +21,7 @@
     <button type="submit" class="btn btn-primary">Speichern</button>
 </EditForm>
 
-<h2>Für neuen Verein</h2>
+<h3>Für neuen Verein</h3>
 
 <EditForm Model="NewClub" OnValidSubmit="NominateNewClubAsync" FormName="NominationForNewClub">
     <DataAnnotationsValidator />
@@ -55,6 +56,7 @@
         if (NewClub is null) { return; }
 
         var clubId = await ClubService.CreateClubAsync(NewClub);
+
     }
 
     private void NominateExistingClubAsync()
