@@ -2,28 +2,42 @@
 
 @inject IClubService ClubService
 @inject ICrewService CrewService
+@inject IRaceService RaceService
+@inject NavigationManager Navigation
 
 <h1>Mannschaft nominieren</h1>
 
-<h3>Für bestehenden Verein</h3>
-
-<EditForm Model="this" OnValidSubmit="NominateExistingClubAsync" FormName="NominationForExistingClub">
-    <div class="mb-3">
-        <label for="clubid" class="form-label">Verein</label>
-        <InputSelect class="form-select" id="clubid" required @bind-Value=ExistingClub>
-            <option value=""></option>
-            @foreach (var club in (Clubs ?? []))
-            {
-                <option value="@club.Id">@club.Name</option>
-            }
-        </InputSelect>
+<EditForm Model="Nomination" OnValidSubmit="NominateAsync" FormName="NominationForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="row row-cols-md-2">
+        <div class="mb-3">
+            <label for="raceid" class="form-label">Rennen</label>
+            <InputSelect class="form-select" id="raceid" required @bind-Value=Nomination!.RaceId>
+                <option value=""></option>
+                @foreach (var race in Races)
+                {
+                    <option value="@race.Id">@race.FullName()</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="mb-3">
+            <label for="clubid" class="form-label">Verein</label>
+            <InputSelect class="form-select" id="clubid" required @bind-Value=Nomination!.ClubId>
+                <option value=""></option>
+                @foreach (var club in Clubs)
+                {
+                    <option value="@club.Id">@club.Name</option>
+                }
+            </InputSelect>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Speichern</button>
 </EditForm>
 
-<h3>Für neuen Verein</h3>
+<h3>Verein neu anlegen</h3>
 
-<EditForm Model="NewClub" OnValidSubmit="NominateNewClubAsync" FormName="NominationForNewClub">
+<EditForm Model="NewClub" OnValidSubmit="CreateClubAsync" FormName="NewClubForm">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="mb-3">
@@ -34,33 +48,47 @@
 </EditForm>
 
 @code {
-    private IList<ClubResponse>? Clubs { get; set; }
+    private IList<ClubResponse> Clubs { get; set; } = [];
+    private IList<RaceResponse> Races { get; set; } = [];
 
-    [SupplyParameterFromForm(FormName = "NominationForNewClub")]
+    [SupplyParameterFromForm(FormName = "NominationForm")]
+    private CreateCrewRequest? Nomination { get; set; }
+
+    [SupplyParameterFromForm(FormName = "NewClubForm")]
     private CreateClubRequest? NewClub { get; set; }
-
-    [SupplyParameterFromForm(FormName = "NominationForExistingClub")]
-    private Guid? ExistingClub { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Clubs = await ClubService.GetClubsAsync();
-        
-        // Initialize if not already set from form.
-        NewClub ??= new();
-        // No need to initialize ExistingClub as null value binds to select.
+        Races = await RaceService.GetRacesAsync();
+        Nomination ??= new();
+
+        // Only load club list if we are not about to add a new one.
+        if (NewClub is null)
+        {
+            Clubs = await ClubService.GetClubsAsync();
+            NewClub ??= new();
+        }
     }
 
-    private async Task NominateNewClubAsync()
+    private async Task CreateClubAsync()
     {
         if (NewClub is null) { return; }
 
         var clubId = await ClubService.CreateClubAsync(NewClub);
 
+        // Load updated club list.
+        Clubs = await ClubService.GetClubsAsync();
+        // Reset the NewClubForm.
+        NewClub = new();
+        // Pre-select the newly created club in the NominationForm.
+        Nomination!.ClubId = clubId;
     }
 
-    private void NominateExistingClubAsync()
+    private async Task NominateAsync()
     {
+        if (Nomination is null) { return; }
 
+        await CrewService.CreateCrewAsync(Nomination);
+        Navigation.NavigateTo("/admin/crews");
     }
 }
