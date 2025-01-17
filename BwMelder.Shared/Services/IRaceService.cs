@@ -1,0 +1,20 @@
+﻿using BwMelder.Shared.Dto;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BwMelder.Shared.Services;
+
+/// <summary>
+/// Represents a service to manage races.
+/// </summary>
+public interface IRaceService
+{
+    /// <summary>
+    /// Gets a list of all races.
+    /// </summary>
+    /// <returns></returns>
+    Task<IList<RaceResponse>> GetRacesAsync();
+}

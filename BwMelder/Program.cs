@@ -1,7 +1,7 @@
+using BwMelder;
 using BwMelder.Authentication;
 using BwMelder.Components;
 using BwMelder.Core;
-using BwMelder.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

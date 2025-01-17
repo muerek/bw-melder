@@ -3,7 +3,7 @@ using BwMelder.Core;
 using BwMelder.Shared.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace BwMelder.Extensions;
+namespace BwMelder;
 
 static class ServiceCollectionExtensions
 {
@@ -12,12 +12,14 @@ static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddBwMelderServices(this IServiceCollection services)
+    internal static IServiceCollection AddBwMelderServices(this IServiceCollection services)
     {
-        services.AddScoped<IAccessKeyService, AccessKeyService>();
-        services.AddScoped<ICrewService, CrewService>();
-        services.AddScoped<IClubCoachService, ClubCoachService>();
-        services.AddScoped<IClubService, ClubService>();
+        services
+            .AddScoped<IAccessKeyService, AccessKeyService>()
+            .AddScoped<ICrewService, CrewService>()
+            .AddScoped<IClubCoachService, ClubCoachService>()
+            .AddScoped<IClubService, ClubService>()
+            .AddScoped<IRaceService, RaceService>();
 
         return services;
     }
@@ -27,7 +29,7 @@ static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddBwMelderAuthentication(this IServiceCollection services)
+    internal static IServiceCollection AddBwMelderAuthentication(this IServiceCollection services)
     {
         // Configure cookie-based authentication.
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -54,14 +56,14 @@ static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddBwMelderAuthorization(this IServiceCollection services)
+    internal static IServiceCollection AddBwMelderAuthorization(this IServiceCollection services)
     {
         services.AddAuthorizationBuilder()
             .AddPolicy("ClubIsNotOnboarded", policy =>
                 policy.RequireRole("ClubCoach").RequireClaim("OnboardingRequired", "true"))
             .AddPolicy("ClubIsOnboarded", policy =>
                 policy.RequireRole("ClubCoach").RequireClaim("OnboardingRequired", "false"));
-        
+
         return services;
     }
 }
