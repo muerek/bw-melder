@@ -7,15 +7,25 @@
 
 <h1>Mannschaft nominieren</h1>
 
-<h3>Für bestehenden Verein</h3>
-<EditForm Model="Nomination" OnValidSubmit="NominateExistingClubAsync" FormName="NominateExistingClubForm">
+<div class="py-3">
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="club-radio" id="existingclub-radio">
+        <label class="form-check-label" for="existingclub-radio">Für bestehenden Verein</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="club-radio" id="newclub-radio">
+        <label class="form-check-label" for="newclub-radio">Für neuen Verein</label>
+    </div>
+</div>
+
+<EditForm Model="Nomination" OnValidSubmit="NominateExistingClubAsync" FormName="NominateExistingClubForm" id="existingclub-form">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="row row-cols-md-2">
 
         <div class="mb-3">
-            <label for="raceid" class="form-label">Rennen</label>
-            <InputSelect class="form-select" id="raceid" required @bind-Value=Nomination!.RaceId>
+            <label for="existingclub-raceid" class="form-label">Rennen</label>
+            <InputSelect class="form-select" id="existingclub-raceid" required @bind-Value=Nomination!.RaceId>
                 <option value=""></option>
                 @foreach (var race in Races)
                 {
@@ -25,8 +35,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="clubid" class="form-label">Verein</label>
-            <InputSelect class="form-select" id="clubid" required @bind-Value=Nomination!.ClubId>
+            <label for="existingclub-clubid" class="form-label">Verein</label>
+            <InputSelect class="form-select" id="existingclub-clubid" required @bind-Value=Nomination!.ClubId>
                 <option value=""></option>
                 @foreach (var club in Clubs)
                 {
@@ -39,15 +49,14 @@
     <button type="submit" class="btn btn-primary">Speichern</button>
 </EditForm>
 
-<h3>Für neuen Verein</h3>
-<EditForm Model="NewClubNomination" OnValidSubmit="NominateNewClubAsync" FormName="NominateNewClubForm">
+<EditForm Model="NewClubNomination" OnValidSubmit="NominateNewClubAsync" FormName="NominateNewClubForm" id="newclub-form">
     <ObjectGraphDataAnnotationsValidator />
     <ValidationSummary />
     <div class="row row-cols-md-2">
 
         <div class="mb-3">
-            <label for="raceid" class="form-label">Rennen</label>
-            <InputSelect class="form-select" id="raceid" required @bind-Value=NewClubNomination!.RaceId>
+            <label for="newclub-raceid" class="form-label">Rennen</label>
+            <InputSelect class="form-select" id="newclub-raceid" required @bind-Value=NewClubNomination!.RaceId>
                 <option value=""></option>
                 @foreach (var race in Races)
                 {
@@ -57,13 +66,44 @@
         </div>
 
         <div class="mb-3">
-            <label for="clubname" class="form-label">Vereinsname</label>
-            <InputText id="clubname" class="form-control" @bind-Value="NewClubNomination!.NewClub.Name" />
+            <label for="newclub-clubname" class="form-label">Vereinsname</label>
+            <InputText id="newclub-clubname" class="form-control" @bind-Value="NewClubNomination!.NewClub.Name" />
         </div>
 
     </div>
     <button type="submit" class="btn btn-primary">Speichern</button>
 </EditForm>
+
+<script>
+    function toggleForm(show, hide) {
+        // Copy the selected race into the visible form.
+        // But only if we actually switch visibility, otherwise we may copy an old value.
+        if (show.classList.contains("d-none")) {
+            show.getElementsByTagName("select")[0].value = hide.getElementsByTagName("select")[0].value;
+        }
+        show.classList.remove("d-none");
+        hide.classList.add("d-none");
+    }
+
+    function showExistingClubForm() {
+        var show = document.getElementById("existingclub-form");
+        var hide = document.getElementById("newclub-form");
+        toggleForm(show, hide);
+    }
+
+    function showNewClubForm() {
+        var hide = document.getElementById("existingclub-form");
+        var show = document.getElementById("newclub-form");
+        toggleForm(show, hide);
+    }
+
+    // Register event listeners.
+    document.getElementById("existingclub-radio").onclick = showExistingClubForm;
+    document.getElementById("newclub-radio").onclick = showNewClubForm;
+
+    // Show existing club form initially.
+    document.getElementById("existingclub-radio").click();
+</script>
 
 @code {
     private IList<ClubResponse> Clubs { get; set; } = [];
