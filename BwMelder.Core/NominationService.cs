@@ -11,15 +11,19 @@ namespace BwMelder.Core;
 public class NominationService(IClubService clubService, ICrewService crewService)
     : INominationService
 {
-    public async Task<Guid> NominateAsync(CreateCrewRequest crew)
+    public async Task<Guid> NominateAsync(CreateCrewRequest nomination)
     {
-        return await crewService.CreateCrewAsync(crew);
+        return await crewService.CreateCrewAsync(nomination);
     }
 
-    public async Task<Guid> NominateAsync(CreateCrewRequest crew, CreateClubRequest club)
+    public async Task<Guid> NominateAsync(NominateNewClubRequest nomination)
     {
-        var clubId = await clubService.CreateClubAsync(club);
-        crew.ClubId = clubId;
+        var clubId = await clubService.CreateClubAsync(nomination.NewClub);
+        var crew = new CreateCrewRequest
+        {
+            ClubId = clubId,
+            RaceId = nomination.RaceId
+        };
         return await NominateAsync(crew);
     }
 }

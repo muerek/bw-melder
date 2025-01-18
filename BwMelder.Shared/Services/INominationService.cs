@@ -16,15 +16,14 @@ public interface INominationService
     /// <summary>
     /// Processes a nomination for an existing club.
     /// </summary>
-    /// <param name="crew">Crew to nominate.</param>
+    /// <param name="nomination">Crew to nominate.</param>
     /// <returns>Unique ID of the nominated crew.</returns>
-    Task<Guid> NominateAsync(CreateCrewRequest crew);
+    Task<Guid> NominateAsync(CreateCrewRequest nomination);
 
     /// <summary>
     /// Processes a nomination for a new club.
     /// </summary>
-    /// <param name="crew">Crew to nominate. The club will be replaced with the new club.</param>
-    /// <param name="club">Club to create.</param>
+    /// <param name="nomination">Nomination for a new club to process.</param>
     /// <returns>Unique ID of the nominated crew.</returns>
-    Task<Guid> NominateAsync(CreateCrewRequest crew, CreateClubRequest club);
+    Task<Guid> NominateAsync(NominateNewClubRequest nomination);
 }
