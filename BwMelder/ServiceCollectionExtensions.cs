@@ -19,6 +19,7 @@ static class ServiceCollectionExtensions
             .AddScoped<ICrewService, CrewService>()
             .AddScoped<IClubCoachService, ClubCoachService>()
             .AddScoped<IClubService, ClubService>()
+            .AddScoped<INominationService, NominationService>()
             .AddScoped<IRaceService, RaceService>();
 
         return services;
