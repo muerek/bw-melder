@@ -74,36 +74,7 @@
     <button type="submit" class="btn btn-primary">Speichern</button>
 </EditForm>
 
-<script>
-    function toggleForm(show, hide) {
-        // Copy the selected race into the visible form.
-        // But only if we actually switch visibility, otherwise we may copy an old value.
-        if (show.classList.contains("d-none")) {
-            show.getElementsByTagName("select")[0].value = hide.getElementsByTagName("select")[0].value;
-        }
-        show.classList.remove("d-none");
-        hide.classList.add("d-none");
-    }
-
-    function showExistingClubForm() {
-        var show = document.getElementById("existingclub-form");
-        var hide = document.getElementById("newclub-form");
-        toggleForm(show, hide);
-    }
-
-    function showNewClubForm() {
-        var hide = document.getElementById("existingclub-form");
-        var show = document.getElementById("newclub-form");
-        toggleForm(show, hide);
-    }
-
-    // Register event listeners.
-    document.getElementById("existingclub-radio").onclick = showExistingClubForm;
-    document.getElementById("newclub-radio").onclick = showNewClubForm;
-
-    // Show existing club form initially.
-    document.getElementById("existingclub-radio").click();
-</script>
+<script src="/Components/Pages/Admin/Crews/NominateCrew.razor.js"></script>
 
 @code {
     private IList<ClubResponse> Clubs { get; set; } = [];
