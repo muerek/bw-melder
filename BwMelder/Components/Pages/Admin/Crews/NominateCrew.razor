@@ -1,4 +1,7 @@
 ﻿@page "/admin/crews/nominate"
+@rendermode InteractiveServer
+
+@using BwMelder.Shared.Crews
 
 @inject IClubService ClubService
 @inject INominationService NominationService
@@ -74,29 +77,29 @@
     <button type="submit" class="btn btn-primary">Speichern</button>
 </EditForm>
 
-<script src="/Components/Pages/Admin/Crews/NominateCrew.razor.js"></script>
+@*<script src="/Components/Pages/Admin/Crews/NominateCrew.razor.js"></script>*@
 
 @code {
     private IList<ClubResponse> Clubs { get; set; } = [];
     private IList<RaceResponse> Races { get; set; } = [];
 
-    [SupplyParameterFromForm(FormName = "NominateExistingClubForm")]
-    private CreateCrewRequest? Nomination { get; set; }
+    //[SupplyParameterFromForm(FormName = "NominateExistingClubForm")]
+    private CreateCrewRequest Nomination { get; set; } = new();
 
-    [SupplyParameterFromForm(FormName = "NominateNewClubForm")]
-    private NominateNewClubRequest? NewClubNomination { get; set; }
+    //[SupplyParameterFromForm(FormName = "NominateNewClubForm")]
+    private NominateNewClubRequest NewClubNomination { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         // No need to load data if we are processing form input.
-        if (Nomination is null && NewClubNomination is null)
+        //if (Nomination is null && NewClubNomination is null)
         {
             Races = await RaceService.GetRacesAsync();
             Clubs = await ClubService.GetClubsAsync();
         }
 
-        Nomination ??= new();
-        NewClubNomination ??= new();
+        //Nomination ??= new();
+        //NewClubNomination ??= new();
     }
 
     private async Task NominateExistingClubAsync()

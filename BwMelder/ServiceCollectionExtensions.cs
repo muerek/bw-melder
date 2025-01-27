@@ -1,5 +1,6 @@
 ﻿using BwMelder.Authentication;
 using BwMelder.Core;
+using BwMelder.Shared.Crews;
 using BwMelder.Shared.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
