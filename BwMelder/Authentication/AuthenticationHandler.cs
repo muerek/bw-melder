@@ -1,5 +1,4 @@
-﻿using BwMelder.Shared.Dto;
-using BwMelder.Shared.Services;
+﻿using BwMelder.Shared.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +9,7 @@ namespace BwMelder.Authentication;
 /// <summary>
 /// Handles authentication tasks for the application.
 /// </summary>
-public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, IConfiguration config,
+public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, IUserAuthenticationService userAuthenticationService,
     IAccessKeyService accessKeyService)
 {
     private HttpContext Context =>
@@ -56,12 +55,15 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, ICo
     /// <returns>True if login completed successfully, false if it failed.</returns>
     public async Task<bool> LoginAsync(UserLoginRequest credentials)
     {
-        if (ValidateCredentials(credentials))
+        var authResponse = await userAuthenticationService.AuthenticateAsync(credentials);
+
+        if (authResponse.IsSuccess)
         {
             var claims = new List<Claim>
             {
+                // TODO: Should probably do null checks here, but too cumbersome.
                 new(ClaimTypes.Name, "Administrator"),
-                new(ClaimTypes.Role, "Administrator")
+                new(ClaimTypes.Role, authResponse.Role!)
             };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await LoginAsync(identity);
@@ -79,21 +81,5 @@ public class AuthenticationHandler(IHttpContextAccessor httpContextAccessor, ICo
         // Make sure any existing session is terminated.
         await LogoutAsync();
         await Context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-    }
-
-    /// <summary>
-    /// Checks if the supplied credentials are valid for the application.
-    /// </summary>
-    private bool ValidateCredentials(UserLoginRequest credentials)
-    {
-        // Credentials are currently stored in the configuration in plaintext.
-        // TODO: Do something else here.
-        var validUser = config.GetValue<string>("AppAdmin:Username");
-        var validPassword = config.GetValue<string>("AppAdmin:Password");
-        if (validUser == null || validPassword == null)
-        {
-            throw new ApplicationException("No admin user configured.");
-        }
-        return validUser == credentials.Username && validPassword == credentials.Password;
     }
 }
