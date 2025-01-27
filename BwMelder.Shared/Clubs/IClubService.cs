@@ -1,6 +1,4 @@
-﻿using BwMelder.Shared.Dto;
-
-namespace BwMelder.Shared.Services;
+﻿namespace BwMelder.Shared.Clubs;
 
 /// <summary>
 /// Represents a service to manage clubs.

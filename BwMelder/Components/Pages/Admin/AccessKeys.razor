@@ -1,7 +1,9 @@
 ﻿@page "/admin/access-keys"
 @rendermode InteractiveServer
 
-@inject IAccessKeyService AccessKeyService;
+@using BwMelder.Shared.Authentication
+
+@inject IAccessKeyService AccessKeyService
 
 <PageTitle>Zugänge</PageTitle>
 
@@ -23,7 +25,7 @@
 
 
 @code {
-    private IList<ClubKey>? clubKeys;
+    private IList<AccessKeyStatusResponse>? clubKeys;
 
     protected override async Task OnInitializedAsync()
     {

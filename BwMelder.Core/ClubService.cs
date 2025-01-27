@@ -1,7 +1,6 @@
-﻿using BwMelder.Shared.Dto;
-using BwMelder.Core.Model;
-using BwMelder.Shared.Services;
+﻿using BwMelder.Core.Model;
 using Microsoft.EntityFrameworkCore;
+using BwMelder.Shared.Clubs;
 
 namespace BwMelder.Core;
 

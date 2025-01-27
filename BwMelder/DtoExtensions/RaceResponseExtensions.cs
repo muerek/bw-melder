@@ -1,4 +1,4 @@
-﻿using BwMelder.Shared.Dto;
+﻿using BwMelder.Shared.Races;
 
 namespace BwMelder.DtoExtensions;
 

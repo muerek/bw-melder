@@ -1,6 +1,5 @@
 ﻿using BwMelder.Core.Model;
-using BwMelder.Shared.Dto;
-using BwMelder.Shared.Services;
+using BwMelder.Shared.ClubCoaches;
 using System;
 using System.Collections.Generic;
 using System.Linq;

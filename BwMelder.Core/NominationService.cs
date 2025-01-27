@@ -1,6 +1,6 @@
-﻿using BwMelder.Shared.Crews;
-using BwMelder.Shared.Dto;
-using BwMelder.Shared.Services;
+﻿using BwMelder.Shared.Clubs;
+using BwMelder.Shared.Crews;
+using BwMelder.Shared.Nomination;
 using System;
 using System.Collections.Generic;
 using System.Linq;

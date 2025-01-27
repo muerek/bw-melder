@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BwMelder.Shared.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BwMelder.Shared.Dto;
+namespace BwMelder.Shared.ClubCoaches;
 
 /// <summary>
 /// DTO representing a new or updated club coach.

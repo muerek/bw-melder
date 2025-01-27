@@ -1,7 +1,11 @@
 ﻿using BwMelder.Authentication;
 using BwMelder.Core;
+using BwMelder.Shared.Authentication;
+using BwMelder.Shared.ClubCoaches;
+using BwMelder.Shared.Clubs;
 using BwMelder.Shared.Crews;
-using BwMelder.Shared.Services;
+using BwMelder.Shared.Nomination;
+using BwMelder.Shared.Races;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BwMelder;
@@ -21,7 +25,8 @@ static class ServiceCollectionExtensions
             .AddScoped<IClubCoachService, ClubCoachService>()
             .AddScoped<IClubService, ClubService>()
             .AddScoped<INominationService, NominationService>()
-            .AddScoped<IRaceService, RaceService>();
+            .AddScoped<IRaceService, RaceService>()
+            .AddScoped<IUserAuthenticationService, UserAuthenticationService>();
 
         return services;
     }

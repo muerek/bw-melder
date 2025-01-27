@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BwMelder.Shared.Dto;
+namespace BwMelder.Shared.Races;
 
 /// <summary>
 /// Response DTO holding information on a race.

@@ -1,9 +1,9 @@
-﻿namespace BwMelder.Shared.Dto;
+﻿namespace BwMelder.Shared.Authentication;
 
 /// <summary>
 /// DTO holding information with which key a club can access the application.
 /// </summary>
-public class ClubKey
+public class AccessKeyStatusResponse
 {
     /// <summary>
     /// Unique ID of the club in the database.

@@ -1,9 +1,8 @@
-﻿using BwMelder.Shared.Dto;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Security.Cryptography;
-using BwMelder.Shared.Services;
 using BwMelder.Core.Model;
+using BwMelder.Shared.Authentication;
 
 namespace BwMelder.Core;
 
@@ -41,14 +40,14 @@ public class AccessKeyService(BwMelderDbContext db)
         return new AuthenticationResponse { IsSuccess = false };
     }
 
-    public async Task<IList<ClubKey>> GetClubKeysAsync()
+    public async Task<IList<AccessKeyStatusResponse>> GetClubKeysAsync()
     {
         var clubs = await db.Clubs
             .AsNoTracking()
             .Include(c => c.AccessKeys)
             .ToListAsync();
 
-        return clubs.Select(c => new ClubKey
+        return clubs.Select(c => new AccessKeyStatusResponse
         {
             ClubId = c.Id,
             ClubName = c.Name,

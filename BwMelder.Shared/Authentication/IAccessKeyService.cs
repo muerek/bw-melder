@@ -1,11 +1,10 @@
-﻿using BwMelder.Shared.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BwMelder.Shared.Services;
+namespace BwMelder.Shared.Authentication;
 
 public interface IAccessKeyService
 {
@@ -17,11 +16,11 @@ public interface IAccessKeyService
     Task<AuthenticationResponse> AuthenticateAsync(string secret);
 
     /// <summary>
-    /// Gets a list of <see cref="ClubKey"/> DTOs listing all clubs with their active key.
-    /// Clubs without an active key will have <see cref="ClubKey.SecretUrl"/> set to null.
+    /// Gets a list of <see cref="AccessKeyStatusResponse"/> DTOs listing all clubs with their active key.
+    /// Clubs without an active key will have <see cref="AccessKeyStatusResponse.SecretUrl"/> set to null.
     /// </summary>
     /// <returns></returns>
-    Task<IList<ClubKey>> GetClubKeysAsync();
+    Task<IList<AccessKeyStatusResponse>> GetClubKeysAsync();
 
     /// <summary>
     /// Renew access to the application for a club.

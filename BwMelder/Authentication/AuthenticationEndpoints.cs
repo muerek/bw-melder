@@ -1,5 +1,4 @@
-﻿using BwMelder.Shared.Dto;
-using BwMelder.Shared.Services;
+﻿using BwMelder.Shared.Clubs;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BwMelder.Authentication;

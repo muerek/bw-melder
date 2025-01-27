@@ -1,11 +1,13 @@
 ﻿@page "/onboarding/club-coach"
 
 @using BwMelder.Authentication
+@using BwMelder.Shared.Authentication
+@using BwMelder.Shared.ClubCoaches
 
-@inject IClubCoachService ClubCoachService;
-@inject IAccessKeyService AccessKeyService;
-@inject NavigationManager Navigation;
-@inject AuthenticationHandler AuthenticationHandler;
+@inject IClubCoachService ClubCoachService
+@inject IAccessKeyService AccessKeyService
+@inject NavigationManager Navigation
+@inject AuthenticationHandler AuthenticationHandler
 
 <PageTitle>Ansprechpartner eintragen</PageTitle>
 
