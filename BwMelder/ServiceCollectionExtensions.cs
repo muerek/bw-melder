@@ -59,7 +59,7 @@ static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Configures authorization.
+    /// Configures authorization policies used in the web app.
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
