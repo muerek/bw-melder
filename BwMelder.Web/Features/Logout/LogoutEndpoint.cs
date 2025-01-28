@@ -1,7 +1,7 @@
 ﻿using BwMelder.Web.Authentication;
 using BwMelder.Web.Utilities.EndpointDiscovery;
 
-namespace BwMelder.Web.Features.Login;
+namespace BwMelder.Web.Features.Logout;
 
 class LogoutEndpoint : IDiscoverableEndpoint
 {
