@@ -31,17 +31,17 @@
                      FormName="NominateNewClubForm" Clubs="Clubs" Races="Races"
                      id="newclub-form" />
 
-
-<script src="/Components/Pages/Admin/Crews/NominateCrew.razor.js"></script>
+@*For use with static SSR*@
+@*<script src="/Components/Pages/Admin/Crews/NominateCrew.razor.js"></script>*@
 
 @code {
     private IList<ClubResponse> Clubs { get; set; } = [];
     private IList<RaceResponse> Races { get; set; } = [];
 
-    [SupplyParameterFromForm(FormName = "NominateExistingClubForm")]
+    //[SupplyParameterFromForm(FormName = "NominateExistingClubForm")]
     private NominateExistingClubRequest ExistingClubNomination { get; set; } = new();
 
-    [SupplyParameterFromForm(FormName = "NominateNewClubForm")]
+    //[SupplyParameterFromForm(FormName = "NominateNewClubForm")]
     private NominateNewClubRequest NewClubNomination { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
