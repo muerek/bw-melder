@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder", "BwMelder\BwMelder.csproj", "{20EE3619-A37C-4369-A806-8A8475B203CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder.Web", "BwMelder.Web\BwMelder.Web.csproj", "{20EE3619-A37C-4369-A806-8A8475B203CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder.Shared", "BwMelder.Shared\BwMelder.Shared.csproj", "{CAC32DE5-502B-4490-80BE-46F5A0ABE0DD}"
 EndProject

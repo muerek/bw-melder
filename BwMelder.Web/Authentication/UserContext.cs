@@ -1,4 +1,4 @@
-﻿namespace BwMelder.Authentication;
+﻿namespace BwMelder.Web.Authentication;
 
 /// <summary>
 /// Represents information on an application user.

@@ -1,6 +1,6 @@
 ﻿using BwMelder.Shared.Races;
 
-namespace BwMelder.DtoExtensions;
+namespace BwMelder.Web.DtoExtensions;
 
 static class RaceResponseExtensions
 {

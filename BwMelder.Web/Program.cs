@@ -1,6 +1,6 @@
-using BwMelder;
-using BwMelder.Authentication;
 using BwMelder.Core;
+using BwMelder.Web;
+using BwMelder.Web.Authentication;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,7 +44,7 @@ app.UseAuthorization();
 // Must be placed after authentication & authorization.
 app.UseAntiforgery();
 
-app.MapRazorComponents<BwMelder.Features.App>()
+app.MapRazorComponents<BwMelder.Web.Features.App>()
     .AddInteractiveServerRenderMode();
 
 app.MapBwMelderAuthenticationEndpoints();

@@ -1,7 +1,7 @@
 ﻿using BwMelder.Shared.Clubs;
 using Microsoft.AspNetCore.Authorization;
 
-namespace BwMelder.Authentication;
+namespace BwMelder.Web.Authentication;
 
 static class AuthenticationEndpoints
 {

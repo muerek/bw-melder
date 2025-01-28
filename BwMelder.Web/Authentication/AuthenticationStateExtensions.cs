@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 
-namespace BwMelder.Authentication;
+namespace BwMelder.Web.Authentication;
 
 public static class AuthenticationStateExtensions
 {

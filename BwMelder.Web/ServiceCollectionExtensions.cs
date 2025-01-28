@@ -1,4 +1,4 @@
-﻿using BwMelder.Authentication;
+﻿using BwMelder.Web.Authentication;
 using BwMelder.Core;
 using BwMelder.Shared.Authentication;
 using BwMelder.Shared.ClubCoaches;
@@ -8,7 +8,7 @@ using BwMelder.Shared.Nomination;
 using BwMelder.Shared.Races;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace BwMelder;
+namespace BwMelder.Web;
 
 static class ServiceCollectionExtensions
 {

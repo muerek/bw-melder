@@ -3,8 +3,8 @@
 @* Override required authorization from _Imports.razor. *@
 @attribute [AllowAnonymous]
 
-@using BwMelder.Authentication;
 @using BwMelder.Shared.Authentication;
+@using BwMelder.Web.Authentication;
 
 @inject AuthenticationHandler AuthHandler;
 @inject NavigationManager Navigation;
