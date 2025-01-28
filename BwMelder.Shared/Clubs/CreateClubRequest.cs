@@ -8,6 +8,6 @@ public class CreateClubRequest
     /// <summary>
     /// Name of the Club to be created.
     /// </summary>
-    [Required]
+    [Required, NotDefault]
     public string Name { get; set; } = string.Empty;
 }
