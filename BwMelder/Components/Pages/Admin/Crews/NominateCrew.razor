@@ -2,7 +2,6 @@
 @rendermode InteractiveServer
 
 @using BwMelder.Shared.Clubs
-@using BwMelder.Shared.Crews
 @using BwMelder.Shared.Nomination
 @using BwMelder.Shared.Races
 
@@ -24,61 +23,13 @@
     </div>
 </div>
 
-<EditForm Model="Nomination" OnValidSubmit="NominateExistingClubAsync" FormName="NominateExistingClubForm" id="existingclub-form">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="row row-cols-md-2">
+<NominateExistingClubForm Nomination="ExistingClubNomination" OnValidSubmit="NominateExistingClubAsync"
+                          FormName="NominateExistingClubForm" Clubs="Clubs" Races="Races"
+                          id="existingclub-form" />
 
-        <div class="mb-3">
-            <label for="existingclub-raceid" class="form-label">Rennen</label>
-            <InputSelect class="form-select" id="existingclub-raceid" required @bind-Value=Nomination!.RaceId>
-                <option value=""></option>
-                @foreach (var race in Races)
-                {
-                    <option value="@race.Id">@race.FullName()</option>
-                }
-            </InputSelect>
-        </div>
-
-        <div class="mb-3">
-            <label for="existingclub-clubid" class="form-label">Verein</label>
-            <InputSelect class="form-select" id="existingclub-clubid" required @bind-Value=Nomination!.ClubId>
-                <option value=""></option>
-                @foreach (var club in Clubs)
-                {
-                    <option value="@club.Id">@club.Name</option>
-                }
-            </InputSelect>
-        </div>
-
-    </div>
-    <button type="submit" class="btn btn-primary">Speichern</button>
-</EditForm>
-
-<EditForm Model="NewClubNomination" OnValidSubmit="NominateNewClubAsync" FormName="NominateNewClubForm" id="newclub-form">
-    <ObjectGraphDataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="row row-cols-md-2">
-
-        <div class="mb-3">
-            <label for="newclub-raceid" class="form-label">Rennen</label>
-            <InputSelect class="form-select" id="newclub-raceid" required @bind-Value=NewClubNomination!.RaceId>
-                <option value=""></option>
-                @foreach (var race in Races)
-                {
-                    <option value="@race.Id">@race.FullName()</option>
-                }
-            </InputSelect>
-        </div>
-
-        <div class="mb-3">
-            <label for="newclub-clubname" class="form-label">Vereinsname</label>
-            <InputText id="newclub-clubname" class="form-control" @bind-Value="NewClubNomination!.NewClub.Name" />
-        </div>
-
-    </div>
-    <button type="submit" class="btn btn-primary">Speichern</button>
-</EditForm>
+<NominateNewClubForm Nomination="NewClubNomination" OnValidSubmit="NominateNewClubAsync"
+                     FormName="NominateNewClubForm" Clubs="Clubs" Races="Races"
+                     id="newclub-form" />
 
 @*<script src="/Components/Pages/Admin/Crews/NominateCrew.razor.js"></script>*@
 
@@ -86,30 +37,23 @@
     private IList<ClubResponse> Clubs { get; set; } = [];
     private IList<RaceResponse> Races { get; set; } = [];
 
-    //[SupplyParameterFromForm(FormName = "NominateExistingClubForm")]
-    private CreateCrewRequest Nomination { get; set; } = new();
+    [SupplyParameterFromForm(FormName = "NominateExistingClubForm")]
+    private NominateExistingClubRequest ExistingClubNomination { get; set; } = new();
 
-    //[SupplyParameterFromForm(FormName = "NominateNewClubForm")]
+    [SupplyParameterFromForm(FormName = "NominateNewClubForm")]
     private NominateNewClubRequest NewClubNomination { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
-        // No need to load data if we are processing form input.
-        //if (Nomination is null && NewClubNomination is null)
-        {
-            Races = await RaceService.GetRacesAsync();
-            Clubs = await ClubService.GetClubsAsync();
-        }
-
-        //Nomination ??= new();
-        //NewClubNomination ??= new();
+        Races = await RaceService.GetRacesAsync();
+        Clubs = await ClubService.GetClubsAsync();
     }
 
     private async Task NominateExistingClubAsync()
     {
-        if (Nomination is null) { return; }
+        if (ExistingClubNomination is null) { return; }
 
-        await NominationService.NominateAsync(Nomination);
+        await NominationService.NominateAsync(ExistingClubNomination);
         Navigation.NavigateTo("/admin/crews");
     }
 
