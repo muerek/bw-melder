@@ -1,0 +1,93 @@
+﻿@page "/admin/crews/nominate"
+@rendermode InteractiveServer
+
+@using BwMelder.Shared.Clubs
+@using BwMelder.Shared.Nomination
+@using BwMelder.Shared.Races
+
+@inject IClubService ClubService
+@inject INominationService NominationService
+@inject IRaceService RaceService
+@inject NavigationManager Navigation
+
+<h1>Mannschaft nominieren</h1>
+
+<div class="py-3">
+    <InputRadioGroup Name="club-radio" @bind-Value="ShowExistingClubForm" @bind-Value:after="SyncRaceSelection">
+        <div class="form-check form-check-inline">
+            <InputRadio Value="true" class="form-check-input" id="existingclub-radio" />
+            <label class="form-check-label" for="existingclub-radio">Für bestehenden Verein</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <InputRadio Value="false" class="form-check-input" id="newclub-radio" />
+            <label class="form-check-label" for="newclub-radio">Für neuen Verein</label>
+        </div>
+    </InputRadioGroup>
+</div>
+
+@if (ShowExistingClubForm)
+{
+    <NominateExistingClubForm Nomination="ExistingClubNomination" OnValidSubmit="NominateExistingClubAsync"
+    FormName="NominateExistingClubForm" Clubs="Clubs" Races="Races"
+    id="existingclub-form" />
+}
+else
+{
+    <NominateNewClubForm Nomination="NewClubNomination" OnValidSubmit="NominateNewClubAsync"
+    FormName="NominateNewClubForm" Clubs="Clubs" Races="Races"
+    id="newclub-form" />
+}
+
+@*For use with static SSR*@
+@*<script src="/Components/Pages/Admin/Crews/NominateCrew.razor.js"></script>*@
+
+@code {
+    private IList<ClubResponse> Clubs { get; set; } = [];
+    private IList<RaceResponse> Races { get; set; } = [];
+
+    //[SupplyParameterFromForm(FormName = "NominateExistingClubForm")]
+    private NominateExistingClubRequest ExistingClubNomination { get; set; } = new();
+
+    //[SupplyParameterFromForm(FormName = "NominateNewClubForm")]
+    private NominateNewClubRequest NewClubNomination { get; set; } = new();
+
+    private bool ShowExistingClubForm { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Races = await RaceService.GetRacesAsync();
+        Clubs = await ClubService.GetClubsAsync();
+    }
+
+    private async Task NominateExistingClubAsync()
+    {
+        if (ExistingClubNomination is null) { return; }
+
+        await NominationService.NominateAsync(ExistingClubNomination);
+        Navigation.NavigateTo("/admin/crews");
+    }
+
+    private async Task NominateNewClubAsync()
+    {
+        if (NewClubNomination is null) { return; }
+
+        await NominationService.NominateAsync(NewClubNomination);
+        Navigation.NavigateTo("/admin/crews");
+    }
+
+    /// <summary>
+    /// Updates the race selection in the newly shown form to match the now hidden form.
+    /// </summary>
+    private void SyncRaceSelection()
+    {
+        // Fires after the toggle event, so the flag represents the new state.
+        if (ShowExistingClubForm)
+        {
+            ExistingClubNomination.RaceId = NewClubNomination.RaceId;
+        }
+        else
+        {
+            NewClubNomination.RaceId = ExistingClubNomination.RaceId;
+        }
+    }
+}

@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Features\Nomination\NominateCrew.razor.js" />
+    <Content Include="Features\Nomination\NominationPage.razor.js" />
   </ItemGroup>
 
   <ItemGroup>
