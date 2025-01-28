@@ -10,7 +10,7 @@ public static class AuthenticationStateExtensions
     /// </summary>
     /// <param name="task"></param>
     /// <returns>User information; null if no authenticated user.</returns>
-    public static async Task<UserContext?> GetUserContextAsync(this Task<AuthenticationState>? task)
+    public static async Task<UserInfo?> GetUserInfoAsync(this Task<AuthenticationState>? task)
     {
         if (task is not null)
         {
@@ -19,7 +19,7 @@ public static class AuthenticationStateExtensions
 
             if (user?.Identity is not null && user.Identity.IsAuthenticated)
             {
-                return new UserContext
+                return new UserInfo
                 {
                     Role = user.FindFirstValue(ClaimTypes.Role) ?? string.Empty,
                     ClubId = Guid.TryParse(user.FindFirstValue("ClubId"), out var guid) ? guid : null,
@@ -39,12 +39,12 @@ public static class AuthenticationStateExtensions
     /// This is not the recommended approach as there is no notifications for authentication state changes.
     /// But it could be an easier-to-use extension method if you do not care about that.
     /// </remarks>
-    public static async Task<UserContext?> GetUserContextAsync(this AuthenticationStateProvider? provider)
+    public static async Task<UserInfo?> GetUserInfoAsync(this AuthenticationStateProvider? provider)
     {
         if (provider is not null)
         {
             var task = provider.GetAuthenticationStateAsync();
-            return await task.GetUserContextAsync();
+            return await task.GetUserInfoAsync();
         }
         return null;
     }

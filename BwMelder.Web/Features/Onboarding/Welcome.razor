@@ -27,10 +27,10 @@
     [CascadingParameter]
     private Task<AuthenticationState>? authenticationState { get; set; }
 
-    private UserContext? userContext;
+    private UserInfo? userContext;
 
     protected override async Task OnInitializedAsync()
     {
-        userContext = await authenticationState.GetUserContextAsync();
+        userContext = await authenticationState.GetUserInfoAsync();
     }
 }

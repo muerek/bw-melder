@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents information on an application user.
 /// </summary>
-public class UserContext
+public class UserInfo
 {
     public required string Role { get; set; }
 

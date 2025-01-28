@@ -26,7 +26,7 @@
     [CascadingParameter]
     private Task<AuthenticationState>? authenticationState { get; set; }
 
-    private UserContext? userContext;
+    private UserInfo? userContext;
 
     protected override void OnInitialized()
     {
@@ -39,7 +39,7 @@
         if (ClubCoach is null) { return; }
 
         // Always set the club ID to the current user's club.
-        userContext = await authenticationState.GetUserContextAsync();
+        userContext = await authenticationState.GetUserInfoAsync();
         ClubCoach.ClubId = userContext?.ClubId ?? throw new ApplicationException();
 
         await ClubCoachService.CreateClubCoachAsync(ClubCoach);
