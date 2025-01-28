@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BwMelder.Shared.Crews;
+namespace BwMelder.Shared.Nomination;
 
-public class CreateCrewRequest
+public class NominateExistingClubRequest
 {
     [Required, NotDefault]
     public Guid ClubId { get; set; } = Guid.Empty;

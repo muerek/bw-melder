@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BwMelder.Shared.Clubs;
+﻿namespace BwMelder.Shared.Clubs;
 
 /// <summary>
 /// DTO representing a request to create a new club.
