@@ -23,7 +23,7 @@ public static class AuthenticationStateExtensions
                 {
                     Role = user.FindFirstValue(ClaimTypes.Role) ?? string.Empty,
                     ClubId = Guid.TryParse(user.FindFirstValue("ClubId"), out var guid) ? guid : null,
-                    ClubName = user.FindFirstValue("ClubName")
+                    ClubName = user.FindFirstValue("ClubName") ?? string.Empty
                 };
             }
         }
