@@ -2,10 +2,10 @@
 
 namespace BwMelder.Web.Utilities.EndpointDiscovery;
 
-static class WebApplicationExtensions
+static class EndpointRouteBuilderExtensions
 {
     /// <summary>
-    /// Discovers and registers endpoints.
+    /// Discovers and registers discoverable endpoints.
     /// Searches for types implementing <see cref="IDiscoverableEndpoint"/> in the given <see cref="Assembly"/>,
     /// then calls their <see cref="IDiscoverableEndpoint.MapEndpoint(IEndpointRouteBuilder)"/> method.
     /// </summary>
