@@ -6,6 +6,7 @@ static class RaceResponseExtensions
 {
     /// <summary>
     /// Total number of athletes per crew in this race.
+    /// This includes rowers and coxes.
     /// </summary>
     internal static int AthleteCount(this RaceResponse race) => race.RowerCount + (race.Coxed ? 1 : 0);
 
