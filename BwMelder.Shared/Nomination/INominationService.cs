@@ -1,5 +1,4 @@
-﻿using BwMelder.Shared.Crews;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +15,9 @@ public interface INominationService
     /// <summary>
     /// Processes a nomination for an existing club.
     /// </summary>
-    /// <param name="nomination">Crew to nominate.</param>
+    /// <param name="nomination">Nomination for an existing club to process.</param>
     /// <returns>Unique ID of the nominated crew.</returns>
-    Task<Guid> NominateAsync(CreateCrewRequest nomination);
+    Task<Guid> NominateAsync(NominateExistingClubRequest nomination);
 
     /// <summary>
     /// Processes a nomination for a new club.

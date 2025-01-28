@@ -10,17 +10,5 @@ namespace BwMelder.Core;
 
 public class CrewService(BwMelderDbContext db) : ICrewService
 {
-    public async Task<Guid> CreateCrewAsync(CreateCrewRequest request)
-    {
-        var crew = new Crew
-        {
-            ClubId = request.ClubId,
-            RaceId = request.RaceId
-        };
 
-        db.Crews.Add(crew);
-        await db.SaveChangesAsync();
-
-        return crew.Id;
-    }
 }

@@ -1,4 +1,5 @@
-﻿using BwMelder.Shared.Clubs;
+﻿using BwMelder.Core.Model;
+using BwMelder.Shared.Clubs;
 using BwMelder.Shared.Crews;
 using BwMelder.Shared.Nomination;
 using System;
@@ -9,18 +10,27 @@ using System.Threading.Tasks;
 
 namespace BwMelder.Core;
 
-public class NominationService(IClubService clubService, ICrewService crewService)
+public class NominationService(IClubService clubService, BwMelderDbContext db)
     : INominationService
 {
-    public async Task<Guid> NominateAsync(CreateCrewRequest nomination)
+    public async Task<Guid> NominateAsync(NominateExistingClubRequest nomination)
     {
-        return await crewService.CreateCrewAsync(nomination);
+        var crew = new Crew
+        {
+            ClubId = nomination.ClubId,
+            RaceId = nomination.RaceId
+        };
+
+        db.Crews.Add(crew);
+        await db.SaveChangesAsync();
+
+        return crew.Id;
     }
 
     public async Task<Guid> NominateAsync(NominateNewClubRequest nomination)
     {
         var clubId = await clubService.CreateClubAsync(nomination.NewClub);
-        var crew = new CreateCrewRequest
+        var crew = new NominateExistingClubRequest
         {
             ClubId = clubId,
             RaceId = nomination.RaceId
