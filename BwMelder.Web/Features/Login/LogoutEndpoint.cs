@@ -1,5 +1,5 @@
 ﻿using BwMelder.Web.Authentication;
-using BwMelder.Web.EndpointDiscovery;
+using BwMelder.Web.Utilities.EndpointDiscovery;
 
 namespace BwMelder.Web.Features.Login;
 

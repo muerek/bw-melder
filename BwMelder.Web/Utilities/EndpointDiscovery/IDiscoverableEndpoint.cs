@@ -1,4 +1,4 @@
-﻿namespace BwMelder.Web.EndpointDiscovery;
+﻿namespace BwMelder.Web.Utilities.EndpointDiscovery;
 
 internal interface IDiscoverableEndpoint
 {

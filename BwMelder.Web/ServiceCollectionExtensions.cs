@@ -1,5 +1,4 @@
-﻿using BwMelder.Web.Authentication;
-using BwMelder.Core;
+﻿using BwMelder.Core;
 using BwMelder.Shared.Authentication;
 using BwMelder.Shared.ClubCoaches;
 using BwMelder.Shared.Clubs;
@@ -7,6 +6,7 @@ using BwMelder.Shared.Crews;
 using BwMelder.Shared.Nomination;
 using BwMelder.Shared.Races;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using BwMelder.Web.Authentication;
 
 namespace BwMelder.Web;
 

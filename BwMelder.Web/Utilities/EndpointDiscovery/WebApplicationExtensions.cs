@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace BwMelder.Web.EndpointDiscovery;
+namespace BwMelder.Web.Utilities.EndpointDiscovery;
 
 static class WebApplicationExtensions
 {
@@ -25,7 +25,7 @@ static class WebApplicationExtensions
             var instance = Activator.CreateInstance(endpointType);
             if (instance is IDiscoverableEndpoint endpoint) { endpoint.MapEndpoint(builder); }
         }
-        
+
         return builder;
     }
 }
