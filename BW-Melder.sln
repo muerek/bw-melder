@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder", "BwMelder\BwMelder.csproj", "{20EE3619-A37C-4369-A806-8A8475B203CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder.Web", "BwMelder.Web\BwMelder.Web.csproj", "{20EE3619-A37C-4369-A806-8A8475B203CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder.Shared", "BwMelder.Shared\BwMelder.Shared.csproj", "{CAC32DE5-502B-4490-80BE-46F5A0ABE0DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BwMelder.Core", "BwMelder.Core\BwMelder.Core.csproj", "{664EA0E3-5D7D-4453-8C6E-D97F848B22D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1_App", "1_App", "{0E3D9EED-E979-4BA7-88A1-1B8D7E4AA8B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2_Shared", "2_Shared", "{D007402B-077D-4055-B78C-B6C7D4DFC129}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3_Core", "3_Core", "{EAE07E7C-8B5A-43E5-BD5F-B50C9D8DDA92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +36,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{20EE3619-A37C-4369-A806-8A8475B203CF} = {0E3D9EED-E979-4BA7-88A1-1B8D7E4AA8B2}
+		{CAC32DE5-502B-4490-80BE-46F5A0ABE0DD} = {D007402B-077D-4055-B78C-B6C7D4DFC129}
+		{664EA0E3-5D7D-4453-8C6E-D97F848B22D6} = {EAE07E7C-8B5A-43E5-BD5F-B50C9D8DDA92}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70B5B1D9-6E05-42EF-9604-9763C0A1A76B}

@@ -23,26 +23,13 @@ class Race
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Full display name of the race.
-    /// </summary>
-    public string FullName => $"{Number} - {Name}";
-
-    /// <summary>
     /// Total number of rowers per crew in this race.
     /// </summary>
-    /// <remarks>
-    /// Does not include coxes. Check <see cref="AthleteCount"/> to account for coxes as well.
-    /// </remarks>
+    /// <remarks>Does not include coxes.</remarks>
     [Display(Name = "Anzahl Ruderer je Mannschaft")]
     [Range(1, 5)]
     public int RowerCount { get; set; } = 1;
 
     [Display(Name = "Steuermensch")]
     public bool Coxed { get; set; } = false;
-
-    /// <summary>
-    /// Total number of athletes per crew in this race.
-    /// </summary>
-    [Display(Name = "Anzahl Sportler je Mannschaft")]
-    public int AthleteCount => RowerCount + (Coxed ? 1 : 0);
 }

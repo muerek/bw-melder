@@ -1,0 +1,59 @@
+﻿@using BwMelder.Shared.Clubs
+@using BwMelder.Shared.Nomination
+@using BwMelder.Shared.Races
+
+<EditForm Model="Nomination" OnValidSubmit="OnValidSubmit" FormName="@FormName" @attributes="AdditionalAttributes">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="row row-cols-md-2">
+
+        <div class="mb-3">
+            <label for="existingclub-raceid" class="form-label">Rennen</label>
+            <InputSelect class="form-select" id="existingclub-raceid" required @bind-Value=Nomination!.RaceId>
+                <option value=""></option>
+                @foreach (var race in Races)
+                {
+                    <option value="@race.Id">@race.FullName()</option>
+                }
+            </InputSelect>
+        </div>
+
+        <div class="mb-3">
+            <label for="existingclub-clubid" class="form-label">Verein</label>
+            <InputSelect class="form-select" id="existingclub-clubid" required @bind-Value=Nomination!.ClubId>
+                <option value=""></option>
+                @foreach (var club in Clubs)
+                {
+                    <option value="@club.Id">@club.Name</option>
+                }
+            </InputSelect>
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Speichern</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public NominateExistingClubRequest? Nomination { get; set; }
+
+    [Parameter]
+    public IList<ClubResponse> Clubs { get; set; } = [];
+
+    [Parameter]
+    public IList<RaceResponse> Races { get; set; } = [];
+
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+
+    [Parameter]
+    public string? FormName { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? AdditionalAttributes { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Nomination ??= new();
+    }
+}

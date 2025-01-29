@@ -1,0 +1,54 @@
+﻿@page "/onboarding/club-coach"
+
+@using BwMelder.Web.Authentication
+@using BwMelder.Shared.Authentication
+@using BwMelder.Shared.ClubCoaches
+
+@inject IClubCoachService ClubCoachService
+@inject IAccessKeyService AccessKeyService
+@inject NavigationManager Navigation
+@inject AuthenticationHandler AuthenticationHandler
+
+<PageTitle>Ansprechpartner eintragen</PageTitle>
+
+<h1>Ansprechpartner eintragen</h1>
+
+<p>
+    Wen können für die weitere Organisation bis zum BW und die Kommunikation zu den Sportlern kontaktieren?
+</p>
+
+<ClubCoachForm ClubCoach="ClubCoach" OnValidSubmit="AddClubCoachAsync" />
+
+@code {
+    [SupplyParameterFromForm]
+    public ClubCoachRequest? ClubCoach { get; set; }
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
+    private UserInfo? userContext;
+
+    protected override void OnInitialized()
+    {
+        // Parameter is already set if form data was posted.
+        ClubCoach ??= new();
+    }
+
+    private async Task AddClubCoachAsync()
+    {
+        if (ClubCoach is null) { return; }
+
+        // Always set the club ID to the current user's club.
+        userContext = await authenticationState.GetUserInfoAsync();
+        ClubCoach.ClubId = userContext?.ClubId ?? throw new ApplicationException();
+
+        await ClubCoachService.CreateClubCoachAsync(ClubCoach);
+
+        // Renew access key for the club to invalidate the used key.
+        await AccessKeyService.RenewAccessAsync(ClubCoach.ClubId);
+        // Terminate existing session started with the old key to force a reauthentication.
+        await AuthenticationHandler.LogoutAsync();
+
+        Navigation.NavigateTo("/onboarding/done");
+    }
+}

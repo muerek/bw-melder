@@ -1,0 +1,54 @@
+﻿@page "/admin/crews"
+
+@using BwMelder.Shared.Crews
+
+@inject ICrewService CrewService
+
+<PageTitle>Mannschaften</PageTitle>
+
+<h1>Mannschaften</h1>
+
+<a href="/admin/crews/nominate" class="btn btn-primary">Nominieren</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Rennen</th>
+            <th>Verein</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var crewStatus in CrewStatuses)
+        {
+            <tr>
+                <td>@crewStatus.Race.FullName()</td>
+                <td>@crewStatus.Club.Name</td>
+                <td class="@GetStatusClass(crewStatus)">@crewStatus.RegisteredAthletes von @crewStatus.Race.AthleteCount()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private IList<CrewStatusResponse> CrewStatuses { get; set; } = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        CrewStatuses = await CrewService.GetCrewStatusesAsync();
+    }
+
+    private string GetStatusClass(CrewStatusResponse crewStatus)
+    {
+        return (crewStatus.RegisteredAthletes, crewStatus.Race.AthleteCount()) switch
+        {
+            // No athletes were added yet, red highlight.
+            (0, _) => "table-danger",
+            // Some were added, but not all of them, yellow highlight.
+            var (x, y) when x < y => "table-warning",
+            // All were added, green highlight.
+            var (x, y) when x == y => "table-success",
+            _ => ""
+        };
+    }
+}

@@ -1,0 +1,43 @@
+﻿<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom">
+    @* Fill full width if narrower than medium breakpoint. *@
+    <div class="container-md">
+       
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-clipboard-check"></i> BW-Melder
+         </a>
+
+        @* Show navbar items to admin users only. *@
+        <AuthorizeView Roles="Administrator">
+            <Authorized>
+
+                @* Hamburger menu icon for collapsed menu. *@
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                @* Collapse main navigation if narrower than medium breakpoint. *@
+                <div class="collapse navbar-collapse d-md-flex justify-content-between" id="navbarNav">
+                    <div class="navbar-nav">
+                        <NavLink class="nav-link" href="/admin/access-keys">Zugänge</NavLink>
+                        <NavLink class="nav-link" href="/admin/crews">Mannschaften</NavLink>
+                        <NavLink class="nav-link" href="/admin/team-coaches">Betreuer</NavLink>
+                    </div>
+                    <div class="navbar-nav">
+                        @* Show logout as button in expanded menu, as regular link in collapsed menu. *@
+                        <NavLink class="btn btn-outline-secondary d-none d-md-inline" href="/admin/logout">
+                            <i class="bi bi-box-arrow-right"></i> Abmelden
+                        </NavLink>
+                        <NavLink class="nav-link d-md-none" href="/admin/logout">
+                            <i class="bi bi-box-arrow-right"></i> Abmelden
+                        </NavLink>
+                    </div>
+                </div>
+
+            </Authorized>
+        </AuthorizeView>
+
+    </div>
+</nav>

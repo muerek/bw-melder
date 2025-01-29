@@ -1,0 +1,53 @@
+﻿@using BwMelder.Shared.Clubs
+@using BwMelder.Shared.Nomination
+@using BwMelder.Shared.Races
+
+<EditForm Model="Nomination" OnValidSubmit="OnValidSubmit" FormName="@FormName" @attributes="AdditionalAttributes">
+    <ObjectGraphDataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="row row-cols-md-2">
+
+        <div class="mb-3">
+            <label for="newclub-raceid" class="form-label">Rennen</label>
+            <InputSelect class="form-select" id="newclub-raceid" required @bind-Value=Nomination!.RaceId>
+                <option value=""></option>
+                @foreach (var race in Races)
+                {
+                    <option value="@race.Id">@race.FullName()</option>
+                }
+            </InputSelect>
+        </div>
+
+        <div class="mb-3">
+            <label for="newclub-clubname" class="form-label">Vereinsname</label>
+            <InputText id="newclub-clubname" class="form-control" @bind-Value="Nomination!.NewClub.Name" />
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Speichern</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public NominateNewClubRequest? Nomination { get; set; }
+
+    [Parameter]
+    public IList<ClubResponse> Clubs { get; set; } = [];
+
+    [Parameter]
+    public IList<RaceResponse> Races { get; set; } = [];
+
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+
+    [Parameter]
+    public string? FormName { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? AdditionalAttributes { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Nomination ??= new();
+    }
+}
