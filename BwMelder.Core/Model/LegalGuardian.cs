@@ -1,20 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BwMelder.Core.Model;
+﻿namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Information on the legal guardian for underage athletes.
 /// </summary>
-class LegalGuardian
+record LegalGuardian
 {
-    [Display(Name = "Vorname")]
-    public string FirstName { get; set; } = string.Empty;
+    public required Name Name { get; set; }
 
-    [Display(Name = "Nachname")]
-    public string LastName { get; set; } = string.Empty;
-
-    [Display(Name = "Name")]
-    public string FullName => FirstName + " " + LastName;
-
-    public Contact Contact { get; set; } = new();
+    public required Contact Contact { get; set; }
 }

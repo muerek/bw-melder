@@ -1,38 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace BwMelder.Core.Model;
 
-namespace BwMelder.Core.Model;
-
+/// <summary>
+/// Common base class for participants, representing basic information required for registration.
+/// </summary>
 class Participant
 {
-    public Guid Id { get; set; } = Guid.Empty;
+    public Guid Id { get; private set; } = Guid.Empty;
 
-    [Display(Name = "Vorname")]
-    public string FirstName { get; set; } = string.Empty;
+    public required Name Name { get; set; }
 
-    [Display(Name = "Nachname")]
-    public string LastName { get; set; } = string.Empty;
+    public required DateTime DateOfBirth { get; set; }
 
-    [Display(Name = "Name")]
-    public string FullName => $"{FirstName} {LastName}";
+    public required Address Address { get; set; }
 
-    [Display(Name = "Geburtstag")]
-    [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
-    public DateTime DateOfBirth { get; set; } = DateTime.Today.AddYears(-14);
+    public required Diet Diet { get; set; }
 
-    [Display(Name = "Adresse")]
-    public Address Address { get; set; } = new();
+    public required ShirtSize ShirtSize { get; set; }
 
-    [Display(Name = "Verpflegung")]
-    public Diet Diet { get; set; } = new();
+    public string? Comments { get; set; }
 
-    [Display(Name = "T-Shirt-Größe")]
-    public ShirtSize ShirtSize { get; set; } = ShirtSize.M;
-
-    [Display(Name = "Medizinische Hinweise und weitere Bemerkungen")]
-    [DataType(DataType.MultilineText)]
-    public string? Comments { get; set; } = string.Empty;
-
-    [Display(Name = "Deutschlandticket")]
     public bool HasPublicTransportTicket { get; set; } = false;
 }

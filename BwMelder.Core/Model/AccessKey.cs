@@ -1,9 +1,13 @@
 ﻿namespace BwMelder.Core.Model;
 
+/// <summary>
+/// Represents an access key that allows logging in with a secret.
+/// </summary>
 class AccessKey
 {
-    public int Id { get; set; } = 0;
-
+    /// <summary>
+    /// Unique secret presented by the user to use this access key.
+    /// </summary>
     public required string Secret { get; init; }
 
     /// <summary>
