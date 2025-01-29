@@ -66,6 +66,9 @@ public class BwMelderDbContext(DbContextOptions<BwMelderDbContext> options) : Db
         // Seed database with default race data.
         optionsBuilder.UseSeeding((context, _) =>
         {
+            // Do not do anything if for whatever reason the table contains data.
+            if(context.Set<Race>().Any()) { return; }
+            
             var races = GetDefaultRaces();
             if (races is null) { return; }
             context.Set<Race>().AddRange(races);
@@ -73,6 +76,9 @@ public class BwMelderDbContext(DbContextOptions<BwMelderDbContext> options) : Db
         })
         .UseAsyncSeeding(async (context, _, cancellationToken) =>
         {
+            // Do not do anything if for whatever reason the table contains data.
+            if (await context.Set<Race>().AnyAsync(cancellationToken)) { return; }
+
             var races = GetDefaultRaces();
             if (races is null) { return; }
             context.Set<Race>().AddRange(races);
