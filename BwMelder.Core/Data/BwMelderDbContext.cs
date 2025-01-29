@@ -38,11 +38,12 @@ public class BwMelderDbContext(DbContextOptions<BwMelderDbContext> options) : Db
 
         modelBuilder.Entity<Athlete>(builder =>
         {
-            // LegalGuardian is a nested type that contains a nested Contact.
+            // LegalGuardian is a nested type.
             builder.ComplexProperty(
                 a => a.LegalGuardian,
                 b =>
                 {
+                    // LegalGuardian contains nested types itself.
                     b.ComplexProperty(lg => lg.Contact);
                     b.ComplexProperty(lg => lg.Name);
                 });

@@ -34,7 +34,14 @@ class Race
     /// </summary>
     public int? CrewCount { get; set; } = 2;
 
+    /// <summary>
+    /// Total number of athletes per crew in this race.
+    /// This is all rowers and coxes.
+    /// </summary>
     public int AthleteCount => RowerCount + (Coxed ? 1 : 0);
 
+    /// <summary>
+    /// Full friendly name of the race.
+    /// </summary>
     public string FullName => $"{Number} - {Name}";
 }
