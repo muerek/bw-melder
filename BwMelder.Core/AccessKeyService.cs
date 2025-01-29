@@ -3,6 +3,7 @@ using System;
 using System.Security.Cryptography;
 using BwMelder.Core.Model;
 using BwMelder.Shared.Authentication;
+using BwMelder.Core.Data;
 
 namespace BwMelder.Core;
 

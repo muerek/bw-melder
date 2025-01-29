@@ -1,6 +1,7 @@
 ﻿using BwMelder.Core.Model;
 using Microsoft.EntityFrameworkCore;
 using BwMelder.Shared.Clubs;
+using BwMelder.Core.Data;
 
 namespace BwMelder.Core;
 

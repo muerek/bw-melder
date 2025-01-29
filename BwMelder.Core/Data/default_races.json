@@ -1,0 +1,184 @@
+[
+  {
+    "Number": "A",
+    "Name": "Jung 1x 13",
+    "RowerCount": 1,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "B",
+    "Name": "Jung 1x 13 LG",
+    "RowerCount": 1,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "C",
+    "Name": "Mäd 1x 13",
+    "RowerCount": 1,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "D",
+    "Name": "Mäd 1x 13 LG",
+    "RowerCount": 1,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "E",
+    "Name": "Jung 2x 12/13",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "F",
+    "Name": "Jung 2x 12/13 LG",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "G",
+    "Name": "Mäd 2x 12/13",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "H",
+    "Name": "Mäd 2x 12/13 LG",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "I",
+    "Name": "Jung 4x+ 12/13",
+    "RowerCount": 4,
+    "Coxed": true,
+    "CrewCount": 2
+  },
+  {
+    "Number": "J",
+    "Name": "Mäd 4x+ 12/13",
+    "RowerCount": 4,
+    "Coxed": true,
+    "CrewCount": 2
+  },
+  {
+    "Number": "K",
+    "Name": "Jung/Mäd 4x+ 12/13 Mix",
+    "RowerCount": 4,
+    "Coxed": true,
+    "CrewCount": 2
+  },
+  {
+    "Number": "L",
+    "Name": "Jung 1x 13",
+    "RowerCount": 1,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "M",
+    "Name": "Jung 1x 13 LG",
+    "RowerCount": 1,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "N",
+    "Name": "Mäd 1x 13",
+    "RowerCount": 1,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "O",
+    "Name": "Mäd 1x 13 LG",
+    "RowerCount": 1,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "P",
+    "Name": "Jung 2x 13/14",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "Q",
+    "Name": "Jung 2x 13/14 LG",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "R",
+    "Name": "Mäd 2x 13/14",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "S",
+    "Name": "Mäd 2x 13/14 LG",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": 2
+  },
+  {
+    "Number": "T",
+    "Name": "Jung 4x+ 13/14",
+    "RowerCount": 4,
+    "Coxed": true,
+    "CrewCount": 2
+  },
+  {
+    "Number": "U",
+    "Name": "Mäd 4x+ 13/14",
+    "RowerCount": 4,
+    "Coxed": true,
+    "CrewCount": 2
+  },
+  {
+    "Number": "V",
+    "Name": "Jung/Mäd 4x+ 13/14 Mix",
+    "RowerCount": 4,
+    "Coxed": true,
+    "CrewCount": 2
+  },
+  {
+    "Number": "W",
+    "Name": "SON 2x 12-14 Inklusion",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": null
+  },
+  {
+    "Number": "X",
+    "Name": "SON 1x 12-14 Para",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": null
+  },
+  {
+    "Number": "1",
+    "Name": "SON 2x 15-18 Inklusion",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": null
+  },
+  {
+    "Number": "2",
+    "Name": "SON 1x 15-18 Para",
+    "RowerCount": 2,
+    "Coxed": false,
+    "CrewCount": null
+  }
+]
