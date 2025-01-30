@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace BwMelder.Shared.Races;
 
 /// <summary>
-/// A service response with details on a race.
+/// A service response with full details on a race.
 /// </summary>
-public class RaceResponse
+public class RaceDetailResponse
 {
     /// <summary>
     /// Unique ID assigned to this race in the database.

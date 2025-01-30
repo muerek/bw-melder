@@ -14,6 +14,19 @@ namespace BwMelder.Core;
 
 public class CrewService(BwMelderDbContext db) : ICrewService
 {
+    public async Task<Guid> CreateCrewAsync(CreateCrewRequest request)
+    {
+        var crew = new Crew
+        {
+            ClubId = request.ClubId,
+            RaceId = request.RaceId
+        };
+
+        await db.Crews.AddAsync(crew);
+        await db.SaveChangesAsync();
+        return crew.Id;
+    }
+
     public async Task<IList<CrewStatusResponse>> GetCrewStatusesAsync()
     {
         return await db.Crews
@@ -23,20 +36,19 @@ public class CrewService(BwMelderDbContext db) : ICrewService
             .Include(c => c.Athletes)
             .Select(c => new CrewStatusResponse
             {
+                CrewId = c.Id,
                 Club = new ClubResponse
                 {
                     Id = c.Club.Id,
                     Name = c.Club.Name
                 },
-                Race = new RaceResponse
+                Race = new RaceSummaryResponse
                 {
                     Id = c.Race.Id,
-                    Name = c.Race.Name,
-                    RowerCount = c.Race.RowerCount,
-                    Coxed = c.Race.Coxed,
-                    Number = c.Race.Number
+                    DisplayName = c.Race.FullName
                 },
-                RegisteredAthletes = c.Athletes.Count
+                CurrentAthleteCount = c.Athletes.Count,
+                TargetAthleteCount = c.Race.AthleteCount
             })
             .ToListAsync();
     }

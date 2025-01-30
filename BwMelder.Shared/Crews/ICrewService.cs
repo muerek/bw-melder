@@ -12,4 +12,6 @@ namespace BwMelder.Shared.Crews;
 public interface ICrewService
 {
     Task<IList<CrewStatusResponse>> GetCrewStatusesAsync();
+
+    Task<Guid> CreateCrewAsync(CreateCrewRequest request);
 }

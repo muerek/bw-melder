@@ -12,17 +12,14 @@ namespace BwMelder.Core;
 public class RaceService(BwMelderDbContext db)
     : IRaceService
 {
-    public async Task<IList<RaceResponse>> GetRacesAsync()
+    public async Task<IList<RaceSummaryResponse>> GetRacesAsync()
     {
         return await db.Races
             .AsNoTracking()
-            .Select(r => new RaceResponse
+            .Select(r => new RaceSummaryResponse
             {
                 Id = r.Id,
-                Number = r.Number,
-                Name = r.Name,
-                RowerCount = r.RowerCount,
-                Coxed = r.Coxed
+                DisplayName = r.FullName
             })
             .ToListAsync();
     }

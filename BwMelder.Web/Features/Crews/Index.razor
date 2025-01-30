@@ -22,9 +22,9 @@
         @foreach(var crewStatus in CrewStatuses)
         {
             <tr>
-                <td>@crewStatus.Race.FullName()</td>
+                <td>@crewStatus.Race.DisplayName</td>
                 <td>@crewStatus.Club.Name</td>
-                <td class="@GetStatusClass(crewStatus)">@crewStatus.RegisteredAthletes von @crewStatus.Race.AthleteCount()</td>
+                <td class="@GetStatusClass(crewStatus)">@crewStatus.CurrentAthleteCount von @crewStatus.TargetAthleteCount</td>
             </tr>
         }
     </tbody>
@@ -40,7 +40,7 @@
 
     private string GetStatusClass(CrewStatusResponse crewStatus)
     {
-        return (crewStatus.RegisteredAthletes, crewStatus.Race.AthleteCount()) switch
+        return (crewStatus.CurrentAthleteCount, crewStatus.TargetAthleteCount) switch
         {
             // No athletes were added yet, red highlight.
             (0, _) => "table-danger",
