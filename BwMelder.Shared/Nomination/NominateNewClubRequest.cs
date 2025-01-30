@@ -15,6 +15,6 @@ public class NominateNewClubRequest
     [Required, NotDefault]
     public int RaceId { get; set; } = 0;
 
-    [ValidateComplexType]
-    public CreateClubRequest NewClub { get; set; } = new();
+    [Required, NotDefault]
+    public string ClubName { get; set; } = string.Empty;
 }

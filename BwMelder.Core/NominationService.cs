@@ -11,26 +11,23 @@ using System.Threading.Tasks;
 
 namespace BwMelder.Core;
 
-public class NominationService(IClubService clubService, BwMelderDbContext db)
+public class NominationService(IClubService clubService, ICrewService crewService)
     : INominationService
 {
     public async Task<Guid> NominateAsync(NominateExistingClubRequest nomination)
     {
-        var crew = new Crew
+        var createCrewRequest = new CreateCrewRequest
         {
             ClubId = nomination.ClubId,
             RaceId = nomination.RaceId
         };
-
-        db.Crews.Add(crew);
-        await db.SaveChangesAsync();
-
-        return crew.Id;
+        return await crewService.CreateCrewAsync(createCrewRequest);
     }
 
     public async Task<Guid> NominateAsync(NominateNewClubRequest nomination)
     {
-        var clubId = await clubService.CreateClubAsync(nomination.NewClub);
+        var createClubRequest = new CreateClubRequest { Name = nomination.ClubName };
+        var clubId = await clubService.CreateClubAsync(createClubRequest);
         var crew = new NominateExistingClubRequest
         {
             ClubId = clubId,
