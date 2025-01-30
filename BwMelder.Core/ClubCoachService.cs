@@ -12,7 +12,7 @@ namespace BwMelder.Core;
 public class ClubCoachService(BwMelderDbContext db)
     : IClubCoachService
 {
-    public async Task CreateClubCoachAsync(ClubCoachRequest request)
+    public async Task CreateClubCoachAsync(CreateClubCoachRequest request)
     {
         var clubCoach = new ClubCoach()
         {

@@ -1,7 +1,7 @@
 ﻿namespace BwMelder.Shared.Clubs;
 
 /// <summary>
-/// DTO representing a request to create a new club.
+/// A request to create a new club.
 /// </summary>
 public class CreateClubRequest
 {

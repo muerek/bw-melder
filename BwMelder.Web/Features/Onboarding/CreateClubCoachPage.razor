@@ -21,7 +21,7 @@
 
 @code {
     [SupplyParameterFromForm]
-    public ClubCoachRequest? ClubCoach { get; set; }
+    public CreateClubCoachRequest? ClubCoach { get; set; }
 
     [CascadingParameter]
     private Task<AuthenticationState>? authenticationState { get; set; }

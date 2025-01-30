@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BwMelder.Shared.Nomination;
 
+/// <summary>
+/// A request to nominate an existing club for an open spot in a race.
+/// </summary>
 public class NominateExistingClubRequest
 {
     [Required, NotDefault]

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BwMelder.Shared.Clubs;
 
+/// <summary>
+/// A service response with details on a club.
+/// </summary>
 public class ClubResponse
 {
     /// <summary>

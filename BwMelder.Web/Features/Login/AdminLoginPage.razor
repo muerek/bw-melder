@@ -37,7 +37,7 @@
 
     // Initialize empty credentials if not set from form.
     protected override void OnInitialized() =>
-        Credentials ??= new() { Username = string.Empty, Password = string.Empty };
+        Credentials ??= new();
 
     private async Task AuthenticateAsync()
     {
