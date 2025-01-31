@@ -19,12 +19,10 @@
 
 @foreach (var clubKey in clubKeys!)
 {
-    <p>@clubKey.ClubName - @(clubKey.SecretUrl ?? "Keine")</p>
-    <button class="btn btn-secondary" @onclick="() => RenewAccess(clubKey.ClubId)">Neu</button>
-    <button class="btn btn-danger" @onclick="() => LockAccess(clubKey.ClubId)">Sperren</button>
+    <ClubKeyItem ClubKey="clubKey"
+                 OnRenew="() => RenewAccess(clubKey.ClubId)"
+                 OnLock="() => LockAccess(clubKey.ClubId)" />
 }
-
-
 
 @code {
     private IList<ClubKeyResponse>? clubKeys;

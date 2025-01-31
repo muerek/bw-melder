@@ -33,9 +33,6 @@ namespace BwMelder.Core.Migrations
                     b.Property<DateTime>("NotAfter")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("NotBefore")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Secret")
                         .IsRequired()
                         .HasColumnType("TEXT");

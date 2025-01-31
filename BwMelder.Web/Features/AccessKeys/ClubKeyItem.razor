@@ -1,0 +1,25 @@
+@using BwMelder.Shared.Clubs
+
+<div class="row" @key="ClubKey.ClubId">
+    <div class="col">
+        @ClubKey.ClubName
+    </div>
+    <div class="col">
+        @ClubKey.Secret
+    </div>
+    <div class="col">
+        <button class="btn btn-secondary" @onclick="OnRenew">Neu</button>
+        <button class="btn btn-danger" disabled="@(!ClubKey.HasValidAccessKey)" @onclick="OnLock">Sperren</button>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public ClubKeyResponse ClubKey { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback OnLock { get; set; }
+    
+    [Parameter]
+    public EventCallback OnRenew { get; set; }
+}
