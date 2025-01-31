@@ -17,12 +17,15 @@
     Bei Bedarf können die Zugänge erneuert oder gesperrt werden.
 </p>
 
-@foreach (var clubKey in clubKeys!)
-{
-    <ClubKeyItem ClubKey="clubKey"
-                 OnRenew="() => RenewAccess(clubKey.ClubId)"
-                 OnLock="() => LockAccess(clubKey.ClubId)" />
-}
+<Accordion>
+    @foreach (var clubKey in clubKeys!)
+    {
+        <ClubKeyAccordionItem ClubKey="clubKey"
+                     OnRenew="() => RenewAccess(clubKey.ClubId)"
+                     OnLock="() => LockAccess(clubKey.ClubId)" />
+    }    
+</Accordion>
+
 
 @code {
     private IList<ClubKeyResponse>? clubKeys;

@@ -1,0 +1,39 @@
+@using BwMelder.Shared.Clubs
+
+<AccordionItem @key="ClubKey.ClubId">
+    <HeaderContent>
+        @ClubKey.ClubName
+
+        @if (ClubKey.HasValidAccessKey)
+        { <span class="badge rounded-pill text-bg-success ms-3">Aktiv</span> }
+        else
+        { <span class="badge rounded-pill text-bg-danger ms-2">Gesperrt</span> }
+    </HeaderContent>
+    <BodyContent>
+        <div class="row" @key="ClubKey.ClubId">
+            <div class="col">
+                <p>
+                    @ClubKey.Secret
+                </p>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" @onclick="OnRenew">Neu</button>
+                <button class="btn btn-danger" disabled="@(!ClubKey.HasValidAccessKey)" @onclick="OnLock">Sperren
+                </button>
+            </div>
+        </div>
+    </BodyContent>
+</AccordionItem>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public ClubKeyResponse ClubKey { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback OnLock { get; set; }
+
+    [Parameter]
+    public EventCallback OnRenew { get; set; }
+
+}
