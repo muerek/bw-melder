@@ -16,11 +16,6 @@ public class ClubKeyResponse
     public required string ClubName { get; init; }
     
     /// <summary>
-    /// Flag to indicate if the club has a valid access key.
-    /// </summary>
-    public required bool HasValidAccessKey { get; init; }
-    
-    /// <summary>
     /// Secret of the valid access key.
     /// Set to null if the club has none.
     /// </summary>

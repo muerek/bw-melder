@@ -1,31 +1,58 @@
 @using BwMelder.Shared.Clubs
+@using PinguApps.Blazor.QRCode
 
 <AccordionItem @key="ClubKey.ClubId">
     <HeaderContent>
         @ClubKey.ClubName
 
-        @if (ClubKey.HasValidAccessKey)
-        { <span class="badge rounded-pill text-bg-success ms-3">Aktiv</span> }
+        @if (HasValidKey)
+        {
+            <span class="badge rounded-pill text-bg-success ms-3">Aktiv</span>
+        }
         else
-        { <span class="badge rounded-pill text-bg-danger ms-2">Gesperrt</span> }
+        {
+            <span class="badge rounded-pill text-bg-danger ms-2">Gesperrt</span>
+        }
     </HeaderContent>
     <BodyContent>
-        <div class="row" @key="ClubKey.ClubId">
-            <div class="col">
-                <p>
-                    @ClubKey.Secret
-                </p>
+        @if (HasValidKey)
+        {
+            <div class="row">
+                <div class="mb-3 col-md-auto mb-md-0 text-center">
+                    <QRCode Data="@ClubKey.Secret" Size="150px"/>
+                </div>
+                <div class="col-md">
+                    <p>
+                        Zugang über QR-Code oder Link:
+                    </p>
+                    <div class="input-group mb-3">
+                        <input class="form-control" readonly value="@ClubKey.Secret"/>
+                        <button class="btn btn-outline-secondary">
+                            <i class="bi bi-copy"></i>
+                        </button>
+                    </div>
+                    <div class="text-end">
+                        <button class="btn btn-danger" @onclick="OnLock">
+                            <i class="bi bi-ban"></i> Sperren
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <button class="btn btn-secondary" @onclick="OnRenew">Neu</button>
-                <button class="btn btn-danger" disabled="@(!ClubKey.HasValidAccessKey)" @onclick="OnLock">Sperren
+        }
+        else
+        {
+            <div class="d-grid d-sm-block">
+                <button class="btn btn-primary" @onclick="OnRenew">
+                    <i class="bi bi-unlock-fill"></i> Freischalten
                 </button>
             </div>
-        </div>
+        }
     </BodyContent>
 </AccordionItem>
 
 @code {
+
+    private bool HasValidKey => ClubKey.Secret is not null;
 
     [Parameter, EditorRequired]
     public ClubKeyResponse ClubKey { get; set; } = null!;
