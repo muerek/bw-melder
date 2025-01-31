@@ -9,6 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
     <Content Include="Features\Nomination\NominationPage.razor.js" />
   </ItemGroup>
 
