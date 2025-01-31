@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BwMelder.Data.Migrations
+namespace BwMelder.Core.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitializeDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,8 @@ namespace BwMelder.Data.Migrations
                     Number = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     RowerCount = table.Column<int>(type: "INTEGER", nullable: false),
-                    Coxed = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Coxed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CrewCount = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,11 +69,11 @@ namespace BwMelder.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: false),
-                    Contact_Phone = table.Column<string>(type: "TEXT", nullable: false),
+                    ClubId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Contact_EmailAddress = table.Column<string>(type: "TEXT", nullable: false),
-                    ClubId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    Contact_Phone = table.Column<string>(type: "TEXT", nullable: false),
+                    Name_First = table.Column<string>(type: "TEXT", nullable: false),
+                    Name_Last = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,6 +103,12 @@ namespace BwMelder.Data.Migrations
                         principalTable: "Clubs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Crews_Races_RaceId",
+                        column: x => x.RaceId,
+                        principalTable: "Races",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -109,28 +116,28 @@ namespace BwMelder.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Address_Street = table.Column<string>(type: "TEXT", nullable: false),
-                    Address_Zip = table.Column<string>(type: "TEXT", nullable: false),
-                    Address_City = table.Column<string>(type: "TEXT", nullable: false),
-                    Diet_Choice = table.Column<int>(type: "INTEGER", nullable: false),
-                    Diet_Restrictions = table.Column<string>(type: "TEXT", nullable: true),
                     ShirtSize = table.Column<int>(type: "INTEGER", nullable: false),
                     Comments = table.Column<string>(type: "TEXT", nullable: true),
                     HasPublicTransportTicket = table.Column<bool>(type: "INTEGER", nullable: false),
                     Discriminator = table.Column<string>(type: "TEXT", maxLength: 13, nullable: false),
-                    LegalGuardian_FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    LegalGuardian_LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    LegalGuardian_Contact_Phone = table.Column<string>(type: "TEXT", nullable: true),
-                    LegalGuardian_Contact_EmailAddress = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_City = table.Column<string>(type: "TEXT", nullable: false),
+                    Address_Street = table.Column<string>(type: "TEXT", nullable: false),
+                    Address_Zip = table.Column<string>(type: "TEXT", nullable: false),
+                    Diet_Choice = table.Column<int>(type: "INTEGER", nullable: false),
+                    Diet_Restrictions = table.Column<string>(type: "TEXT", nullable: true),
+                    Name_First = table.Column<string>(type: "TEXT", nullable: false),
+                    Name_Last = table.Column<string>(type: "TEXT", nullable: false),
                     Position = table.Column<int>(type: "INTEGER", nullable: true),
                     CrewId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    Contact_Phone = table.Column<string>(type: "TEXT", nullable: true),
-                    Contact_EmailAddress = table.Column<string>(type: "TEXT", nullable: true),
+                    LegalGuardian_Contact_EmailAddress = table.Column<string>(type: "TEXT", nullable: true),
+                    LegalGuardian_Contact_Phone = table.Column<string>(type: "TEXT", nullable: true),
+                    LegalGuardian_Name_First = table.Column<string>(type: "TEXT", nullable: true),
+                    LegalGuardian_Name_Last = table.Column<string>(type: "TEXT", nullable: true),
                     DriversLicense = table.Column<int>(type: "INTEGER", nullable: true),
-                    ClubId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    ClubId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Contact_EmailAddress = table.Column<string>(type: "TEXT", nullable: true),
+                    Contact_Phone = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -166,6 +173,11 @@ namespace BwMelder.Data.Migrations
                 column: "ClubId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Crews_RaceId",
+                table: "Crews",
+                column: "RaceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Participants_ClubId",
                 table: "Participants",
                 column: "ClubId");
@@ -189,13 +201,13 @@ namespace BwMelder.Data.Migrations
                 name: "Participants");
 
             migrationBuilder.DropTable(
-                name: "Races");
-
-            migrationBuilder.DropTable(
                 name: "Crews");
 
             migrationBuilder.DropTable(
                 name: "Clubs");
+
+            migrationBuilder.DropTable(
+                name: "Races");
         }
     }
 }

@@ -13,14 +13,14 @@
                 <option value=""></option>
                 @foreach (var race in Races)
                 {
-                    <option value="@race.Id">@race.FullName()</option>
+                    <option value="@race.Id">@race.DisplayName</option>
                 }
             </InputSelect>
         </div>
 
         <div class="mb-3">
             <label for="newclub-clubname" class="form-label">Vereinsname</label>
-            <InputText id="newclub-clubname" class="form-control" @bind-Value="Nomination!.NewClub.Name" />
+            <InputText id="newclub-clubname" class="form-control" @bind-Value="Nomination!.ClubName" />
         </div>
 
     </div>
@@ -35,7 +35,7 @@
     public IList<ClubResponse> Clubs { get; set; } = [];
 
     [Parameter]
-    public IList<RaceResponse> Races { get; set; } = [];
+    public IList<RaceSummaryResponse> Races { get; set; } = [];
 
     [Parameter]
     public EventCallback OnValidSubmit { get; set; }

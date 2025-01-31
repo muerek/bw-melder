@@ -1,4 +1,4 @@
-using BwMelder.Core;
+using BwMelder.Core.Data;
 using BwMelder.Web;
 using BwMelder.Web.Utilities.EndpointDiscovery;
 using Microsoft.EntityFrameworkCore;

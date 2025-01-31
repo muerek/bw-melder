@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BwMelder.Core.Model;
+﻿namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Represents different types of drivers license.
@@ -8,10 +6,7 @@ namespace BwMelder.Core.Model;
 /// </summary>
 enum DriversLicense
 {
-    [Display(Name = "Kein Führerschein")]
     None = 0,
-    [Display(Name = "PKW (B oder gleichwertig)")]
     Car = 1,
-    [Display(Name = "Anhänger (BE oder gleichwertig)")]
     Trailer = 2
 }

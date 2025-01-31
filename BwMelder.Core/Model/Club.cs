@@ -1,19 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BwMelder.Core.Model;
+﻿namespace BwMelder.Core.Model;
 
 /// <summary>
 /// Represents a club that registers crews and team coaches.
 /// </summary>
 class Club
 {
-    public Guid Id { get; set; } = Guid.Empty;
+    public Guid Id { get; private set; } = Guid.Empty;
 
     /// <summary>
     /// Name of the club.
     /// </summary>
-    [Display(Name = "Vereinsname")]
-    public string Name { get; set; } = string.Empty;
+    public required string Name { get; set; }
 
     public ClubCoach? ClubCoach { get; set; } = null;
 

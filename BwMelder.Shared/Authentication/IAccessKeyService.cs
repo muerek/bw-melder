@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BwMelder.Shared.Clubs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,13 +15,6 @@ public interface IAccessKeyService
     /// <param name="secret"></param>
     /// <returns>Authentication result and, if successful, additional information on the user.</returns>
     Task<AuthenticationResponse> AuthenticateAsync(string secret);
-
-    /// <summary>
-    /// Gets a list of <see cref="AccessKeyStatusResponse"/> DTOs listing all clubs with their active key.
-    /// Clubs without an active key will have <see cref="AccessKeyStatusResponse.SecretUrl"/> set to null.
-    /// </summary>
-    /// <returns></returns>
-    Task<IList<AccessKeyStatusResponse>> GetClubKeysAsync();
 
     /// <summary>
     /// Renew access to the application for a club.

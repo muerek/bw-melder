@@ -367,3 +367,6 @@ FodyWeavers.xsd
 
 # Client-side libraries managed by libman.json
 */wwwroot/lib/
+
+# Rider config directory
+.idea/

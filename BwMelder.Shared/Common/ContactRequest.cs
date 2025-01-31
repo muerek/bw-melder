@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BwMelder.Shared.Common;
 
 /// <summary>
-/// DTO representing common contact information.
+/// Common contact information.
 /// </summary>
 public class ContactRequest
 {

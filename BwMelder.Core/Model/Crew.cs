@@ -5,7 +5,7 @@
 /// </summary>
 class Crew
 {
-    public Guid Id { get; set; } = Guid.Empty;
+    public Guid Id { get; private set; } = Guid.Empty;
 
     public Guid ClubId { get; set; } = Guid.Empty;
     public Club Club { get; set; } = null!;
@@ -13,5 +13,5 @@ class Crew
     public int RaceId { get; set; } = 0;
     public Race Race { get; set; } = null!;
 
-    public IList<Athlete> Athletes { get; set; } = new List<Athlete>();
+    public IList<Athlete> Athletes { get; set; } = [];
 }

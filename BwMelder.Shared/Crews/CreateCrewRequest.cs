@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BwMelder.Shared.Nomination;
+namespace BwMelder.Shared.Crews;
 
 /// <summary>
-/// A request to nominate an existing club for an open spot in a race.
+/// A request to create a crew.
 /// </summary>
-public class NominateExistingClubRequest
+public class CreateCrewRequest
 {
     [Required, NotDefault]
-    public Guid ClubId { get; set; } = Guid.Empty;
+    public Guid ClubId { get; set; } = default;
 
     [Required, NotDefault]
     public int RaceId { get; set; } = 0;

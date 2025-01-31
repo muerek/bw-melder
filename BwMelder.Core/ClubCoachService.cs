@@ -1,4 +1,5 @@
-﻿using BwMelder.Core.Model;
+﻿using BwMelder.Core.Data;
+using BwMelder.Core.Model;
 using BwMelder.Shared.ClubCoaches;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,16 @@ namespace BwMelder.Core;
 public class ClubCoachService(BwMelderDbContext db)
     : IClubCoachService
 {
-    public async Task CreateClubCoachAsync(ClubCoachRequest request)
+    public async Task CreateClubCoachAsync(CreateClubCoachRequest request)
     {
         var clubCoach = new ClubCoach()
         {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Contact = new Contact()
+            Name = new Name
+            {
+                First = request.FirstName,
+                Last = request.LastName
+            },
+            Contact = new Contact
             {
                 Phone = request.Contact.Phone,
                 EmailAddress = request.Contact.EmailAddress

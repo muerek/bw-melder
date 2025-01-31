@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace BwMelder.Shared.Races;
 
 /// <summary>
-/// Response DTO holding information on a race.
+/// A service response with full details on a race.
 /// </summary>
-public class RaceResponse
+public class RaceDetailResponse
 {
     /// <summary>
     /// Unique ID assigned to this race in the database.
@@ -33,5 +33,8 @@ public class RaceResponse
     /// <remarks>Does not include coxes.</remarks>
     public required int RowerCount { get; set; }
 
+    /// <summary>
+    /// Flag to indicate if crews have a cox in this race.
+    /// </summary>
     public required bool Coxed { get; set; }
 }
