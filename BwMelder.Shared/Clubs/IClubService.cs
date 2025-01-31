@@ -31,4 +31,6 @@ public interface IClubService
     /// <param name="clubId">Unique ID of the club to delete.</param>
     /// <returns></returns>
     Task DeleteClubAsync(Guid clubId);
+
+    Task<IList<ClubKeyResponse>> GetClubKeysAsync();
 }

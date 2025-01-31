@@ -1,9 +1,11 @@
 ﻿@page "/admin/access-keys"
+@using BwMelder.Shared.Authentication
 @rendermode InteractiveServer
 
-@using BwMelder.Shared.Authentication
+@using BwMelder.Shared.Clubs
 
 @inject IAccessKeyService AccessKeyService
+@inject IClubService ClubService
 
 <PageTitle>Zugänge</PageTitle>
 
@@ -25,7 +27,7 @@
 
 
 @code {
-    private IList<AccessKeyStatusResponse>? clubKeys;
+    private IList<ClubKeyResponse>? clubKeys;
 
     protected override async Task OnInitializedAsync()
     {
@@ -47,5 +49,5 @@
         StateHasChanged();
     }
 
-    private async Task LoadDataAsync() => clubKeys = await AccessKeyService.GetClubKeysAsync();
+    private async Task LoadDataAsync() => clubKeys = await ClubService.GetClubKeysAsync();
 }
