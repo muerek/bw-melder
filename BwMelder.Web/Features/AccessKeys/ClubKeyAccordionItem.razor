@@ -34,24 +34,17 @@
                         </div>
                     </div>
                     <div>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle"
-                                    type="button" data-bs-toggle="dropdown">
-                                Verwalten
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="#" @onclick="OnRenew" @onclick:preventDefault>
-                                        <i class="bi bi-ban"></i> Erneuern    
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#" @onclick="OnLock" @onclick:preventDefault>
-                                        <i class="bi bi-ban"></i> Sperren
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <Dropdown>
+                            <DropdownButton>Verwalten</DropdownButton>
+                            <DropdownMenu>
+                                <DropdownItem OnClick="OnRenew">
+                                    <i class="bi bi-arrow-clockwise"></i> Erneuern
+                                </DropdownItem>
+                                <DropdownItem OnClick="OnLock">
+                                    <i class="bi bi-ban"></i> Sperren
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
                     </div>
                 </div>
                 <div class="mb-3 col-md-auto mb-md-0 text-center">

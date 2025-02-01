@@ -1,0 +1,20 @@
+<li>
+    <a class="dropdown-item" href="@Href" @onclick="OnClick" @onclick:preventDefault="OnClickPreventDefault">
+        @ChildContent
+    </a>
+</li>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Href { get; set; } = "#";
+    
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public bool OnClickPreventDefault { get; set; } = true;
+
+}
