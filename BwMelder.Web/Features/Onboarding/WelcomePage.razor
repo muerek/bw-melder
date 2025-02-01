@@ -1,4 +1,5 @@
 ﻿@page "/onboarding/welcome"
+@layout OnboardingLayout
 
 @using BwMelder.Web.Authentication
 
@@ -24,12 +25,12 @@
 
 @code {
     [CascadingParameter]
-    private Task<AuthenticationState>? authenticationState { get; set; }
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
 
     private UserInfo? userContext;
 
     protected override async Task OnInitializedAsync()
     {
-        userContext = await authenticationState.GetUserInfoAsync();
+        userContext = await AuthenticationState.GetUserInfoAsync();
     }
 }
