@@ -18,24 +18,44 @@
         @if (HasValidKey)
         {
             <div class="row">
-                <div class="mb-3 col-md-auto mb-md-0 text-center">
-                    <QRCode Data="@ClubKey.Secret" Size="150px"/>
-                </div>
                 <div class="col-md">
                     <p>
-                        Zugang über QR-Code oder Link:
+                        Zugang zur Registrierung über Link oder QR-Code:
                     </p>
-                    <div class="input-group mb-3">
-                        <input class="form-control" readonly value="@ClubKey.Secret"/>
-                        <button class="btn btn-outline-secondary">
-                            <i class="bi bi-copy"></i>
-                        </button>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input class="form-control" readonly value="@ClubKey.Secret"/>
+                            <button class="btn btn-outline-secondary">
+                                <i class="bi bi-copy"></i>
+                            </button>
+                        </div>
+                        <div class="form-text">
+                            Noch gültig bis @ClubKey.NotAfter.ToString()
+                        </div>
                     </div>
-                    <div class="text-end">
-                        <button class="btn btn-danger" @onclick="OnLock">
-                            <i class="bi bi-ban"></i> Sperren
-                        </button>
+                    <div>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle"
+                                    type="button" data-bs-toggle="dropdown">
+                                Verwalten
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="#" @onclick="OnRenew" @onclick:preventDefault>
+                                        <i class="bi bi-ban"></i> Erneuern    
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" @onclick="OnLock" @onclick:preventDefault>
+                                        <i class="bi bi-ban"></i> Sperren
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+                <div class="mb-3 col-md-auto mb-md-0 text-center">
+                    <QRCode Data="@ClubKey.Secret" Size="150px"/>
                 </div>
             </div>
         }

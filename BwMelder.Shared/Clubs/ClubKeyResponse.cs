@@ -16,6 +16,12 @@ public class ClubKeyResponse
     public required string ClubName { get; init; }
     
     /// <summary>
+    /// Key is expired after this date.
+    /// Set to null if no valid key.
+    /// </summary>
+    public required DateTime? NotAfter { get; init; }
+    
+    /// <summary>
     /// Secret of the valid access key.
     /// Set to null if the club has none.
     /// </summary>

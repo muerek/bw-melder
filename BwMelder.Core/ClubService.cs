@@ -40,6 +40,7 @@ public class ClubService(BwMelderDbContext db)
         {
             ClubId = c.Id,
             ClubName = c.Name,
+            NotAfter = c.AccessKeys.FirstOrDefault(k => k.IsValid)?.NotAfter,
             // There should only be a single valid access key.
             Secret = c.AccessKeys.FirstOrDefault(k => k.IsValid)?.Secret
         }).ToList();
