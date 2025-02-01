@@ -1,5 +1,9 @@
 @using BwMelder.Shared.Clubs
+@using BwMelder.Web.Utilities
+@using Microsoft.Extensions.Options
 @using PinguApps.Blazor.QRCode
+
+@inject IOptions<AppSettingsOptions> AppOptions
 
 <AccordionItem @key="ClubKey.ClubId">
     <HeaderContent>
@@ -24,7 +28,7 @@
                     </p>
                     <div class="mb-3">
                         <div class="input-group">
-                            <input class="form-control" readonly value="@ClubKey.Secret"/>
+                            <input class="form-control" readonly value="@SecretUrl"/>
                             <button class="btn btn-outline-secondary">
                                 <i class="bi bi-copy"></i>
                             </button>
@@ -48,7 +52,7 @@
                     </div>
                 </div>
                 <div class="mb-3 col-md-auto mb-md-0 text-center">
-                    <QRCode Data="@ClubKey.Secret" Size="150px"/>
+                    <QRCode Data="@SecretUrl" Size="150px"/>
                 </div>
             </div>
         }
@@ -64,6 +68,8 @@
 </AccordionItem>
 
 @code {
+
+    private string SecretUrl => $"{AppOptions.Value.BaseUri}go/{ClubKey.Secret ?? string.Empty}";
 
     private bool HasValidKey => ClubKey.Secret is not null;
 
