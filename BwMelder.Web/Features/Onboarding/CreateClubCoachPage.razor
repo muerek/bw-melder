@@ -25,14 +25,13 @@
     public CreateClubCoachRequest? ClubCoach { get; set; }
 
     [CascadingParameter]
-    private Task<AuthenticationState>? authenticationState { get; set; }
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
 
-    private UserInfo? userContext;
-
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         // Parameter is already set if form data was posted.
         ClubCoach ??= new();
+        ClubCoach.ClubId = await GetClubIdAsync();
     }
 
     private async Task AddClubCoachAsync()
@@ -40,16 +39,24 @@
         if (ClubCoach is null) { return; }
 
         // Always set the club ID to the current user's club.
-        userContext = await authenticationState.GetUserInfoAsync();
-        ClubCoach.ClubId = userContext?.ClubId ?? throw new ApplicationException();
+        ClubCoach.ClubId = await GetClubIdAsync();
 
         await ClubCoachService.CreateClubCoachAsync(ClubCoach);
 
         // Renew access key for the club to invalidate the used key.
         await AccessKeyService.RenewAccessAsync(ClubCoach.ClubId);
-        // Terminate existing session started with the old key to force a reauthentication.
+        // Terminate existing session started with the old key to force a re-authentication.
         await AuthenticationHandler.LogoutAsync();
 
         Navigation.NavigateTo("/onboarding/done");
+    }
+
+    /// <summary>
+    /// Helper method to get the club ID of the current user.
+    /// </summary>
+    private async Task<Guid> GetClubIdAsync()
+    {
+        var userContext = await AuthenticationState.GetUserInfoAsync();
+        return userContext?.ClubId ?? throw new ApplicationException();
     }
 }
