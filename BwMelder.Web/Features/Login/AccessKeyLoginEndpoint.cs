@@ -26,6 +26,9 @@ internal class AccessKeyLoginEndpoint : IDiscoverableEndpoint
         return Results.NotFound();
     }
 
+    /// <summary>
+    /// Redirects a club coach to their next step.
+    /// </summary>
     [Authorize(Roles = "ClubCoach")]
     private static async Task<IResult> RouteClubCoach(IAuthorizationService authorization, HttpContext context)
     {
