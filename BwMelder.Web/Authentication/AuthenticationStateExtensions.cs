@@ -12,21 +12,21 @@ public static class AuthenticationStateExtensions
     /// <returns>User information; null if no authenticated user.</returns>
     public static async Task<UserInfo?> GetUserInfoAsync(this Task<AuthenticationState>? task)
     {
-        if (task is not null)
-        {
-            var authenticationState = await task;
-            var user = authenticationState.User;
+        if (task is null) { return null; }
 
-            if (user?.Identity is not null && user.Identity.IsAuthenticated)
+        var authenticationState = await task;
+        var user = authenticationState.User;
+
+        if (user.Identity is not null && user.Identity.IsAuthenticated)
+        {
+            return new UserInfo
             {
-                return new UserInfo
-                {
-                    Role = user.FindFirstValue(ClaimTypes.Role) ?? string.Empty,
-                    ClubId = Guid.TryParse(user.FindFirstValue("ClubId"), out var guid) ? guid : null,
-                    ClubName = user.FindFirstValue("ClubName") ?? string.Empty
-                };
-            }
+                Role = user.FindFirstValue(ClaimTypes.Role) ?? string.Empty,
+                ClubId = Guid.TryParse(user.FindFirstValue("ClubId"), out var guid) ? guid : null,
+                ClubName = user.FindFirstValue("ClubName") ?? string.Empty
+            };
         }
+
         return null;
     }
 
@@ -41,11 +41,9 @@ public static class AuthenticationStateExtensions
     /// </remarks>
     public static async Task<UserInfo?> GetUserInfoAsync(this AuthenticationStateProvider? provider)
     {
-        if (provider is not null)
-        {
-            var task = provider.GetAuthenticationStateAsync();
-            return await task.GetUserInfoAsync();
-        }
-        return null;
+        if (provider is null) { return null; }
+
+        var task = provider.GetAuthenticationStateAsync();
+        return await task.GetUserInfoAsync();
     }
 }
