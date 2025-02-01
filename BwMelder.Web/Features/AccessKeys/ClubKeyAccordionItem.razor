@@ -1,0 +1,85 @@
+@using BwMelder.Shared.Clubs
+@using BwMelder.Web.Utilities
+@using Microsoft.Extensions.Options
+@using PinguApps.Blazor.QRCode
+
+@inject IOptions<AppSettingsOptions> AppOptions
+
+<AccordionItem @key="ClubKey.ClubId">
+    <HeaderContent>
+        @ClubKey.ClubName
+
+        @if (HasValidKey)
+        {
+            <span class="badge rounded-pill text-bg-success ms-3">Aktiv</span>
+        }
+        else
+        {
+            <span class="badge rounded-pill text-bg-danger ms-2">Gesperrt</span>
+        }
+    </HeaderContent>
+    <BodyContent>
+        @if (HasValidKey)
+        {
+            <div class="row">
+                <div class="col-md">
+                    <p>
+                        Zugang zur Registrierung über Link oder QR-Code:
+                    </p>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input class="form-control" readonly value="@SecretUrl"/>
+                            <button class="btn btn-outline-secondary">
+                                <i class="bi bi-copy"></i>
+                            </button>
+                        </div>
+                        <div class="form-text">
+                            Noch gültig bis @ClubKey.NotAfter.ToString()
+                        </div>
+                    </div>
+                    <div>
+                        <Dropdown>
+                            <DropdownButton>Verwalten</DropdownButton>
+                            <DropdownMenu>
+                                <DropdownItem OnClick="OnRenew">
+                                    <i class="bi bi-arrow-clockwise"></i> Erneuern
+                                </DropdownItem>
+                                <DropdownItem OnClick="OnLock" CssClass="link-danger">
+                                    <i class="bi bi-ban"></i> Sperren
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-auto mb-md-0 text-center">
+                    <QRCode Data="@SecretUrl" Size="150px"/>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="d-grid d-sm-block">
+                <button class="btn btn-primary" @onclick="OnRenew">
+                    <i class="bi bi-unlock-fill"></i> Freischalten
+                </button>
+            </div>
+        }
+    </BodyContent>
+</AccordionItem>
+
+@code {
+
+    private string SecretUrl => $"{AppOptions.Value.BaseUri}go/{ClubKey.Secret ?? string.Empty}";
+
+    private bool HasValidKey => ClubKey.Secret is not null;
+
+    [Parameter, EditorRequired]
+    public ClubKeyResponse ClubKey { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback OnLock { get; set; }
+
+    [Parameter]
+    public EventCallback OnRenew { get; set; }
+
+}

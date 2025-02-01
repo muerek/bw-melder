@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BwMelder.Core.Migrations
 {
     [DbContext(typeof(BwMelderDbContext))]
-    [Migration("20250129163510_InitializeDatabase")]
-    partial class InitializeDatabase
+    [Migration("20250131111806_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,9 +34,6 @@ namespace BwMelder.Core.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("NotAfter")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("NotBefore")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Secret")

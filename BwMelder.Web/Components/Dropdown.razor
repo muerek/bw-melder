@@ -1,0 +1,27 @@
+<div class="dropdown">
+    <button class="btn dropdown-toggle @ButtonStyle"
+            type="button" data-bs-toggle="dropdown">
+        @DropdownButton
+    </button>
+    <ul class="dropdown-menu">
+        @DropdownMenu
+    </ul>
+</div>
+
+@code {
+
+    /// <summary>
+    /// Bootstrap button style CSS class.
+    /// The <c>btn</c> and <c>dropdown-toggle</c> class are already set.
+    /// Use this to set the button type. Defaults to <c>btn-outline-secondary</c>.
+    /// </summary>
+    [Parameter]
+    public string ButtonStyle { get; set; } = "btn-outline-secondary";
+    
+    [Parameter, EditorRequired]
+    public RenderFragment DropdownButton { get; set; } = null!;
+
+    [Parameter]
+    public RenderFragment? DropdownMenu { get; set; }
+    
+}

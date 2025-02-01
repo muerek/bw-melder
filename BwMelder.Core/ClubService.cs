@@ -30,18 +30,19 @@ public class ClubService(BwMelderDbContext db)
 
     public async Task<IList<ClubKeyResponse>> GetClubKeysAsync()
     {
+        // Fetch club information along with any keys.
         var clubs = await db.Clubs
             .AsNoTracking()
             .Include(c => c.AccessKeys)
             .ToListAsync();
-
+        
         return clubs.Select(c => new ClubKeyResponse
         {
             ClubId = c.Id,
             ClubName = c.Name,
-            IsActive = c.AccessKeys.Any(k => k.IsValid),
-            // TODO: Include base URI.
-            SecretUrl = c.AccessKeys.FirstOrDefault()?.Secret
+            NotAfter = c.AccessKeys.FirstOrDefault(k => k.IsValid)?.NotAfter,
+            // There should only be a single valid access key.
+            Secret = c.AccessKeys.FirstOrDefault(k => k.IsValid)?.Secret
         }).ToList();
     }
 

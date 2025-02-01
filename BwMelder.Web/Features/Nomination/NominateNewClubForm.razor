@@ -5,9 +5,9 @@
 <EditForm Model="Nomination" OnValidSubmit="OnValidSubmit" FormName="@FormName" @attributes="AdditionalAttributes">
     <ObjectGraphDataAnnotationsValidator />
     <ValidationSummary />
-    <div class="row row-cols-md-2">
+    <div class="row row-cols-1 row-cols-md-2 g-3">
 
-        <div class="mb-3">
+        <div class="col mb-3">
             <label for="newclub-raceid" class="form-label">Rennen</label>
             <InputSelect class="form-select" id="newclub-raceid" required @bind-Value=Nomination!.RaceId>
                 <option value=""></option>
@@ -18,7 +18,7 @@
             </InputSelect>
         </div>
 
-        <div class="mb-3">
+        <div class="col mb-3">
             <label for="newclub-clubname" class="form-label">Vereinsname</label>
             <InputText id="newclub-clubname" class="form-control" @bind-Value="Nomination!.ClubName" />
         </div>

@@ -16,6 +16,9 @@ builder.Services.AddDbContext<BwMelderDbContext>(options =>
     options.UseSqlite(connectionString)
 );
 
+// Read app-specific configuration items.
+builder.GetBwMelderConfig();
+
 // Add application services.
 builder.Services.AddBwMelderServices();
 
@@ -47,6 +50,7 @@ app.UseAntiforgery();
 app.MapRazorComponents<BwMelder.Web.Features.App>()
     .AddInteractiveServerRenderMode();
 
+// Detect and map all API endpoints.
 app.MapDiscoverableEndpoints(typeof(Program).Assembly);
 
 app.Run();

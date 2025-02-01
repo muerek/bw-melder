@@ -1,0 +1,27 @@
+<li>
+    <a class="dropdown-item @CssClass" href="@Href" @onclick="OnClick" @onclick:preventDefault="OnClickPreventDefault">
+        @ChildContent
+    </a>
+</li>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Href { get; set; } = "#";
+    
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public bool OnClickPreventDefault { get; set; } = true;
+
+    /// <summary>
+    /// Any additional CSS classes to apply to this element.
+    /// The <c>dropdown-item</c> class is already set.
+    /// </summary>
+    [Parameter]
+    public string CssClass { get; set; } = string.Empty;
+
+}

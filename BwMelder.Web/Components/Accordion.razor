@@ -1,0 +1,23 @@
+<div class="accordion" id="@HtmlId">
+    <CascadingValue Value="this">
+        @ChildContent    
+    </CascadingValue>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// HTML ID of this accordion.
+    /// Child elements can access this through the cascading parameter.
+    /// They need access to it so all but one panel stay collapsed. 
+    /// </summary>
+    public string HtmlId { get; private set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        HtmlId = HtmlIdGenerator.GetId();
+    }
+
+}

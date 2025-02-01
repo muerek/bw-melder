@@ -23,5 +23,10 @@ class AccessKey
     
     public Guid ClubId { get; set; } = Guid.Empty;
     
+    /// <summary>
+    /// Evaluate if this access key is valid for login.
+    /// Considers both the expiration set by <see cref="NotAfter"/> and the <see cref="Active"/> flag.
+    /// </summary>
+    /// <remarks>Cannot be queried directly from the database.</remarks>
     public bool IsValid => Active && DateTime.Now <= NotAfter;
 }

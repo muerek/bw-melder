@@ -15,17 +15,30 @@ public class AccessKeyService(BwMelderDbContext db)
 {
     public async Task<AuthenticationResponse> AuthenticateAsync(string secret)
     {
+        // Try to find an access key with the given secret.
+        // There should never be more than one access key with the same secret.
+        // Throw if we happen to get more than one result.
         var accessKey = await db.AccessKeys
             .AsNoTracking()
-            .SingleOrDefaultAsync(k => k.IsValid && k.Secret == secret);
+            .SingleOrDefaultAsync(k => k.Secret == secret);
 
-        if (accessKey == null) return new AuthenticationResponse { IsSuccess = false };
-        
+        if (accessKey is not { IsValid: true })
+        {
+            return new AuthenticationResponse { IsSuccess = false };
+        }
+
         // Club is needed to get the club name and club coach.
         var club = await db.Clubs
             .AsNoTracking()
             .Include(c => c.ClubCoach)
-            .SingleAsync(c => c.Id == accessKey.ClubId);
+            .SingleOrDefaultAsync(c => c.Id == accessKey.ClubId);
+
+        // Check if this is an orphaned access key.
+        // TODO: Do not delete access keys if club is deleted.
+        if (club is null)
+        {
+            return new AuthenticationResponse { IsSuccess = false };
+        }
 
         return new AuthenticationResponse
         {
@@ -36,7 +49,6 @@ public class AccessKeyService(BwMelderDbContext db)
             ClubId = club.Id,
             ClubName = club.Name
         };
-
     }
 
     public async Task<string> RenewAccessAsync(Guid clubId)
@@ -81,10 +93,12 @@ public class AccessKeyService(BwMelderDbContext db)
             {
                 continue;
             }
+
             return secret;
         }
 
-        throw new Exception("Could not generate unique secret. While not impossible, this is highly unlikely to occur.");
+        throw new Exception(
+            "Could not generate unique secret. While not impossible, this is highly unlikely to occur.");
 
         // 14 characters should give us more than enough space to operate collision-free and prevent enumeration.
         string GenerateSecret() => RandomNumberGenerator.GetString(alphabet, 14);

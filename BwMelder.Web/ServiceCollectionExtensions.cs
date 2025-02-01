@@ -7,10 +7,11 @@ using BwMelder.Shared.Nomination;
 using BwMelder.Shared.Races;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using BwMelder.Web.Authentication;
+using BwMelder.Web.Utilities;
 
 namespace BwMelder.Web;
 
-static class ServiceCollectionExtensions
+internal static class ServiceCollectionExtensions
 {
     /// <summary>
     /// Registers the application's services.
