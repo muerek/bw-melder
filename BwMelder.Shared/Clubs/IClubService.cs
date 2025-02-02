@@ -33,4 +33,11 @@ public interface IClubService
     Task DeleteClubAsync(Guid clubId);
 
     Task<IList<ClubKeyResponse>> GetClubKeysAsync();
+    
+    /// <summary>
+    /// Gets all entries associated with this club.
+    /// </summary>
+    /// <param name="clubId"></param>
+    /// <returns></returns>
+    Task<ClubEntriesResponse> GetClubEntriesAsync(Guid clubId);
 }

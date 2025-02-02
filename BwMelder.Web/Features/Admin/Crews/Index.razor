@@ -19,28 +19,30 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var crewStatus in CrewStatuses)
+        @foreach(var crew in Crews)
         {
             <tr>
-                <td>@crewStatus.Race.DisplayName</td>
-                <td>@crewStatus.Club.Name</td>
-                <td class="@GetStatusClass(crewStatus)">@crewStatus.CurrentAthleteCount von @crewStatus.TargetAthleteCount</td>
+                <td>@crew.Race.DisplayName</td>
+                <td>@crew.Club.Name</td>
+                <td class="@GetStatusClass(crew)">
+                    @crew.Status.CurrentAthleteCount von @crew.Status.TargetAthleteCount
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
 @code {
-    private IList<CrewStatusResponse> CrewStatuses { get; set; } = [];
+    private IList<CrewSummaryResponse> Crews { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
     {
-        CrewStatuses = await CrewService.GetCrewStatusesAsync();
+        Crews = await CrewService.GetAllCrewsAsync();
     }
 
-    private string GetStatusClass(CrewStatusResponse crewStatus)
+    private static string GetStatusClass(CrewSummaryResponse crew)
     {
-        return (crewStatus.CurrentAthleteCount, crewStatus.TargetAthleteCount) switch
+        return (crew.Status.CurrentAthleteCount, crew.Status.TargetAthleteCount) switch
         {
             // No athletes were added yet, red highlight.
             (0, _) => "table-danger",

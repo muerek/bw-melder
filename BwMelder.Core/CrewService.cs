@@ -27,14 +27,15 @@ public class CrewService(BwMelderDbContext db) : ICrewService
         return crew.Id;
     }
 
-    public async Task<IList<CrewStatusResponse>> GetCrewStatusesAsync()
+    public async Task<IList<CrewSummaryResponse>> GetAllCrewsAsync()
     {
+        // TODO: Use split queries here?
         return await db.Crews
             .AsNoTracking()
             .Include(c => c.Race)
             .Include(c => c.Club)
             .Include(c => c.Athletes)
-            .Select(c => new CrewStatusResponse
+            .Select(c => new CrewSummaryResponse
             {
                 CrewId = c.Id,
                 Club = new ClubResponse
@@ -47,8 +48,11 @@ public class CrewService(BwMelderDbContext db) : ICrewService
                     Id = c.Race.Id,
                     DisplayName = c.Race.FullName
                 },
-                CurrentAthleteCount = c.Athletes.Count,
-                TargetAthleteCount = c.Race.AthleteCount
+                Status = new CrewRegistrationStatusResponse
+                {
+                    CurrentAthleteCount = c.Athletes.Count,
+                    TargetAthleteCount = c.Race.AthleteCount
+                }
             })
             .ToListAsync();
     }

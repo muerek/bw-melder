@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using BwMelder.Shared.Clubs;
 using BwMelder.Core.Data;
 using System.Diagnostics.Tracing;
+using BwMelder.Shared.Crews;
+using BwMelder.Shared.Races;
+using BwMelder.Shared.TeamCoaches;
 
 namespace BwMelder.Core;
 
@@ -46,12 +49,42 @@ public class ClubService(BwMelderDbContext db)
         }).ToList();
     }
 
+    public async Task<ClubEntriesResponse> GetClubEntriesAsync(Guid clubId)
+    {
+        var crews = await db.Crews
+            .AsNoTracking()
+            .Include(c => c.Race)
+            .Where(c => c.Id == clubId)
+            .Select(c => new ClubCrewStatusResponse
+            {
+                CrewId = c.Id,
+                Race = new RaceSummaryResponse
+                {
+                    DisplayName = c.Race.Name,
+                    Id = c.Race.Id,
+                },
+                Status = new CrewRegistrationStatusResponse
+                {
+                    CurrentAthleteCount = c.Athletes.Count,
+                    TargetAthleteCount = c.Race.AthleteCount
+                }
+            })
+            .ToListAsync();
+        
+        // TODO: Add projection after DTO is implemented.
+        var teamCoaches = await db.TeamCoaches
+            .AsNoTracking()
+            .Select(tc => new TeamCoachResponse())
+            .ToListAsync();
+        
+        return new ClubEntriesResponse { Crews = crews, TeamCoaches = teamCoaches };
+    }
+
     public async Task<ClubResponse?> GetClubAsync(Guid clubId)
     {
         return await db.Clubs
             .AsNoTracking()
-            .Select(c => new ClubResponse
-            { Id = c.Id, Name = c.Name })
+            .Select(c => new ClubResponse { Id = c.Id, Name = c.Name })
             .SingleOrDefaultAsync();
     }
 
