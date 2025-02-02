@@ -1,9 +1,12 @@
+﻿using BwMelder.Shared.Clubs;
+using BwMelder.Shared.Races;
+
 namespace BwMelder.Shared.Crews;
 
 /// <summary>
-/// A service response summarizing the registration status of a crew.
+/// A service response summarizing the registration status for a crew.
 /// </summary>
-public class CrewRegistrationStatusResponse
+public class RegistrationProgressResponse
 {
     /// <summary>
     /// Number of athletes that have been registered for this crew.

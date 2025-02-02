@@ -25,7 +25,7 @@
                 <td>@crew.Race.DisplayName</td>
                 <td>@crew.Club.Name</td>
                 <td class="@GetStatusClass(crew)">
-                    @crew.Status.CurrentAthleteCount von @crew.Status.TargetAthleteCount
+                    @crew.RegistrationProgress.CurrentAthleteCount von @crew.RegistrationProgress.TargetAthleteCount
                 </td>
             </tr>
         }
@@ -33,16 +33,16 @@
 </table>
 
 @code {
-    private IList<CrewSummaryResponse> Crews { get; set; } = [];
+    private IList<CrewResponse> Crews { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
     {
         Crews = await CrewService.GetAllCrewsAsync();
     }
 
-    private static string GetStatusClass(CrewSummaryResponse crew)
+    private static string GetStatusClass(CrewResponse crew)
     {
-        return (crew.Status.CurrentAthleteCount, crew.Status.TargetAthleteCount) switch
+        return (crew.RegistrationProgress.CurrentAthleteCount, crew.RegistrationProgress.TargetAthleteCount) switch
         {
             // No athletes were added yet, red highlight.
             (0, _) => "table-danger",

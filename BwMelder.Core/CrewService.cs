@@ -14,6 +14,28 @@ namespace BwMelder.Core;
 
 public class CrewService(BwMelderDbContext db) : ICrewService
 {
+    public async Task<IList<ClubCrewResponse>> GetCrewsByClubAsync(Guid clubId)
+    {
+        return await db.Crews
+            .Where(c => c.ClubId == clubId)
+            .Include(c => c.Race)
+            .Select(c => new ClubCrewResponse
+            {
+                CrewId = c.Id,
+                RegistrationProgress = new RegistrationProgressResponse
+                {
+                    CurrentAthleteCount = c.Athletes.Count,
+                    TargetAthleteCount = c.Race.AthleteCount
+                },
+                Race = new RaceSummaryResponse
+                {
+                    DisplayName = c.Race.FullName,
+                    Id = c.Race.Id,
+                }
+            })
+            .ToListAsync();
+    }
+
     public async Task<Guid> CreateCrewAsync(CreateCrewRequest request)
     {
         var crew = new Crew
@@ -27,7 +49,7 @@ public class CrewService(BwMelderDbContext db) : ICrewService
         return crew.Id;
     }
 
-    public async Task<IList<CrewSummaryResponse>> GetAllCrewsAsync()
+    public async Task<IList<CrewResponse>> GetAllCrewsAsync()
     {
         // TODO: Use split queries here?
         return await db.Crews
@@ -35,7 +57,7 @@ public class CrewService(BwMelderDbContext db) : ICrewService
             .Include(c => c.Race)
             .Include(c => c.Club)
             .Include(c => c.Athletes)
-            .Select(c => new CrewSummaryResponse
+            .Select(c => new CrewResponse
             {
                 CrewId = c.Id,
                 Club = new ClubResponse
@@ -48,7 +70,7 @@ public class CrewService(BwMelderDbContext db) : ICrewService
                     Id = c.Race.Id,
                     DisplayName = c.Race.FullName
                 },
-                Status = new CrewRegistrationStatusResponse
+                RegistrationProgress = new RegistrationProgressResponse
                 {
                     CurrentAthleteCount = c.Athletes.Count,
                     TargetAthleteCount = c.Race.AthleteCount

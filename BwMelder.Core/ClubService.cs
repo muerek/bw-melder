@@ -9,7 +9,7 @@ using BwMelder.Shared.TeamCoaches;
 
 namespace BwMelder.Core;
 
-public class ClubService(BwMelderDbContext db)
+public class ClubService(BwMelderDbContext db, ICrewService crewService)
     : IClubService
 {
     public async Task<Guid> CreateClubAsync(CreateClubRequest request)
@@ -51,31 +51,10 @@ public class ClubService(BwMelderDbContext db)
 
     public async Task<ClubEntriesResponse> GetClubEntriesAsync(Guid clubId)
     {
-        var crews = await db.Crews
-            .AsNoTracking()
-            .Include(c => c.Race)
-            .Where(c => c.Id == clubId)
-            .Select(c => new ClubCrewStatusResponse
-            {
-                CrewId = c.Id,
-                Race = new RaceSummaryResponse
-                {
-                    DisplayName = c.Race.Name,
-                    Id = c.Race.Id,
-                },
-                Status = new CrewRegistrationStatusResponse
-                {
-                    CurrentAthleteCount = c.Athletes.Count,
-                    TargetAthleteCount = c.Race.AthleteCount
-                }
-            })
-            .ToListAsync();
+        var crews = await crewService.GetCrewsByClubAsync(clubId);
         
-        // TODO: Add projection after DTO is implemented.
-        var teamCoaches = await db.TeamCoaches
-            .AsNoTracking()
-            .Select(tc => new TeamCoachResponse())
-            .ToListAsync();
+        // TODO: Replace with actual implementation.
+        var teamCoaches = new List<TeamCoachResponse>();
         
         return new ClubEntriesResponse { Crews = crews, TeamCoaches = teamCoaches };
     }

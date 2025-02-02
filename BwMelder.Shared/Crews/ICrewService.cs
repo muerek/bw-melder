@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BwMelder.Shared.Clubs;
 
 namespace BwMelder.Shared.Crews;
 
@@ -11,7 +12,9 @@ namespace BwMelder.Shared.Crews;
 /// </summary>
 public interface ICrewService
 {
-    Task<IList<CrewSummaryResponse>> GetAllCrewsAsync();
+    Task<IList<CrewResponse>> GetAllCrewsAsync();
+    
+    Task<IList<ClubCrewResponse>> GetCrewsByClubAsync(Guid clubId);
 
     Task<Guid> CreateCrewAsync(CreateCrewRequest request);
 }

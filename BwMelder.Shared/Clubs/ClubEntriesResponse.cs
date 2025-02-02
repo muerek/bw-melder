@@ -7,7 +7,7 @@ namespace BwMelder.Shared.Clubs;
 /// </summary>
 public class ClubEntriesResponse
 {
-    public required IList<ClubCrewStatusResponse> Crews { get; set; }
+    public required IList<ClubCrewResponse> Crews { get; set; }
     
     public required IList<TeamCoachResponse> TeamCoaches { get; set; }
 }
