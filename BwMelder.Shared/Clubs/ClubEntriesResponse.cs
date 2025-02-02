@@ -1,3 +1,4 @@
+using BwMelder.Shared.Crews;
 using BwMelder.Shared.TeamCoaches;
 
 namespace BwMelder.Shared.Clubs;

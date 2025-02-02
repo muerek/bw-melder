@@ -1,7 +1,6 @@
-using BwMelder.Shared.Crews;
 using BwMelder.Shared.Races;
 
-namespace BwMelder.Shared.Clubs;
+namespace BwMelder.Shared.Crews;
 
 /// <summary>
 /// A service response describing a crew of a club and its registration progress.
