@@ -34,6 +34,6 @@ internal class AccessKeyLoginEndpoint : IDiscoverableEndpoint
     {
         // Determine if onboarding must be completed.
         var authorizationResult = await authorization.AuthorizeAsync(context.User, "ClubIsOnboarded");
-        return Results.Redirect(authorizationResult.Succeeded ? "/" : "/onboarding/welcome");
+        return Results.Redirect(authorizationResult.Succeeded ? "/registration" : "/onboarding/welcome");
     }
 }
