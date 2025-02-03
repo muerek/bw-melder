@@ -1,0 +1,19 @@
+@using BwMelder.Shared.Races
+
+<option value=""></option>
+@foreach (var race in OrderedRaces)
+{
+    <option value="@race.Id">
+        @race.Number - @race.Name
+    </option>
+}
+
+@code {
+
+    private IOrderedEnumerable<RaceSummaryResponse> OrderedRaces =>
+        Races.OrderBy(r => r.Number.Length).ThenBy(r => r.Number);
+    
+    [Parameter, EditorRequired]
+    public IEnumerable<RaceSummaryResponse> Races { get; set; } = [];
+    
+}

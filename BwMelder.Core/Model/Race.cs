@@ -39,9 +39,4 @@ class Race
     /// This is all rowers and coxes.
     /// </summary>
     public int AthleteCount => RowerCount + (Coxed ? 1 : 0);
-
-    /// <summary>
-    /// Full friendly name of the race.
-    /// </summary>
-    public string FullName => $"{Number} - {Name}";
 }

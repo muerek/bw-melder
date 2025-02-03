@@ -9,9 +9,20 @@ namespace BwMelder.Shared.Races;
 /// <summary>
 /// A service response with brief information on a race.
 /// </summary>
-public class RaceSummaryResponse
+public record RaceSummaryResponse
 {
-    public required int Id { get; set; }
+    /// <summary>
+    /// Unique ID assigned to this race in the database.
+    /// </summary>
+    public required int Id { get; init; }
 
-    public required string DisplayName { get; set; }
+    /// <summary>
+    /// Race number as referenced in official documents.
+    /// </summary>
+    public required string Number { get; init; }
+
+    /// <summary>
+    /// Descriptive name of the race.
+    /// </summary>
+    public required string Name { get; init; }
 }

@@ -1,6 +1,6 @@
 namespace BwMelder.Shared.TeamCoaches;
 
-public class TeamCoachResponse
+public record TeamCoachResponse
 {
     // TODO: Implement class.
 }

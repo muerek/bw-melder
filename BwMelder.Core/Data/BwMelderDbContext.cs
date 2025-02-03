@@ -91,7 +91,7 @@ public class BwMelderDbContext(DbContextOptions<BwMelderDbContext> options) : Db
     /// Reads the default race data from an embedded resource file.
     /// </summary>
     /// <returns>List of races, or null if nothing was found.</returns>
-    private IList<Race>? GetDefaultRaces()
+    private static IList<Race>? GetDefaultRaces()
     {
         // Try to find and open seed data file in assembly.
         var assembly = Assembly.GetExecutingAssembly();

@@ -12,17 +12,18 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>Rennen</th>
-            <th>Verein</th>
-            <th>Status</th>
-        </tr>
+    <tr>
+        <th colspan="2">Rennen</th>
+        <th>Verein</th>
+        <th>Status</th>
+    </tr>
     </thead>
     <tbody>
         @foreach(var crew in Crews)
         {
             <tr>
-                <td>@crew.Race.DisplayName</td>
+                <td>@crew.Race.Number</td>
+                <td>@crew.Race.Name</td>
                 <td>@crew.Club.Name</td>
                 <td class="@GetStatusClass(crew)">
                     @crew.RegistrationProgress.CurrentAthleteCount von @crew.RegistrationProgress.TargetAthleteCount
@@ -33,7 +34,7 @@
 </table>
 
 @code {
-    private IList<CrewResponse> Crews { get; set; } = [];
+    private IReadOnlyList<CrewResponse> Crews { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
     {

@@ -10,15 +10,30 @@ namespace BwMelder.Shared.Authentication;
 /// DTO representing the response to a authentication request.
 /// For successful authentications, it returns additional user data.
 /// </summary>
-public class AuthenticationResponse
+public record AuthenticationResponse
 {
-    public required bool IsSuccess { get; set; }
+    /// <summary>
+    /// Flag if the authentication was successful.
+    /// </summary>
+    public required bool IsSuccess { get; init; }
 
-    public bool OnboardingRequired { get; set; } = false;
+    /// <summary>
+    /// Flag to indicate if the user should complete the onboarding process for their club.
+    /// </summary>
+    public bool OnboardingRequired { get; init; } = false;
 
-    public string? Role { get; set; }
+    /// <summary>
+    /// Role assigned to the user.
+    /// </summary>
+    public string? Role { get; init; }
 
-    public Guid? ClubId { get; set; }
+    /// <summary>
+    /// Unique ID of the club this user belongs to.
+    /// </summary>
+    public Guid? ClubId { get; init; }
 
-    public string? ClubName { get; set; }
+    /// <summary>
+    /// Name of the club this user belongs to.
+    /// </summary>
+    public string? ClubName { get; init; }
 }

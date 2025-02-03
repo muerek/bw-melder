@@ -31,7 +31,7 @@ public class ClubService(BwMelderDbContext db, ICrewService crewService)
             .ExecuteDeleteAsync();
     }
 
-    public async Task<IList<ClubKeyResponse>> GetClubKeysAsync()
+    public async Task<IReadOnlyList<ClubKeyResponse>> GetClubKeysAsync()
     {
         // Fetch club information along with any keys.
         var clubs = await db.Clubs
@@ -67,7 +67,7 @@ public class ClubService(BwMelderDbContext db, ICrewService crewService)
             .SingleOrDefaultAsync();
     }
 
-    public async Task<IList<ClubResponse>> GetClubsAsync()
+    public async Task<IReadOnlyList<ClubResponse>> GetClubsAsync()
     {
         return await db.Clubs
             .AsNoTracking()

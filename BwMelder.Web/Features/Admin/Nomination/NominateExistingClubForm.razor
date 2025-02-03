@@ -9,20 +9,16 @@
 
         <div class="col mb-3">
             <label for="existingclub-raceid" class="form-label">Rennen</label>
-            <InputSelect class="form-select" id="existingclub-raceid" required @bind-Value=Nomination!.RaceId>
-                <option value=""></option>
-                @foreach (var race in Races)
-                {
-                    <option value="@race.Id">@race.DisplayName</option>
-                }
+            <InputSelect class="form-select" id="existingclub-raceid" required @bind-Value="Nomination!.RaceId">
+                <RaceOptions Races="Races" />
             </InputSelect>
         </div>
 
         <div class="col mb-3">
             <label for="existingclub-clubid" class="form-label">Verein</label>
-            <InputSelect class="form-select" id="existingclub-clubid" required @bind-Value=Nomination!.ClubId>
+            <InputSelect class="form-select" id="existingclub-clubid" required @bind-Value="Nomination!.ClubId">
                 <option value=""></option>
-                @foreach (var club in Clubs)
+                @foreach (var club in Clubs.OrderBy(c => c.Name))
                 {
                     <option value="@club.Id">@club.Name</option>
                 }
@@ -38,10 +34,10 @@
     public NominateExistingClubRequest? Nomination { get; set; }
 
     [Parameter]
-    public IList<ClubResponse> Clubs { get; set; } = [];
+    public IReadOnlyList<ClubResponse> Clubs { get; set; } = [];
 
     [Parameter]
-    public IList<RaceSummaryResponse> Races { get; set; } = [];
+    public IReadOnlyList<RaceSummaryResponse> Races { get; set; } = [];
 
     [Parameter]
     public EventCallback OnValidSubmit { get; set; }

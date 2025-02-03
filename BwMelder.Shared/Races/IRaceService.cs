@@ -15,5 +15,5 @@ public interface IRaceService
     /// Gets a list of all races.
     /// </summary>
     /// <returns></returns>
-    Task<IList<RaceSummaryResponse>> GetRacesAsync();
+    Task<IReadOnlyList<RaceSummaryResponse>> GetRacesAsync();
 }

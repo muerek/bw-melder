@@ -14,7 +14,7 @@ namespace BwMelder.Core;
 
 public class CrewService(BwMelderDbContext db) : ICrewService
 {
-    public async Task<IList<ClubCrewResponse>> GetCrewsByClubAsync(Guid clubId)
+    public async Task<IReadOnlyList<ClubCrewResponse>> GetCrewsByClubAsync(Guid clubId)
     {
         return await db.Crews
             .Where(c => c.ClubId == clubId)
@@ -29,8 +29,9 @@ public class CrewService(BwMelderDbContext db) : ICrewService
                 },
                 Race = new RaceSummaryResponse
                 {
-                    DisplayName = c.Race.FullName,
                     Id = c.Race.Id,
+                    Number = c.Race.Number,
+                    Name = c.Race.Name
                 }
             })
             .ToListAsync();
@@ -49,7 +50,7 @@ public class CrewService(BwMelderDbContext db) : ICrewService
         return crew.Id;
     }
 
-    public async Task<IList<CrewResponse>> GetAllCrewsAsync()
+    public async Task<IReadOnlyList<CrewResponse>> GetAllCrewsAsync()
     {
         // TODO: Use split queries here?
         return await db.Crews
@@ -68,7 +69,8 @@ public class CrewService(BwMelderDbContext db) : ICrewService
                 Race = new RaceSummaryResponse
                 {
                     Id = c.Race.Id,
-                    DisplayName = c.Race.FullName
+                    Number = c.Race.Number,
+                    Name = c.Race.Name
                 },
                 RegistrationProgress = new RegistrationProgressResponse
                 {

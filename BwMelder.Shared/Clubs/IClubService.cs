@@ -16,7 +16,7 @@ public interface IClubService
     /// Gets a list of all clubs.
     /// </summary>
     /// <returns>List of all clubs.</returns>
-    Task<IList<ClubResponse>> GetClubsAsync();
+    Task<IReadOnlyList<ClubResponse>> GetClubsAsync();
 
     /// <summary>
     /// Gets the club with the given ID.
@@ -32,7 +32,7 @@ public interface IClubService
     /// <returns></returns>
     Task DeleteClubAsync(Guid clubId);
 
-    Task<IList<ClubKeyResponse>> GetClubKeysAsync();
+    Task<IReadOnlyList<ClubKeyResponse>> GetClubKeysAsync();
     
     /// <summary>
     /// Gets all entries associated with this club.

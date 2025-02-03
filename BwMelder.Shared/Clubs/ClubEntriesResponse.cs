@@ -6,9 +6,9 @@ namespace BwMelder.Shared.Clubs;
 /// <summary>
 /// A service response holding all entries made and to be made by a club.
 /// </summary>
-public class ClubEntriesResponse
+public record ClubEntriesResponse
 {
-    public required IList<ClubCrewResponse> Crews { get; set; }
+    public required IReadOnlyList<ClubCrewResponse> Crews { get; init; }
     
-    public required IList<TeamCoachResponse> TeamCoaches { get; set; }
+    public required IReadOnlyList<TeamCoachResponse> TeamCoaches { get; init; }
 }

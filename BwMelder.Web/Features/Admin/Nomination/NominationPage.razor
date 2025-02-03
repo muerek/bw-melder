@@ -15,11 +15,11 @@
 <div class="py-3">
     <InputRadioGroup Name="club-radio" @bind-Value="ShowExistingClubForm" @bind-Value:after="SyncRaceSelection">
         <div class="form-check form-check-inline">
-            <InputRadio Value="true" class="form-check-input" id="existingclub-radio" />
+            <InputRadio Value="true" class="form-check-input" id="existingclub-radio"/>
             <label class="form-check-label" for="existingclub-radio">Für bestehenden Verein</label>
         </div>
         <div class="form-check form-check-inline">
-            <InputRadio Value="false" class="form-check-input" id="newclub-radio" />
+            <InputRadio Value="false" class="form-check-input" id="newclub-radio"/>
             <label class="form-check-label" for="newclub-radio">Für neuen Verein</label>
         </div>
     </InputRadioGroup>
@@ -28,22 +28,22 @@
 @if (ShowExistingClubForm)
 {
     <NominateExistingClubForm Nomination="ExistingClubNomination" OnValidSubmit="NominateExistingClubAsync"
-    FormName="NominateExistingClubForm" Clubs="Clubs" Races="Races"
-    id="existingclub-form" />
+                              FormName="NominateExistingClubForm" Clubs="Clubs" Races="Races"
+                              id="existingclub-form"/>
 }
 else
 {
     <NominateNewClubForm Nomination="NewClubNomination" OnValidSubmit="NominateNewClubAsync"
-    FormName="NominateNewClubForm" Clubs="Clubs" Races="Races"
-    id="newclub-form" />
+                         FormName="NominateNewClubForm" Clubs="Clubs" Races="Races"
+                         id="newclub-form"/>
 }
 
 @*For use with static SSR*@
 @*<script src="/Components/Pages/Admin/Crews/NominateCrew.razor.js"></script>*@
 
 @code {
-    private IList<ClubResponse> Clubs { get; set; } = [];
-    private IList<RaceSummaryResponse> Races { get; set; } = [];
+    private IReadOnlyList<ClubResponse> Clubs { get; set; } = [];
+    private IReadOnlyList<RaceSummaryResponse> Races { get; set; } = [];
 
     //[SupplyParameterFromForm(FormName = "NominateExistingClubForm")]
     private NominateExistingClubRequest ExistingClubNomination { get; set; } = new();
@@ -61,16 +61,12 @@ else
 
     private async Task NominateExistingClubAsync()
     {
-        if (ExistingClubNomination is null) { return; }
-
         await NominationService.NominateAsync(ExistingClubNomination);
         Navigation.NavigateTo("/admin/crews");
     }
 
     private async Task NominateNewClubAsync()
     {
-        if (NewClubNomination is null) { return; }
-
         await NominationService.NominateAsync(NewClubNomination);
         Navigation.NavigateTo("/admin/crews");
     }
@@ -81,13 +77,8 @@ else
     private void SyncRaceSelection()
     {
         // Fires after the toggle event, so the flag represents the new state.
-        if (ShowExistingClubForm)
-        {
-            ExistingClubNomination.RaceId = NewClubNomination.RaceId;
-        }
-        else
-        {
-            NewClubNomination.RaceId = ExistingClubNomination.RaceId;
-        }
+        if (ShowExistingClubForm) { ExistingClubNomination.RaceId = NewClubNomination.RaceId; }
+        else { NewClubNomination.RaceId = ExistingClubNomination.RaceId; }
     }
+
 }

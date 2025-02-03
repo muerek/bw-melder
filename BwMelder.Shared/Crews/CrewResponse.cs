@@ -6,25 +6,25 @@ namespace BwMelder.Shared.Crews;
 /// <summary>
 /// A service response describing a crew.
 /// </summary>
-public class CrewResponse
+public record CrewResponse
 {
     /// <summary>
     /// Unique ID of the crew.
     /// </summary>
-    public required Guid CrewId { get; set; }
+    public required Guid CrewId { get; init; }
     
     /// <summary>
     /// Registration progress for this crew.
     /// </summary>
-    public required RegistrationProgressResponse RegistrationProgress  { get; set; }
+    public required RegistrationProgressResponse RegistrationProgress  { get; init; }
     
     /// <summary>
     /// Club the crew belongs to.
     /// </summary>
-    public required ClubResponse Club { get; set; }
+    public required ClubResponse Club { get; init; }
     
     /// <summary>
     /// Race this crew starts in.
     /// </summary>
-    public required RaceSummaryResponse Race { get; set; }
+    public required RaceSummaryResponse Race { get; init; }
 }
