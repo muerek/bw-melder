@@ -34,6 +34,7 @@ public class ClubService(BwMelderDbContext db, ICrewService crewService)
     public async Task<IReadOnlyList<ClubKeyResponse>> GetClubKeysAsync()
     {
         // Fetch club information along with any keys.
+        // Cannot project into DTOs directly because IsValid cannot be processed in the database.
         var clubs = await db.Clubs
             .AsNoTracking()
             .Include(c => c.AccessKeys)
