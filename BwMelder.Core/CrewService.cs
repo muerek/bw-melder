@@ -52,12 +52,13 @@ public class CrewService(BwMelderDbContext db) : ICrewService
 
     public async Task<IReadOnlyList<CrewResponse>> GetAllCrewsAsync()
     {
-        // TODO: Use split queries here?
         return await db.Crews
             .AsNoTracking()
             .Include(c => c.Race)
             .Include(c => c.Club)
             .Include(c => c.Athletes)
+            .OrderBy(c => c.Race.Number.Length)
+            .ThenBy(c => c.Race.Number)
             .Select(c => new CrewResponse
             {
                 CrewId = c.Id,
