@@ -1,6 +1,8 @@
 @page "/registration"
 
 @using BwMelder.Shared.Clubs
+@using BwMelder.Shared.Crews
+@using BwMelder.Shared.TeamCoaches
 @using BwMelder.Web.Authentication
 
 @inject IClubService ClubService
@@ -12,21 +14,10 @@
     für @userInfo?.ClubName
 </p>
 
-@if (entries is not null)
-{
-    <h2>Offen</h2>
-
-    @foreach (var crew in entries.Crews)
-    {
-        <p>
-            @crew.Race.Name - @crew.RegistrationProgress.CurrentAthleteCount von @crew.RegistrationProgress.TargetAthleteCount
-        </p>
-    }
-
-    <h2>Erledigt</h2>
-}
+<ClubEntriesOverview Crews="entries.Crews" />
 
 @code {
+
     private ClubEntriesResponse? entries;
     
     [CascadingParameter]
@@ -38,6 +29,7 @@
     {
         userInfo = await AuthenticationState.GetUserInfoAsync();
         var clubId = userInfo?.ClubId ?? throw new ApplicationException("Cannot access Club ID to process request.");
+        
         entries = await ClubService.GetClubEntriesAsync(clubId);
     }
 }
