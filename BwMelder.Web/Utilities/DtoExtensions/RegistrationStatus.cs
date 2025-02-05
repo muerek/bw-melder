@@ -3,7 +3,7 @@ namespace BwMelder.Web.Utilities.DtoExtensions;
 /// <summary>
 /// Represents the status to describe the registration progress.
 /// </summary>
-internal enum RegistrationStatus
+public enum RegistrationStatus
 {
     Unknown = 0,
     New = 1,

@@ -1,0 +1,16 @@
+<i class="bi @GetIconClass() fs-4"></i>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public RegistrationStatus Status { get; set; }
+
+    private string GetIconClass() => Status switch
+    {
+        RegistrationStatus.New => "bi-plus-circle text-primary",
+        RegistrationStatus.InProgress => "bi-circle-half text-primary",
+        RegistrationStatus.Completed => "bi-check-circle-fill text-success",
+        _ => "bi-question-circle"
+    };
+
+}

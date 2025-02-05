@@ -4,47 +4,16 @@
 
 <h2>Mannschaften</h2>
 
-<div class="list-group">
-    @if (Crews.Count == 0)
-    {
-        <a class="list-group-item list-group-item-action disabled">
-            Keine
-        </a>
-    }
-    else
-    {
-        @foreach (var crew in newCrews)
-        {
-            <a href="#" class="list-group-item list-group-item-action">
-                <div>
-                    <i class="bi bi-plus-circle-dotted text-primary"></i> @crew.Race.Number @crew.Race.Name
-                </div>
-            </a>
-        }
-        @foreach (var crew in inProgressCrews)
-        {
-            <a href="#" class="list-group-item list-group-item-action">
-                <div>
-                    <i class="bi bi-circle-half"></i> @crew.Race.Number @crew.Race.Name
-                </div>
-            </a>
-        }
-        @foreach (var crew in completedCrews)
-        {
-            <a href="#" class="list-group-item list-group-item-action">
-                <div>
-                    <i class="bi bi-check-circle-fill text-success"></i> @crew.Race.Number @crew.Race.Name
-                </div>
-            </a>
-        }
-    }
-</div>
+<h3>Offen</h3>
+<ClubCrewList Crews="incompleteCrews" />
+
+<h3>Erledigt</h3>
+<ClubCrewList Crews="completedCrews" />
 
 
 @code {
-
-    private IReadOnlyList<ClubCrewResponse> newCrews = [];
-    private IReadOnlyList<ClubCrewResponse> inProgressCrews = [];
+    
+    private IReadOnlyList<ClubCrewResponse> incompleteCrews = [];
     private IReadOnlyList<ClubCrewResponse> completedCrews = [];
 
     [Parameter, EditorRequired]
@@ -52,9 +21,8 @@
 
     protected override void OnInitialized()
     {
-        newCrews = Crews.Where(c => c.RegistrationProgress.IsNew()).ToList();
-        inProgressCrews = Crews.Where(c => c.RegistrationProgress.IsInProgress()).ToList();
         completedCrews = Crews.Where(c => c.RegistrationProgress.IsComplete()).ToList();
+        incompleteCrews = Crews.Where(c => !c.RegistrationProgress.IsComplete()).ToList();
     }
 
 }
