@@ -1,0 +1,22 @@
+@if (Href is not null)
+{
+    <a href="@Href" class="list-group-item list-group-item-action">
+        @ChildContent
+    </a>
+}
+else
+{
+    <div class="list-group-item list-group-item-action">
+        @ChildContent
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public string? Href { get; set; } = null;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}
