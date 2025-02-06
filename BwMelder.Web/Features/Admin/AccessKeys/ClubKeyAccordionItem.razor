@@ -5,7 +5,7 @@
 
 @inject IOptions<AppSettingsOptions> AppOptions
 
-<AccordionItem @key="ClubKey.ClubId">
+<AccordionItem TItem="ClubKeyResponse" @key="ClubKey.ClubId">
     <HeaderContent>
         @ClubKey.ClubName
 

@@ -1,8 +1,8 @@
 @using BwMelder.Shared.Crews
 
-<ListGroup Items="Crews" @Context="crew">
+<ListGroup Items="Crews" Context="crew">
     <ItemTemplate>
-        <ListGroupItem Href="/registration/crew/@crew.CrewId">
+        <ListGroupItem Href=@($"/registration/crew/{crew.CrewId}")>
             <div class="d-flex align-items-center">
                 <div class="pe-3">
                     <RegistrationStatusIcon Status="crew.RegistrationProgress.GetStatus()"/>

@@ -17,13 +17,12 @@
     Bei Bedarf können die Zugänge erneuert oder gesperrt werden.
 </p>
 
-<Accordion>
-    @foreach (var clubKey in clubKeys!)
-    {
+<Accordion Items="clubKeys" Context="clubKey">
+    <ItemTemplate>
         <ClubKeyAccordionItem ClubKey="clubKey"
-                     OnRenew="() => RenewAccess(clubKey.ClubId)"
-                     OnLock="() => LockAccess(clubKey.ClubId)" />
-    }    
+                              OnRenew="() => RenewAccess(clubKey.ClubId)"
+                              OnLock="() => LockAccess(clubKey.ClubId)" />
+    </ItemTemplate>
 </Accordion>
 
 

@@ -1,3 +1,6 @@
+@attribute [CascadingTypeParameter(nameof(TItem))]
+@typeparam TItem
+
 <div class="accordion-item">
     <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@htmlId">
@@ -22,7 +25,7 @@
 
     // Ancestor accordion must be set as parent so panels will auto-collapse when another one is opened.
     [CascadingParameter]
-    public Accordion? AncestorAccordion { get; set; }
+    public Accordion<TItem>? AncestorAccordion { get; set; }
 
     protected override void OnInitialized()
     {

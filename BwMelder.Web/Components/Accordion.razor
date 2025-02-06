@@ -1,12 +1,21 @@
+@typeparam TItem
+
 <div class="accordion" id="@HtmlId">
     <CascadingValue Value="this">
-        @ChildContent    
+        @foreach (var item in Items)
+        {
+            @ItemTemplate(item)
+        }
     </CascadingValue>
 </div>
 
 @code {
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter, EditorRequired]
+    public IEnumerable<TItem> Items { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public RenderFragment<TItem> ItemTemplate { get; set; } = null!;
 
     /// <summary>
     /// HTML ID of this accordion.
