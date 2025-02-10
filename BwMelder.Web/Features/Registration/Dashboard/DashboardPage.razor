@@ -1,10 +1,12 @@
 @page "/registration"
 
+@using BwMelder.Shared.ClubCoaches
 @using BwMelder.Shared.Clubs
 @using BwMelder.Shared.Crews
 @using BwMelder.Shared.TeamCoaches
 @using BwMelder.Web.Authentication
 
+@inject IClubCoachService ClubCoachService
 @inject IClubService ClubService
 
 <PageTitle>Registrierung</PageTitle>
@@ -33,24 +35,34 @@ else
     <ClubCrewList Crews="completedCrews" />
 }
 
+<h2>Ansprechpartner</h2>
+<ClubCoachDisplay ClubCoach="clubCoach" />
+
 @code {
 
     private IReadOnlyList<ClubCrewResponse> incompleteCrews = [];
     private IReadOnlyList<ClubCrewResponse> completedCrews = [];
+
+    private ClubCoachResponse? clubCoach;
+    
+    private UserInfo? userInfo;
     
     [CascadingParameter]
     public Task<AuthenticationState>? AuthenticationState { get; set; }
 
-    private UserInfo? userInfo;
-
     protected override async Task OnInitializedAsync()
     {
+        // Retrieve the club ID from the logged-in user's data.
         userInfo = await AuthenticationState.GetUserInfoAsync();
         var clubId = userInfo?.ClubId ?? throw new ApplicationException("Cannot access Club ID to process request.");
         
+        // Load entries associated with the club.
         var entries = await ClubService.GetClubEntriesAsync(clubId);
-        
         completedCrews = entries.Crews.Where(c => c.RegistrationProgress.IsComplete()).ToList();
         incompleteCrews = entries.Crews.Where(c => !c.RegistrationProgress.IsComplete()).ToList();
+        
+        // Load club coach.
+        // This should always return a non-null response, otherwise the user should have been directed to onboarding.
+        clubCoach = await ClubCoachService.GetClubCoachAsync(clubId);
     }
 }
