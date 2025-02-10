@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BwMelder.Shared.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace BwMelder.Core;
 
@@ -31,5 +33,23 @@ public class ClubCoachService(BwMelderDbContext db)
 
         await db.ClubCoaches.AddAsync(clubCoach);
         await db.SaveChangesAsync();
+    }
+
+    public async Task<ClubCoachResponse?> GetClubCoachAsync(Guid clubId)
+    {
+        return await db.ClubCoaches
+            .AsNoTracking()
+            .Where(c => c.ClubId == clubId)
+            .Select(c => new ClubCoachResponse
+            {
+                Id = c.Id,
+                Name = c.Name.Full,
+                Contact = new ContactResponse
+                {
+                    Phone = c.Contact.Phone,
+                    EmailAddress = c.Contact.EmailAddress,
+                },
+            })
+            .SingleOrDefaultAsync();
     }
 }
