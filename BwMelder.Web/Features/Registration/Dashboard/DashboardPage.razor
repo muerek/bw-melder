@@ -9,19 +9,37 @@
 
 <PageTitle>Registrierung</PageTitle>
 
-<h1>Übersicht</h1>
+<h1>Anmeldung zum BW</h1>
 <p class="lead">
     für @userInfo?.ClubName
 </p>
 
-<ClubEntriesOverview Crews="entries.Crews" />
+@if (incompleteCrews.Count > 0)
+{
+    <h2>Offen</h2>
+    <ClubCrewList Crews="incompleteCrews"/>
+}
+else
+{
+    <div class="alert alert-primary">
+        <strong>Momentan alles erledigt!</strong>
+        Wir benachrichtigen dich, falls es etwas Neues gibt. 
+    </div>
+}
+
+@if (completedCrews.Count > 0 || true)
+{
+    <h2>Erledigt</h2>
+    <ClubCrewList Crews="completedCrews" />
+}
 
 @code {
 
-    private ClubEntriesResponse? entries;
+    private IReadOnlyList<ClubCrewResponse> incompleteCrews = [];
+    private IReadOnlyList<ClubCrewResponse> completedCrews = [];
     
     [CascadingParameter]
-    private Task<AuthenticationState>? AuthenticationState { get; set; }
+    public Task<AuthenticationState>? AuthenticationState { get; set; }
 
     private UserInfo? userInfo;
 
@@ -30,6 +48,9 @@
         userInfo = await AuthenticationState.GetUserInfoAsync();
         var clubId = userInfo?.ClubId ?? throw new ApplicationException("Cannot access Club ID to process request.");
         
-        entries = await ClubService.GetClubEntriesAsync(clubId);
+        var entries = await ClubService.GetClubEntriesAsync(clubId);
+        
+        completedCrews = entries.Crews.Where(c => c.RegistrationProgress.IsComplete()).ToList();
+        incompleteCrews = entries.Crews.Where(c => !c.RegistrationProgress.IsComplete()).ToList();
     }
 }
