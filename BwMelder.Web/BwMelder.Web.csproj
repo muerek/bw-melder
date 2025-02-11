@@ -31,4 +31,8 @@
     <ProjectReference Include="..\BwMelder.Shared\BwMelder.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Authorization\" />
+  </ItemGroup>
+
 </Project>

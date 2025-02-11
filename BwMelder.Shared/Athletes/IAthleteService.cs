@@ -5,5 +5,5 @@ namespace BwMelder.Shared.Athletes;
 /// </summary>
 public interface IAthleteService
 {
-    Task<IReadOnlyList<AthleteSummaryResponse>> GetAthletesAsync();
+    Task<IReadOnlyList<AthleteSummaryResponse>> GetAthletesByCrewAsync(Guid crewId);
 }

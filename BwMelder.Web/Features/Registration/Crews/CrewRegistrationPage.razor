@@ -1,0 +1,27 @@
+@page "/registration/crew/{CrewId:guid}"
+@using BwMelder.Shared.Athletes
+
+@inject IAthleteService AthleteService
+
+<h1>Mannschaft anmelden</h1>
+
+@foreach (var athlete in athletes)
+{
+    <p>
+        @athlete.Name
+    </p>
+}
+
+@code {
+
+    private IReadOnlyList<AthleteSummaryResponse> athletes = [];
+    
+    [Parameter]
+    public Guid CrewId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // TODO: Add authorization.
+        athletes = await AthleteService.GetAthletesByCrewAsync(CrewId);
+    }
+}
