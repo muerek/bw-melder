@@ -14,12 +14,12 @@ namespace BwMelder.Core;
 
 public class CrewService(BwMelderDbContext db) : ICrewService
 {
-    public async Task<IReadOnlyList<ClubCrewResponse>> GetCrewsByClubAsync(Guid clubId)
+    public async Task<IReadOnlyList<CrewByClubResponse>> GetCrewsByClubAsync(Guid clubId)
     {
         return await db.Crews
             .Where(c => c.ClubId == clubId)
             .Include(c => c.Race)
-            .Select(c => new ClubCrewResponse
+            .Select(c => new CrewByClubResponse
             {
                 CrewId = c.Id,
                 RegistrationProgress = new RegistrationProgressResponse

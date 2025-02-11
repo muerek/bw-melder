@@ -19,7 +19,7 @@
 @if (incompleteCrews.Count > 0)
 {
     <h2>Offen</h2>
-    <ClubCrewList Crews="incompleteCrews"/>
+    <CrewList Crews="incompleteCrews"/>
 }
 else
 {
@@ -32,7 +32,7 @@ else
 @if (completedCrews.Count > 0 || true)
 {
     <h2>Erledigt</h2>
-    <ClubCrewList Crews="completedCrews" />
+    <CrewList Crews="completedCrews" />
 }
 
 <h2>Ansprechpartner</h2>
@@ -40,8 +40,8 @@ else
 
 @code {
 
-    private IReadOnlyList<ClubCrewResponse> incompleteCrews = [];
-    private IReadOnlyList<ClubCrewResponse> completedCrews = [];
+    private IReadOnlyList<CrewByClubResponse> incompleteCrews = [];
+    private IReadOnlyList<CrewByClubResponse> completedCrews = [];
 
     private ClubCoachResponse? clubCoach;
     

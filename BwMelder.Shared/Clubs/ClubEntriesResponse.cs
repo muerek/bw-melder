@@ -8,7 +8,7 @@ namespace BwMelder.Shared.Clubs;
 /// </summary>
 public record ClubEntriesResponse
 {
-    public required IReadOnlyList<ClubCrewResponse> Crews { get; init; }
+    public required IReadOnlyList<CrewByClubResponse> Crews { get; init; }
     
     public required IReadOnlyList<TeamCoachResponse> TeamCoaches { get; init; }
 }
