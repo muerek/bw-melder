@@ -1,4 +1,5 @@
 ﻿using BwMelder.Core;
+using BwMelder.Shared.Athletes;
 using BwMelder.Shared.Authentication;
 using BwMelder.Shared.ClubCoaches;
 using BwMelder.Shared.Clubs;
@@ -22,6 +23,7 @@ internal static class ServiceCollectionExtensions
     {
         services
             .AddScoped<IAccessKeyService, AccessKeyService>()
+            .AddScoped<IAthleteService, AthleteService>()
             .AddScoped<ICrewService, CrewService>()
             .AddScoped<IClubCoachService, ClubCoachService>()
             .AddScoped<IClubService, ClubService>()
