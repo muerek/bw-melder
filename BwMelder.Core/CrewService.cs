@@ -36,6 +36,33 @@ public class CrewService(BwMelderDbContext db) : ICrewService
             .ToListAsync();
     }
 
+    public async Task<CrewSummaryResponse?> GetCrewAsync(Guid crewId)
+    {
+        return await db.Crews
+            .Where(c => c.Id == crewId)
+            .Select(c => new CrewSummaryResponse
+            {
+                CrewId = c.Id,
+                Club = new ClubResponse
+                {
+                    Id = c.Club.Id,
+                    Name = c.Club.Name
+                },
+                Race = new RaceSummaryResponse
+                {
+                    Id = c.Race.Id,
+                    Number = c.Race.Number,
+                    Name = c.Race.Name
+                },
+                RegistrationProgress = new RegistrationProgressResponse
+                {
+                    CurrentAthleteCount = c.Athletes.Count,
+                    TargetAthleteCount = c.Race.AthleteCount
+                }
+            })
+            .SingleOrDefaultAsync();
+    }
+
     public async Task<Guid> CreateCrewAsync(CreateCrewRequest request)
     {
         var crew = new Crew

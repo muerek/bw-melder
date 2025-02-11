@@ -1,9 +1,16 @@
 @page "/registration/crew/{CrewId:guid}"
+
 @using BwMelder.Shared.Athletes
+@using BwMelder.Shared.Crews
+@using BwMelder.Web.Authentication
 
 @inject IAthleteService AthleteService
+@inject ICrewService CrewService
 
 <h1>Mannschaft anmelden</h1>
+<p class="lead">
+    @crew.Club.Name in Rennen @crew?.Race.Number - @crew?.Race.Name
+</p>
 
 @foreach (var athlete in athletes)
 {
@@ -15,13 +22,26 @@
 @code {
 
     private IReadOnlyList<AthleteSummaryResponse> athletes = [];
-    
+    private CrewSummaryResponse? crew;
+
     [Parameter]
     public Guid CrewId { get; set; }
 
+    [CascadingParameter]
+    public Task<AuthenticationState>? AuthenticationState { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        // TODO: Add authorization.
+        crew = await CrewService.GetCrewAsync(CrewId);
+
+        // Check if the user belongs to the same club as the crew they try to access.
+        var userInfo = await AuthenticationState.GetUserInfoAsync();
+        if (crew is not null && userInfo is not null && userInfo.ClubId != crew.Club.Id)
+        {
+            throw new ApplicationException("Club ID mismatch.");
+        }
+
         athletes = await AthleteService.GetAthletesByCrewAsync(CrewId);
     }
+
 }

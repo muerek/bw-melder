@@ -24,6 +24,13 @@ public interface ICrewService
     /// <param name="clubId">Unique ID of the club.</param>
     /// <returns></returns>
     Task<IReadOnlyList<CrewByClubResponse>> GetCrewsByClubAsync(Guid clubId);
+    
+    /// <summary>
+    /// Gets a summary for the referenced crew.
+    /// </summary>
+    /// <param name="crewId">Unique ID of the crew.</param>
+    /// <returns></returns>
+    Task<CrewSummaryResponse?> GetCrewAsync(Guid crewId);
 
     /// <summary>
     /// Creates a crew in the database.
