@@ -6,7 +6,7 @@ namespace BwMelder.Shared.Crews;
 /// <summary>
 /// A service response describing a crew.
 /// </summary>
-public record CrewResponse
+public record CrewSummaryResponse
 {
     /// <summary>
     /// Unique ID of the crew.

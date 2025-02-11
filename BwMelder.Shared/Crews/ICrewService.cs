@@ -16,7 +16,7 @@ public interface ICrewService
     /// Gets a list of all crews.
     /// </summary>
     /// <returns></returns>
-    Task<IReadOnlyList<CrewResponse>> GetAllCrewsAsync();
+    Task<IReadOnlyList<CrewSummaryResponse>> GetAllCrewsAsync();
     
     /// <summary>
     /// Gets a list of crews from to the given club.

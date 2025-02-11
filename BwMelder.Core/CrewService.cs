@@ -18,7 +18,6 @@ public class CrewService(BwMelderDbContext db) : ICrewService
     {
         return await db.Crews
             .Where(c => c.ClubId == clubId)
-            .Include(c => c.Race)
             .Select(c => new CrewByClubResponse
             {
                 CrewId = c.Id,
@@ -50,16 +49,14 @@ public class CrewService(BwMelderDbContext db) : ICrewService
         return crew.Id;
     }
 
-    public async Task<IReadOnlyList<CrewResponse>> GetAllCrewsAsync()
+    public async Task<IReadOnlyList<CrewSummaryResponse>> GetAllCrewsAsync()
     {
         return await db.Crews
             .AsNoTracking()
             .Include(c => c.Race)
-            .Include(c => c.Club)
-            .Include(c => c.Athletes)
             .OrderBy(c => c.Race.Number.Length)
             .ThenBy(c => c.Race.Number)
-            .Select(c => new CrewResponse
+            .Select(c => new CrewSummaryResponse
             {
                 CrewId = c.Id,
                 Club = new ClubResponse

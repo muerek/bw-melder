@@ -34,14 +34,14 @@
 </table>
 
 @code {
-    private IReadOnlyList<CrewResponse> Crews { get; set; } = [];
+    private IReadOnlyList<CrewSummaryResponse> Crews { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
     {
         Crews = await CrewService.GetAllCrewsAsync();
     }
 
-    private static string GetStatusClass(CrewResponse crew)
+    private static string GetStatusClass(CrewSummaryResponse crew)
     {
         return (crew.RegistrationProgress.CurrentAthleteCount, crew.RegistrationProgress.TargetAthleteCount) switch
         {
